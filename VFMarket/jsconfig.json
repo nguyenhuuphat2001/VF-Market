@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    //   "baseUrl": ".",
+    "paths": {
+      "@/navigation/*": [
+        "./src/navigation/*"
+      ],
+      "@/components/*": [
+        "./src/components/*"
+      ],
+      "@/screens/*": [
+        "./src/screens/*"
+      ],
+      "@/theme/*": [
+        "./src/theme/*"
+      ],
+      "@/assets/*": [
+        "./assets/*"
+      ],
+      "@/constants/*": [
+        "./src/constants/*"
+      ],
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
