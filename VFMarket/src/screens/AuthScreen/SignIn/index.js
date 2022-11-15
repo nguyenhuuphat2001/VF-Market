@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import {MAIN_LOGO} from '@assets/images';
 import {
   View,
@@ -19,9 +19,16 @@ import SCREEN from '@/constants/screen';
 
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
+import {login} from '@/store/auth/action';
+
+import {useDispatch, useSelector} from 'react-redux';
+
 const SignInScreen = () => {
   let fadeAnim = useRef(new Animated.Value(0)).current;
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
+  const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const inputRef = React.useRef(null);
@@ -36,10 +43,10 @@ const SignInScreen = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const opacityAnim = fadeAnim.interpolate({
-    inputRange: [0, 1, 2, 4],
-    outputRange: [0.5, 1, 0.2, 0.9],
-  });
+  // const opacityAnim = fadeAnim.interpolate({
+  //   inputRange: [0, 1, 2, 4],s
+  //   outputRange: [0.5, 1, 0.2, 0.9],
+  // });
 
   const _scrollToInput = reactNode => {
     // Add a 'scroll' ref to your ScrollView
@@ -50,7 +57,18 @@ const SignInScreen = () => {
 
   const goToRecoveryPasswordScreen = () => navigation.push(SCREEN.INPUT_GMAIL);
 
-  const goToMainScreen = () => navigation.push(SCREEN.MAIN_SCREEN);
+  const handleEmail = txt => {
+    setEmail(txt);
+  };
+
+  const handlePassword = txt => {
+    setPassword(txt);
+  };
+
+  const handleLogin = async () => {
+    await dispatch(login({email, password, isGoToMain: true}));
+    // console.log(data.payload);
+  };
 
   return (
     <View style={[styles.container]}>
@@ -68,10 +86,14 @@ const SignInScreen = () => {
 
         <View style={{flex: 1, width: '100%'}}>
           <ContainerInput customStyle={styles.input}>
-            <TextInput placeholder="Tên" />
+            <TextInput placeholder="Email" onChangeText={handleEmail} />
           </ContainerInput>
           <ContainerInput customStyle={styles.input}>
-            <TextInput placeholder="Mật khẩu" />
+            <TextInput
+              secureTextEntry
+              placeholder="Mật khẩu"
+              onChangeText={handlePassword}
+            />
           </ContainerInput>
 
           <TouchableOpacity
@@ -80,7 +102,7 @@ const SignInScreen = () => {
             <Text style={styles.subText}>Quên mật khẩu ?</Text>
           </TouchableOpacity>
 
-          <Button onPress={goToMainScreen} content="Đăng nhập" />
+          <Button onPress={handleLogin} content="Đăng nhập" />
         </View>
       </KeyboardAwareScrollView>
 

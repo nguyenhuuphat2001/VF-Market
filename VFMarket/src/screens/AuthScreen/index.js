@@ -20,7 +20,6 @@ const options = {
   animationEnabled: true,
 };
 
-//https://avatars.dicebear.com/api/croodles/patrick.svg
 const AuthScreen = () => (
   <Stack.Navigator>
     <Stack.Screen

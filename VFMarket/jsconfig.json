@@ -14,11 +14,17 @@
       "@/theme/*": [
         "./src/theme/*"
       ],
+      "@/store/*": [
+        "./src/store/*"
+      ],
       "@/assets/*": [
         "./assets/*"
       ],
       "@/constants/*": [
         "./src/constants/*"
+      ],
+      "@/utils/*": [
+        "./src/utils/*"
       ],
     }
   },

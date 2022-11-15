@@ -25,7 +25,8 @@ module.exports = {
           '@/screens': './src/screens',
           '@/theme': './src/theme',
           '@/constants': './src/constants',
-
+          '@/store': './src/store',
+          '@/utils': './src/utils',
           '@assets': './assets',
         },
       },

@@ -13,6 +13,12 @@ export const COLORS = {
   orange: '#FF9800',
   green: '#4BBB47',
   gray_light: '#EDEEF0',
+  sub_text: '#606060',
+  white: '#ffffff',
+  favorite: '#FF5148',
+  break_line: '#C5C5C5',
+  text_gold: '#FFF5BE',
+  star: '#FFC107',
 };
 
 export const OPENSANS_REGULAR = 'OpenSans-Regular';
@@ -28,6 +34,7 @@ export const MONT_BOLD = 'Montserrat-Bold';
 export const MONT_MEDIUM = 'Montserrat-Medium';
 
 export const SPACING = {
+  xs: 8,
   small: 12,
   medium: 15,
   large: 20,
@@ -36,7 +43,7 @@ export const SPACING = {
 
 export const FONT_SIZE = {
   tiny: 10,
-  small: 12,
-  medium: 15,
-  large: 20,
+  small: 14,
+  medium: 16,
+  large: 24,
 };

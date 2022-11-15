@@ -1,13 +1,13 @@
-import React, { createRef } from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import React, {createRef} from 'react';
+import {createStackNavigator} from '@react-navigation/stack';
 
-import { enableScreens } from 'react-native-screens';
+import {enableScreens} from 'react-native-screens';
 
 import SplashScreen from '@/screens/SplashScreen';
 
 import BottomTab from './BottomTab';
 
-import AuthScreen from '@/screens/AuthScreen'
+import AuthScreen from '@/screens/AuthScreen';
 
 enableScreens();
 
@@ -27,7 +27,6 @@ export const navigate = (name, params) => {
 };
 
 const Stack = createStackNavigator();
-
 
 const MainStack = () => {
   return (
