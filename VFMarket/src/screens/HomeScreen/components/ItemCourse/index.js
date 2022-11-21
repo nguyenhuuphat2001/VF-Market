@@ -1,30 +1,30 @@
 import React, {useCallback, useRef, useMemo, useState} from 'react';
 
 import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
-import {COLORS} from '@/theme/index';
+import {COLORS, SPACING} from '@/theme/index';
+
+import {SharedElement} from 'react-navigation-shared-element';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 // arrow-drop-down
 
 import Text from '@/components/Text';
 
-import {
-  IMAGE_CONTENT,
-  LOCATION,
-  DUMBBELL,
-  MEDITATION,
-  BOXING,
-} from '@assets/images';
+import {IMAGE_CONTENT} from '@/assets/images';
 
-import {widthPercentageToDP} from 'react-native-responsive-screen';
-
-const ItemCourse = ({label = 'label', value = 'value', onChange}) => {
+const ItemCourse = ({id, name, image, price, currency}) => {
   return (
     <View style={styles.container}>
-      <Image style={styles.image} resizeMode="cover" source={IMAGE_CONTENT} />
+      <SharedElement id={`item.${id}.photo`}>
+        <Image
+          style={styles.image}
+          resizeMode="cover"
+          source={image ? {uri: image} : IMAGE_CONTENT}
+        />
+      </SharedElement>
       <View style={styles.content}>
         <Text customStyle={{fontSize: 14, color: 'black', fontWeight: '500'}}>
-          Vinfast VF8
+          {name}
         </Text>
         <View
           style={{
@@ -39,12 +39,13 @@ const ItemCourse = ({label = 'label', value = 'value', onChange}) => {
         </View>
         <Text
           customStyle={{
-            fontSize: 13,
+            fontSize: 12,
             marginTop: 5,
             color: 'black',
             fontWeight: '500',
           }}>
-          $ 189.000
+          $ {price}
+          {currency}
         </Text>
       </View>
     </View>
@@ -58,11 +59,13 @@ const styles = StyleSheet.create({
     // width: '100%',
     alignContent: 'flex-start',
     // flex: 1,
-    maxHeight: 180,
+    maxHeight: 280,
+    marginBottom: SPACING.large,
     // backgroundColor: 'red',
   },
   image: {
     width: '100%',
+    height: 100,
     maxHeight: 100,
     borderRadius: 10,
     marginBottom: 5,

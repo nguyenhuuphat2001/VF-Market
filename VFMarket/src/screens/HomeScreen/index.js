@@ -1,4 +1,4 @@
-import React, {useRef, useCallback, useMemo} from 'react';
+import React, {useRef, useCallback, useMemo, useState, useEffect} from 'react';
 import {
   View,
   ScrollView,
@@ -11,9 +11,13 @@ import Text from '@/components/Text';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 
+import {useDispatch, useSelector} from 'react-redux';
+import {getListProduct} from '@/store/product/action';
+
 import Header from '@/components/Header';
 
 import SCREEN from '@/constants/screen';
+import {PAGE_LIMIT} from '@/constants/index';
 
 import {SPACING, COLORS} from '@/theme/index';
 
@@ -21,11 +25,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import BottomSheet, {BottomSheetBackdrop} from '@gorhom/bottom-sheet';
 
-import {Picker} from 'react-native-wheel-pick';
-
 import Search from '@/components/Search';
 
-import {BANNER, FILTER, HELLO} from '@assets/images/index';
+import {BANNER, HELLO} from '@/assets/images/index';
+import {navigate} from '@/navigation/navigationUtils';
+import screen from '@/constants/screen';
 
 import {
   widthPercentageToDP as wp,
@@ -33,51 +37,19 @@ import {
 } from 'react-native-responsive-screen';
 
 import ItemCourse from './components/ItemCourse';
-
-const AGE = Array.from({length: 100}, (_, i) => i + 1);
-
-const LIST_DATA = [
-  {
-    key: '1',
-    type: 'title',
-    title: 'May',
-    data: '25',
-  },
-  {
-    key: '2',
-    type: 'data',
-    title: 'Meeting with UI/UX team',
-    data: '09:00am - 11:00am',
-  },
-  {
-    key: '3',
-    type: 'data',
-    title: 'Meeting with Patrick team',
-    data: '09:00am - 11:00am',
-  },
-  {
-    key: '4',
-    type: 'title',
-    title: 'May',
-    data: '26',
-  },
-  {
-    key: '5',
-    type: 'data',
-    title: 'Meeting with UI/UX team',
-    data: '09:00am - 11:00am',
-  },
-  {
-    key: '6',
-    type: 'data',
-    title: 'Meeting with Patrick team',
-    data: '09:00am - 11:00am',
-  },
-];
+import {logout} from '@/store/auth';
 
 const UpdatePersonalInfoScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const profile = useSelector(state => state.authReducer.profile);
+  const listProduct = useSelector(state => state.productReducer.list);
 
+  const [paginatior, setPaginator] = useState({page: 1, limit: PAGE_LIMIT});
+
+  useEffect(() => {
+    dispatch(getListProduct(paginatior));
+  }, []);
   const ref = useRef(null);
 
   const onPress = useCallback(() => {
@@ -109,9 +81,15 @@ const UpdatePersonalInfoScreen = () => {
   const renderItems = useCallback(
     ({item}) => (
       <TouchableOpacity
-        onPress={() => navigation.push('DetailScreen')}
+        onPress={() => navigate(screen.DETAIL_CAR, item)}
         style={{width: '48%'}}>
-        <ItemCourse />
+        <ItemCourse
+          id={item._id}
+          image={item.images[0]}
+          name={item.name}
+          price={item.price.value}
+          currency={item.price.currency}
+        />
       </TouchableOpacity>
     ),
     [],
@@ -136,13 +114,16 @@ const UpdatePersonalInfoScreen = () => {
             alignItems: 'flex-start',
             marginBottom: SPACING.medium,
           }}>
-          <Image
-            style={{width: 48, height: 48, borderRadius: 100}}
-            resizeMode="contain"
-            source={{
-              uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRieAa2n6WfexuRussvPylufCjOBXpon47vJQ&usqp=CAU',
-            }}
-          />
+          <TouchableOpacity style={styles.itemMenu}>
+            <Image
+              style={{width: 48, height: 48, borderRadius: 100}}
+              resizeMode="contain"
+              source={{
+                uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRieAa2n6WfexuRussvPylufCjOBXpon47vJQ&usqp=CAU',
+              }}
+            />
+          </TouchableOpacity>
+
           <View
             style={{
               justifyContent: 'space-between',
@@ -157,7 +138,7 @@ const UpdatePersonalInfoScreen = () => {
             </View>
 
             <Text customStyle={{fontSize: 16, fontWeight: '500'}}>
-              Nguyễn Văn A
+              {profile?.firstName} {profile?.lastName}
             </Text>
           </View>
         </View>
@@ -200,18 +181,18 @@ const UpdatePersonalInfoScreen = () => {
                   resizeMode="contain"
                   source={FILTER}
                 /> */}
-                <Text customStyle={{fontSize: 14, fontWeight: '400'}}>
+                <Text customStyle={{fontSize: 12, fontWeight: '400'}}>
                   Xem tất cả
                 </Text>
               </TouchableOpacity>
             </View>
             <FlatList
-              data={LIST_DATA}
+              data={listProduct}
               renderItem={renderItems}
               numColumns={2}
               columnWrapperStyle={{justifyContent: 'space-between'}}
               showsVerticalScrollIndicator={false}
-              keyExtractor={item => item.key}
+              keyExtractor={item => item._id}
             />
           </View>
         </View>
@@ -237,10 +218,12 @@ const UpdatePersonalInfoScreen = () => {
               alignItems: 'center',
             }}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Icon
-                name="close"
-                style={{fontSize: 35, color: COLORS.border_input}}
-              />
+              <TouchableOpacity onPress={onClose}>
+                <Icon
+                  name="close"
+                  style={{fontSize: 35, color: COLORS.border_input}}
+                />
+              </TouchableOpacity>
               <Text
                 customStyle={{fontWeight: '600', fontSize: 16, marginLeft: 10}}>
                 Sắp xếp theo

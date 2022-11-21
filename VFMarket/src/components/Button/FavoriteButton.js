@@ -25,8 +25,8 @@ export default FavoriteButton;
 const styles = StyleSheet.create({
   btnCircle: {
     flex: 1,
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',
@@ -35,6 +35,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   icon: {
-    fontSize: 24,
+    fontSize: 20,
   },
 });

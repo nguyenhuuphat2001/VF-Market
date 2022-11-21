@@ -54,6 +54,7 @@ const InputGmailScreen = () => {
             </View> */}
             <Button
               content="Gửi OTP"
+              // disabled={!}
               containerStyle={styles.marginTopLarge}
               onPress={() => navigation.push(SCREEN.OTP_RECOVERY)}
             />

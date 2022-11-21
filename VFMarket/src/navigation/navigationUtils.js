@@ -9,9 +9,6 @@ export const isMountedRef = createRef();
 
 // Use this function to navigate to specific page when you are using Redux-Saga
 export const navigate = (name, params) => {
-  console.log('name: ', name);
-  console.log('isMountedRef: ', isMountedRef.current);
-  console.log('navigationRef: ', navigationRef.current);
   if (isMountedRef.current && navigationRef.current) {
     // Perform navigation if the app has mounted
     navigationRef.current.navigate(name, params);

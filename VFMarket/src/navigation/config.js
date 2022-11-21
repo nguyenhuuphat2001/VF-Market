@@ -1,29 +1,24 @@
-// const headerNavigationOptions = () => {
-//   StatusBar.setBarStyle('dark-content');
-//   return {
-//     headerTitle: () => (
-//       <View style={styles.container}>
-//         <Image
-//           resizeMode="contain"
-//           style={[styles.marginRightSmall, styles.icon]}
-//           source={ThemeConfig.icons.CHEER_ME_RED_HEART}
-//         />
-//         <Image
-//           resizeMode="contain"
-//           style={styles.logo}
-//           source={ThemeConfig.images.CHEER_ME_TEXT_RED}
-//         />
-//       </View>
-//     ),
-//     headerTitleAlign: 'center',
-//     headerBackTitleVisible: false,
-//     headerLeft: () => <BackBtn isIcon />,
-//     headerStyle: {
-//       height: hp('12%'),
-//       shadowOffset: {height: 1},
-//       shadowColor: 'rgba(0,0,0,0.05)',
-//       shadowOpacity: 1,
-//       shadowRadius: 2,
-//     },
-//   };
-// };
+const forFade = ({current}) => ({
+  cardStyle: {
+    opacity: current.progress,
+  },
+});
+
+export const HEADER_OPTIONS = {
+  headerShown: false,
+  animationEnabled: true,
+  transitionSpec: TRANSITION,
+  cardStyleInterpolator: forFade,
+};
+
+export const TRANSITION = {
+  animation: 'spring',
+  config: {
+    stiffness: 1000,
+    damping: 500,
+    mass: 3,
+    overshootClamping: true,
+    restDisplacementThreshold: 0.01,
+    restSpeedThreshold: 0.01,
+  },
+};

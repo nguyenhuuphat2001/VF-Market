@@ -42,7 +42,7 @@ export const SPACING = {
 };
 
 export const FONT_SIZE = {
-  tiny: 10,
+  tiny: 12,
   small: 14,
   medium: 16,
   large: 24,

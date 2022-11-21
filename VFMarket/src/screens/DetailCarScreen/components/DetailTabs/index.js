@@ -1,16 +1,29 @@
-import React from 'react'
-import { View, useWindowDimensions, TouchableOpacity, Animated, StyleSheet } from 'react-native';
-import { TabView, SceneMap, TabBar } from 'react-native-tab-view';
+import React from 'react';
+import {
+  View,
+  useWindowDimensions,
+  TouchableOpacity,
+  Animated,
+  StyleSheet,
+} from 'react-native';
+import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
 import Text from '@/components/Text';
-import RateTab from './RateTab'
-import ServiceTab from './ServiceTab'
-import TermTab from './TermTab'
-import ContentTab from './ContentTab'
-import { COLORS, SPACING, MONT_BOLD, FONT_SIZE, MONT_REGULAR, MONT_MEDIUM } from '@/theme/index';
+// import RateTab from './RateTab';
+// import ServiceTab from './ServiceTab'
+import TermTab from './TermTab';
+import ContentTab from './ContentTab';
+import {
+  COLORS,
+  SPACING,
+  MONT_BOLD,
+  FONT_SIZE,
+  MONT_REGULAR,
+  MONT_MEDIUM,
+} from '@/theme/index';
 
 const renderScene = SceneMap({
-  service: ServiceTab,
-  rate: RateTab,
+  // service: ServiceTab,
+  // rate: RateTab,
   term: TermTab,
   content: ContentTab,
 });
@@ -20,13 +33,13 @@ const DetailTabs = () => {
 
   const [index, setIndex] = React.useState(0);
   const [routes] = React.useState([
-    { key: 'service', title: 'Dịch vụ' },
-    { key: 'rate', title: 'Đánh giá' },
-    { key: 'term', title: 'Điều khoản' },
-    { key: 'content', title: 'Nội dung' },
+    {key: 'service', title: 'Dịch vụ'},
+    {key: 'rate', title: 'Đánh giá'},
+    {key: 'term', title: 'Điều khoản'},
+    {key: 'content', title: 'Nội dung'},
   ]);
 
-  const renderTabBar = (props) => {
+  const renderTabBar = props => {
     const inputRange = props.navigationState.routes.map((x, i) => i);
 
     return (
@@ -42,24 +55,25 @@ const DetailTabs = () => {
   };
 
   return (
-    <View style={{
-      borderBottomWidth: 1,
-      borderBottomColor: COLORS.border_color,
-      minHeight: 500,
-      padding: SPACING.innerContainer
-    }}>
+    <View
+      style={{
+        borderBottomWidth: 1,
+        borderBottomColor: COLORS.border_color,
+        minHeight: 500,
+        padding: SPACING.innerContainer,
+      }}>
       <TabView
-        navigationState={{ index, routes }}
+        navigationState={{index, routes}}
         renderScene={renderScene}
         onIndexChange={setIndex}
         renderTabBar={renderTabBar}
         initialLayout={{
-          width: layout.width
+          width: layout.width,
         }}
       />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   tabbar: {
@@ -72,14 +86,14 @@ const styles = StyleSheet.create({
   label: {
     color: COLORS.primary,
     textTransform: 'none',
-    fontSize: FONT_SIZE.small
+    fontSize: FONT_SIZE.small,
   },
   tabStyle: {
     width: 'auto',
   },
   innerContent: {
-    width: 50
-  }
+    width: 50,
+  },
 });
 
-export default DetailTabs
+export default DetailTabs;

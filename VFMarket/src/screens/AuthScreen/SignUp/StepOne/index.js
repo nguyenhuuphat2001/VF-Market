@@ -35,6 +35,13 @@ const SignInScreen = () => {
     password: '',
     passwordConfirm: '',
   });
+  const disabled =
+    !input.email ||
+    !input.password ||
+    !input.firstName ||
+    !input.lastName ||
+    !input.mobileNumber ||
+    !input.passwordConfirm;
 
   const [error, setError] = useState({
     email: false,
@@ -74,7 +81,6 @@ const SignInScreen = () => {
   };
 
   const submit = async () => {
-    console.log('input: ', input);
     if (
       !input.mobileNumber ||
       !input.email ||
@@ -88,7 +94,8 @@ const SignInScreen = () => {
       });
       return;
     }
-    await dispatch(signUp(input));
+    const data = await dispatch(signUp(input));
+    console.log('data: ', data);
   };
 
   return (
@@ -171,41 +178,10 @@ const SignInScreen = () => {
                 placeholder="Nhập lại mật khẩu"
               />
             </ContainerInput>
-            {/* <ContainerInput customStyle={styles.input}>
-              <TextInput placeholder="Tên người dùng" />
-            </ContainerInput>
-            <ContainerInput customStyle={styles.input}>
-              <TextInput placeholder="Email" />
-            </ContainerInput>
-            <ContainerInput customStyle={styles.input}>
-              <TextInput placeholder="Số điện thoại" />
-            </ContainerInput>
-            <ContainerInput customStyle={styles.input}>
-              <TextInput placeholder="Mật khẩu" />
-            </ContainerInput>
-            <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
-              <Icon name="check" style={styles.icon} />
-              <Text customStyle={styles.note}>Tối thiểu 8 kí tự</Text>
-            </View>
-            <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
-              <Icon name="check" style={styles.icon} />
-              <Text customStyle={styles.note}>
-                Bao gồm chữ in hoa, số, kí tự đặc biệt (#,@,...)
-              </Text>
-            </View>
-            <ContainerInput customStyle={[styles.input, styles.marginTopLarge]}>
-              <TextInput placeholder="Nhập lại mật khẩu" />
-            </ContainerInput> */}
-
-            {/* <Button
-              content="Đăng ký"
-              containerStyle={styles.marginTopLarge}
-              onPress={() => navigation.push(SCREEN.OTP)}
-            /> */}
             <Button
               content="Đăng ký"
               isLoading={isLoading}
-              isDisabled={isLoading}
+              disabled={disabled}
               containerStyle={styles.marginTopLarge}
               onPress={submit}
               // onPress={() => navigation.push(SCREEN.OTP)}

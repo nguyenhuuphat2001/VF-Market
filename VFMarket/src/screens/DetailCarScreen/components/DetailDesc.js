@@ -1,62 +1,69 @@
-import { View, Button, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import {View, Button, TouchableOpacity} from 'react-native';
+import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Text from '@/components/Text';
-import { ARROW_DOWN } from "@assets/images"
-import { COLORS, SPACING, MONT_BOLD, FONT_SIZE, MONT_REGULAR, MONT_MEDIUM } from '@/theme/index';
+import {ARROW_DOWN} from '@assets/images';
+import {
+  COLORS,
+  SPACING,
+  MONT_BOLD,
+  FONT_SIZE,
+  MONT_REGULAR,
+  MONT_MEDIUM,
+} from '@/theme/index';
 // arrow-drop-down
 
-const getFormatTime = (time) => {
-  if (time < 12) return `${time}:00 AM`
-  else return `${time}:00 PM`
-}
+const getFormatTime = time => {
+  if (time < 12) return `${time}:00 AM`;
+  else return `${time}:00 PM`;
+};
 
-const ReadMoreButton = ({ readMore, onPress }) => {
+const ReadMoreButton = ({readMore, onPress}) => {
   return (
     <TouchableOpacity onPress={onPress}>
       <Icon
         name={readMore ? 'expand-more' : 'navigate-next'}
-        style={{ fontSize: FONT_SIZE.large, color: COLORS.sub_text }}
+        style={{fontSize: FONT_SIZE.large, color: COLORS.sub_text}}
       />
     </TouchableOpacity>
-  )
-}
+  );
+};
 
-const DetailDesc = ({ description, openTime, closeTime }) => {
-
+const DetailDesc = ({description, openTime, closeTime}) => {
   const [text, setText] = useState(description.slice(0, 100));
   const [readMore, setReadMore] = useState(false);
 
   const pressReadMore = () => {
     if (!readMore) {
-      setText(description)
-      setReadMore(true)
+      setText(description);
+      setReadMore(true);
     } else {
-      setText(description.slice(0, 100))
-      setReadMore(false)
+      setText(description.slice(0, 100));
+      setReadMore(false);
     }
-  }
+  };
 
   return (
     <View
       style={{
         padding: SPACING.innerContainer,
         borderBottomWidth: 1,
-        borderBottomColor: COLORS.border_color
-      }}
-    >
+        borderBottomColor: COLORS.border_color,
+      }}>
       <TouchableOpacity onPress={pressReadMore} activeOpacity={1}>
-        <View style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center'
-        }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
           <Text
             customStyle={{
-              fontFamily: MONT_MEDIUM,
-              fontSize: FONT_SIZE.medium
+              fontFamily: MONT_BOLD,
+              fontSize: FONT_SIZE.medium,
+              lineHeight: SPACING.large,
             }}>
-            Thông tin về địa điểm
+            Mô tả
           </Text>
 
           {/* <Button title={'>'} onPress={() => {
@@ -68,28 +75,31 @@ const DetailDesc = ({ description, openTime, closeTime }) => {
         <Text
           customStyle={{
             fontSize: FONT_SIZE.small,
-            lineHeight: SPACING.large
+            lineHeight: SPACING.large,
           }}>
           {text}
           {!readMore && '...'}
         </Text>
       </TouchableOpacity>
 
-      <Text
+      {/* <Text
         customStyle={{
           fontFamily: MONT_REGULAR,
           fontSize: FONT_SIZE.medium,
-          paddingTop: SPACING.small
+          paddingTop: SPACING.small,
         }}>
         Mở cửa {` `}
-        <Text customStyle={{
-          fontFamily: MONT_BOLD,
-          fontSize: FONT_SIZE.medium,
-          paddingLeft: SPACING.xs
-        }}>{getFormatTime(openTime)} - {getFormatTime(closeTime)}</Text>
-      </Text>
-    </View >
-  )
-}
+        <Text
+          customStyle={{
+            fontFamily: MONT_BOLD,
+            fontSize: FONT_SIZE.medium,
+            paddingLeft: SPACING.xs,
+          }}>
+          {getFormatTime(openTime)} - {getFormatTime(closeTime)}
+        </Text>
+      </Text> */}
+    </View>
+  );
+};
 
-export default DetailDesc
+export default DetailDesc;

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, Image, Dimensions, Text, FlatList} from 'react-native';
 import Carousel, {Pagination} from 'react-native-snap-carousel';
-import {ITEM_COURSE} from '@assets/images';
+import {IMAGE_CONTENT} from '@/assets/images';
 import {
   COLORS,
   SPACING,
@@ -11,7 +11,12 @@ import {
   MONT_MEDIUM,
 } from '@/theme/index';
 
-const IMG_DEFAULT = [ITEM_COURSE, ITEM_COURSE, ITEM_COURSE, ITEM_COURSE];
+const IMG_DEFAULT = [
+  IMAGE_CONTENT,
+  IMAGE_CONTENT,
+  IMAGE_CONTENT,
+  IMAGE_CONTENT,
+];
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
@@ -24,7 +29,11 @@ const renderItem = ({item, index}) => {
         borderRadius: 0,
         height: 250,
       }}>
-      <Image style={{minHeight: '100%'}} source={{uri: item}} resizeMode="cover" />
+      <Image
+        style={{minHeight: '100%'}}
+        source={{uri: item}}
+        resizeMode="cover"
+      />
     </View>
   );
 };

@@ -1,5 +1,5 @@
 import React, {useRef, useEffect, useState} from 'react';
-import {MAIN_LOGO} from '@assets/images';
+import {MAIN_LOGO} from '@/assets/images';
 import {
   View,
   Image,
@@ -27,6 +27,7 @@ const SignInScreen = () => {
   let fadeAnim = useRef(new Animated.Value(0)).current;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const isDisable = !email || !password;
 
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -102,7 +103,11 @@ const SignInScreen = () => {
             <Text style={styles.subText}>Quên mật khẩu ?</Text>
           </TouchableOpacity>
 
-          <Button onPress={handleLogin} content="Đăng nhập" />
+          <Button
+            onPress={handleLogin}
+            disabled={isDisable}
+            content="Đăng nhập"
+          />
         </View>
       </KeyboardAwareScrollView>
 

@@ -27,7 +27,7 @@ module.exports = {
           '@/constants': './src/constants',
           '@/store': './src/store',
           '@/utils': './src/utils',
-          '@assets': './assets',
+          '@/assets': './assets',
         },
       },
     ],

@@ -1,9 +1,15 @@
-import { View } from 'react-native'
-import React from 'react'
+import {View} from 'react-native';
+import React from 'react';
 import Text from '@/components/Text';
-import { COLORS, SPACING, MONT_BOLD, FONT_SIZE, MONT_REGULAR } from '@/theme/index';
+import {
+  COLORS,
+  SPACING,
+  MONT_BOLD,
+  FONT_SIZE,
+  MONT_REGULAR,
+} from '@/theme/index';
 
-const StatusDot = ({ isOpen }) => {
+const StatusDot = ({isOpen}) => {
   return (
     <View
       style={{
@@ -11,49 +17,48 @@ const StatusDot = ({ isOpen }) => {
         width: SPACING.xs,
         backgroundColor: isOpen ? COLORS.green : 'red',
         borderRadius: 100,
-        marginRight: SPACING.xs
+        marginRight: SPACING.xs,
       }}></View>
-  )
-}
+  );
+};
 
-const StatusTag = ({ isOpen }) => {
+const StatusTag = ({isOpen}) => {
   return (
     <Text
       customStyle={{
-        fontSize: FONT_SIZE.small
+        fontSize: FONT_SIZE.small,
       }}>
       {isOpen ? 'Đang mở cửa' : 'Đóng cửa'}
     </Text>
-  )
-}
+  );
+};
 
-const DetailTitle = ({ title, address, isOpen }) => {
+const DetailTitle = ({title, address, isOpen}) => {
   return (
     <View
       style={{
         padding: SPACING.innerContainer,
         borderBottomWidth: 1,
-        borderBottomColor: COLORS.border_color
-      }}
-    >
+        borderBottomColor: COLORS.border_color,
+      }}>
       <View
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
-          alignItems: 'center'
-        }}
-      >
+          alignItems: 'center',
+        }}>
         <Text
           customStyle={{
             fontFamily: MONT_BOLD,
-            fontSize: FONT_SIZE.medium + 2
+            fontSize: FONT_SIZE.large,
           }}>
           {title}
         </Text>
-        <View style={{
-          flexDirection: 'row',
-          alignItems: 'center'
-        }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}>
           <StatusDot isOpen={isOpen} />
           <StatusTag isOpen={isOpen} />
         </View>
@@ -63,12 +68,12 @@ const DetailTitle = ({ title, address, isOpen }) => {
           fontFamily: MONT_REGULAR,
           fontSize: FONT_SIZE.tiny,
           paddingTop: SPACING.xs,
-          color: COLORS.sub_text
+          color: COLORS.sub_text,
         }}>
         {address}
       </Text>
-    </View >
-  )
-}
+    </View>
+  );
+};
 
-export default DetailTitle
+export default DetailTitle;

@@ -7,4 +7,4 @@ export const login = data => api.post('/auth/login', data);
 
 export const activeAccount = data => api.post('/auth/activeUser', data);
 
-export const getProfile = () => api.get('/client/me');
+export const getProfile = () => api.get('/user/profile');

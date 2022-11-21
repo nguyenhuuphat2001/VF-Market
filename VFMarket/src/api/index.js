@@ -23,7 +23,8 @@ axios.interceptors.response.use(
   },
   async err => {
     return Promise.reject({
-      message: err || 'Server error',
+      message:
+        JSON.stringify(err?.response.data.errors[0].message) || 'Server error',
     });
   },
 );

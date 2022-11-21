@@ -1,5 +1,5 @@
 import React from 'react';
-import {OTP} from '@assets/images';
+import {OTP} from '@/assets/images';
 import {View, Image, SafeAreaView, TouchableOpacity} from 'react-native';
 import Text from '@/components/Text';
 import {useNavigation} from '@react-navigation/native';

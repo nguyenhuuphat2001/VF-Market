@@ -15,24 +15,21 @@ const Button = ({
   onPress,
   textStyle,
   isOutline,
-  isDisabled = false,
+  disabled,
   isLoading = false,
   iconLeft,
   iconRight,
 }) => {
   return (
     <TouchableOpacity
-      disabled={isDisabled}
-      onPress={onPress}
+      disabled={disabled}
+      onPress={!disabled ? onPress : () => {}}
       style={[
         styles.container,
         styles.border,
         containerStyle,
         isOutline && {backgroundColor: 'transparent'},
-        isDisabled && {
-          backgroundColor: '#00000070',
-          border: 0,
-        },
+        disabled ? {opacity: 0.6} : {},
       ]}>
       {iconLeft && (
         <Icon

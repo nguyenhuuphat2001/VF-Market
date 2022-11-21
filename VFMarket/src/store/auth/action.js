@@ -12,7 +12,6 @@ import {
 import screen from '@/constants/screen';
 
 import {storeData, getData} from '@/utils/storage';
-import {KEY_AUTHEN} from '@/constants/enviroments';
 
 import {navigate, reset} from '@/navigation/navigationUtils';
 
@@ -22,7 +21,7 @@ export const login = createAsyncThunk(
     const response = await loginAPI({email, password});
     setToken(response.data.data.accessToken);
     await storeData('KEY_AUTHEN', response.data.data.accessToken);
-
+    const profile = await getProfileAPI();
     if (isGoToMain) {
       reset({
         index: 0,
@@ -30,7 +29,7 @@ export const login = createAsyncThunk(
       });
     }
 
-    return response.data.data.person;
+    return profile.data.data;
   },
 );
 
@@ -40,19 +39,15 @@ export const signUp = createAsyncThunk(
     {firstName, lastName, password, passwordConfirm, mobileNumber, email},
     thunkAPI,
   ) => {
-    // const response = await loginAPI({ username, password });
-    // setToken("trueABC");
-    const data = await signUpAPI({
+    const response = await signUpAPI({
       firstName,
       lastName,
       password,
       mobileNumber,
       email,
     });
-    console.log('data: ', data);
     navigate(screen.OTP);
-    console.log('data1: ', data);
-    return {email, password};
+    return {response};
   },
 );
 
@@ -71,7 +66,7 @@ export const activeAccount = createAsyncThunk(
   async ({email, password, otp}, thunkAPI) => {
     // const response = await loginAPI({ username, password });
     // setToken("trueABC");
-    const data = await activateAccountAPI({email, otp});
+    await activateAccountAPI({email, otp});
     thunkAPI.dispatch(login({email, password, isNotGoToMain: true}));
     reset({
       index: 0,
@@ -81,16 +76,14 @@ export const activeAccount = createAsyncThunk(
   },
 );
 
-export const getProfile = createAsyncThunk('auth/getProfile', async () => {
+export const getProfile = createAsyncThunk('user/profile', async () => {
   const token = await getData('KEY_AUTHEN');
   setToken(token);
-  // const response = await getProfileAPI();
-  // console.log(response);
-
+  const response = await getProfileAPI();
   reset({
     index: 0,
     routes: [{name: screen.MAIN_SCREEN}],
   });
 
-  // return response.data.data;
+  return response.data.data;
 });

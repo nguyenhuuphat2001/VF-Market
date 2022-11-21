@@ -20,6 +20,7 @@ const INIT_STATE = {
 const slice = createSlice({
   name: 'auth',
   initialState: INIT_STATE,
+
   reducers: {
     logoutSuccess: (state, action) => {
       state.auth = null;
@@ -39,8 +40,7 @@ const slice = createSlice({
       state.isLoading = false;
       Toast.show({
         type: 'error',
-        text1: 'SDT hoặc mật khẩu không đúng !!!',
-        // text2: 'This is some something 👋'
+        text1: 'Email hoặc mật khẩu không đúng !!!',
       });
     });
     // Sign up
@@ -49,15 +49,14 @@ const slice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(signUp.fulfilled, (state, action) => {
-      console.log('action: ', action.payload);
       state.tempAccount = action.payload;
       state.isLoading = false;
     });
     builder.addCase(signUp.rejected, (state, action) => {
-      console.log('action: ', action.payload);
+      console.log('action: ', action.error);
       Toast.show({
         type: 'error',
-        text1: 'Có gì đó sai sai !!!',
+        text1: action.error?.message || 'Vui lòng điền thông tin chính xác',
         // text2: 'This is some something 👋'
       });
       state.isLoading = false;
@@ -70,6 +69,7 @@ const slice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(getProfile.fulfilled, (state, action) => {
+      console.log(' action.payload: ', action.payload);
       state.auth = true;
       state.isLoading = false;
       state.profile = action.payload;
@@ -86,7 +86,7 @@ const {logoutSuccess} = slice.actions;
 
 export const logout = () => async dispatch => {
   try {
-    await storeData(KEY_AUTHEN, null);
+    await storeData('KEY_AUTHEN', null);
     reset({
       index: 0,
       routes: [{name: 'AuthScreen'}],
