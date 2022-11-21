@@ -1,23 +1,26 @@
 import React, {useCallback, useRef, useMemo, useState} from 'react';
 
-import {View, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
-import {COLORS} from '@/theme/index';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  TextInput,
+  Platform,
+} from 'react-native';
+import {COLORS, SPACING} from '@/theme/index';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
-// arrow-drop-down
 
-import ContainerInput from '../ContainerInput';
-
-import Text from '../Text';
-
-const Search = ({label = 'label', value = 'value', onChange}) => {
+const Search = ({label = 'label', value = 'value', onPress, onChangeText}) => {
   return (
     <View style={[styles.container, styles.border]}>
       <View style={styles.horizontal}>
         <TextInput
-          //   editable={false}
+          onPressIn={!onChangeText ? onPress : null}
+          editable={!!onChangeText || false}
+          onChangeText={onChangeText}
           style={styles.input}
-          placeholder="Tìm kiếm  "
+          placeholder="Tìm kiếm "
         />
         <Icon name="search" style={[styles.icon]} />
       </View>
@@ -29,11 +32,11 @@ export default Search;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    paddingHorizontal: SPACING.small,
+    paddingVertical: Platform.OS == 'android' ? 0 : SPACING.small,
     width: '100%',
     backgroundColor: COLORS.gray_light,
   },
-
   border: {
     borderRadius: 10,
   },
@@ -41,11 +44,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
-    alignItems: 'flex-end',
+    alignItems: 'center',
   },
   input: {
     // marginVertical: 5
-    top: -3,
+    // top: -3
   },
   icon: {
     fontSize: 25,

@@ -22,6 +22,7 @@ const Header = ({
   title,
   isDark,
   noActionLeft,
+  fontSizeTitle = FONT_SIZE.medium,
 }) => {
   const navigation = useNavigation();
 
@@ -48,9 +49,16 @@ const Header = ({
               />
             ))}
         </TouchableOpacity>
-        <Text customStyle={{...styles.txtBold, ...styles.center}}>{title}</Text>
+        <Text
+          customStyle={{
+            ...styles.txtBold,
+            ...styles.center,
+            fontSize: fontSizeTitle,
+          }}>
+          {title}
+        </Text>
 
-        <TouchableOpacity style={[styles.left, styles.btn]}>
+        <TouchableOpacity style={[styles.right, styles.btn]}>
           {renderIconRight && renderIconRight()}
         </TouchableOpacity>
       </View>

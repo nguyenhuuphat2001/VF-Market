@@ -12,6 +12,7 @@ import {
 import Text from '@/components/Text';
 import {useNavigation} from '@react-navigation/native';
 import ContainerInput from '@/components/ContainerInput';
+import PasswordInput from '@/components/PasswordInput';
 import styles from './styles';
 import Button from '@/components/Button';
 
@@ -89,13 +90,14 @@ const SignInScreen = () => {
           <ContainerInput customStyle={styles.input}>
             <TextInput placeholder="Email" onChangeText={handleEmail} />
           </ContainerInput>
-          <ContainerInput customStyle={styles.input}>
+          {/* <ContainerInput customStyle={styles.input}>
             <TextInput
               secureTextEntry
               placeholder="Mật khẩu"
               onChangeText={handlePassword}
             />
-          </ContainerInput>
+          </ContainerInput> */}
+          <PasswordInput onChangeText={handlePassword} />
 
           <TouchableOpacity
             style={styles.btnForget}

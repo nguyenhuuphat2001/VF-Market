@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {getListProduct, getProductDetail} from './action';
+import {getListProduct, getListSearchProduct, getProductDetail} from './action';
 import {STATUS} from '@/constants/index';
 
 const INIT_STATE = {
@@ -7,6 +7,8 @@ const INIT_STATE = {
   list: [],
   detail: {},
   totalPage: 1,
+  listSearch: [],
+  totalPageSearch: 1,
 };
 
 // Slice
@@ -19,7 +21,7 @@ const slice = createSlice({
     },
   },
   extraReducers: builder => {
-    // List Gym
+    // List product
     builder.addCase(getListProduct.pending, (state, action) => {
       state.status = STATUS.FETCHING;
     });
@@ -33,7 +35,20 @@ const slice = createSlice({
       console.log(action.error);
     });
 
-    // Detail Gym
+    // builder.addCase(getListSearchProduct.pending, (state, action) => {
+    //   state.status = STATUS.FETCHING;
+    // });
+    // builder.addCase(getListSearchProduct.fulfilled, (state, action) => {
+    //   state.status = STATUS.SUCCESS;
+    //   state.listSearch = action.payload;
+    //   state.totalPageSearch = action.payload.totalPage;
+    // });
+    // builder.addCase(getListSearchProduct.rejected, (state, action) => {
+    //   state.status = STATUS.ERROR;
+    //   console.log(action.error);
+    // });
+
+    // Detail product
     builder.addCase(getProductDetail.pending, (state, action) => {
       state.status = STATUS.FETCHING;
     });

@@ -3,7 +3,12 @@ import {View, SafeAreaView, Image, ScrollView} from 'react-native';
 import Button, {BackButton, FavoriteButton} from '@/components/Button';
 import Text from '@/components/Text';
 import {COLORS, SPACING} from '@/theme/index';
-import {DetailTitle, DetailCarousel, DetailDesc} from './components';
+import {
+  DetailTitle,
+  DetailCarousel,
+  DetailDesc,
+  DetailParameter,
+} from './components';
 import {SharedElement} from 'react-navigation-shared-element';
 
 const DetailCarScreen = ({navigation, route}) => {
@@ -15,11 +20,22 @@ const DetailCarScreen = ({navigation, route}) => {
 
   useEffect(() => {
     const item = route.params;
-    console.log('data: ', data);
+    console.log('detail car: ', item);
     if (item.name != data?.name) {
       setData(item);
     }
   }, [navigation]);
+
+  const showPrice = value => {
+    const price = +value;
+    var moneyFormatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+    });
+
+    return moneyFormatter.format(price);
+  };
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -58,7 +74,11 @@ const DetailCarScreen = ({navigation, route}) => {
           isOpen={true}
         />
         {data?.description && <DetailDesc description={data?.description} />}
-        {/* <DetailTabs /> */}
+        <DetailParameter
+          title={data?.name}
+          address={'146 Đường số 2, P.15, Quận Bình Thạnh, Tp Hồ Chí Minh'}
+          isOpen={true}
+        />
       </ScrollView>
 
       <View
@@ -84,7 +104,7 @@ const DetailCarScreen = ({navigation, route}) => {
               color: 'black',
               fontWeight: '500',
             }}>
-            $ {data?.price?.value}
+            {showPrice(data?.price?.value)}
           </Text>
         </View>
         <View>

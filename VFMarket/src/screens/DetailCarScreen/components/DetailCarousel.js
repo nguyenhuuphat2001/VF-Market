@@ -73,7 +73,7 @@ const DetailCarousel = ({images}) => {
             height: 10,
             borderRadius: 5,
             marginHorizontal: 0,
-            backgroundColor: COLORS.white,
+            backgroundColor: COLORS.gray_light,
           }}
           inactiveDotStyle={{}}
           inactiveDotOpacity={1}

@@ -10,6 +10,7 @@ import {
 import Text from '@/components/Text';
 import {useNavigation} from '@react-navigation/native';
 import ContainerInput from '@/components/ContainerInput';
+import PasswordInput from '@/components/PasswordInput';
 import styles from './styles';
 import Button from '@/components/Button';
 import Header from '@/components/Header';
@@ -95,7 +96,6 @@ const SignInScreen = () => {
       return;
     }
     const data = await dispatch(signUp(input));
-    console.log('data: ', data);
   };
 
   return (
@@ -151,13 +151,17 @@ const SignInScreen = () => {
                 placeholder="Số điện thoại"
               />
             </ContainerInput>
-            <ContainerInput customStyle={styles.input}>
+            {/* <ContainerInput customStyle={styles.input}>
               <TextInput
                 onChangeText={handleTextChanges('password')}
                 secureTextEntry
                 placeholder="Mật khẩu"
               />
-            </ContainerInput>
+            </ContainerInput> */}
+            <PasswordInput
+              placeholder="Mật khẩu"
+              onChangeText={handleTextChanges('password')}
+            />
             <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
               <Icon name="check" style={styles.icon} />
               <Text customStyle={styles.note}>Tối thiểu 8 kí tự</Text>
@@ -168,7 +172,7 @@ const SignInScreen = () => {
                 Bao gồm chữ in hoa, số, kí tự đặc biệt (#,@,...)
               </Text>
             </View>
-            <ContainerInput
+            {/* <ContainerInput
               customStyle={[styles.input, styles.marginTopLarge]}
               isError={!!error['passwordConfirm']}
               errorText={'Mật khẩu không trùng khớp'}>
@@ -177,7 +181,11 @@ const SignInScreen = () => {
                 secureTextEntry
                 placeholder="Nhập lại mật khẩu"
               />
-            </ContainerInput>
+            </ContainerInput> */}
+            <PasswordInput
+              placeholder="Nhập lại mật khẩu"
+              onChangeText={handleTextChanges('passwordConfirm')}
+            />
             <Button
               content="Đăng ký"
               isLoading={isLoading}

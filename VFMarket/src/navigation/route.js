@@ -9,7 +9,7 @@ import DetailCarScreen from '@/screens/DetailCarScreen';
 // import OrderPackagesScreen from '@/screens/Order/OrderPackagesScreen';
 // import OrderPaymentScreen from '@/screens/Order/OrderPaymentScreen';
 // import OrderSuccessScreen from '@/screens/Order/OrderSuccessScreen';
-// import SearchScreen from '@/screens/SearchScreen';
+import SearchScreen from '@/screens/SearchScreen';
 
 export const route = [
   //   {
@@ -39,10 +39,10 @@ export const route = [
       ];
     },
   },
-  //   {
-  //     name: CONST_SCREEN.SEARCH,
-  //     component: SearchScreen,
-  //   },
+  {
+    name: CONST_SCREEN.SEARCH,
+    component: SearchScreen,
+  },
   //   {
   //     name: CONST_SCREEN.ORDER_PACKAGE,
   //     component: OrderPackagesScreen,

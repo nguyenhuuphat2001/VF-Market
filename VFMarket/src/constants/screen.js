@@ -9,6 +9,7 @@ const screen = {
   AVATAR_CAMERA: 'AVATAR_CAMERA',
   MAIN_SCREEN: 'MAIN',
   DETAIL_CAR: 'DETAIL_CAR',
+  SEARCH: 'SEARCH',
 };
 
 export default screen;

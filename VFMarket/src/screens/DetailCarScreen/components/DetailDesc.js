@@ -56,6 +56,7 @@ const DetailDesc = ({description, openTime, closeTime}) => {
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
+            paddingBottom: SPACING.xs,
           }}>
           <Text
             customStyle={{
@@ -65,10 +66,6 @@ const DetailDesc = ({description, openTime, closeTime}) => {
             }}>
             Mô tả
           </Text>
-
-          {/* <Button title={'>'} onPress={() => {
-            
-          }} /> */}
           <ReadMoreButton readMore={readMore} onPress={pressReadMore} />
         </View>
 
@@ -81,23 +78,6 @@ const DetailDesc = ({description, openTime, closeTime}) => {
           {!readMore && '...'}
         </Text>
       </TouchableOpacity>
-
-      {/* <Text
-        customStyle={{
-          fontFamily: MONT_REGULAR,
-          fontSize: FONT_SIZE.medium,
-          paddingTop: SPACING.small,
-        }}>
-        Mở cửa {` `}
-        <Text
-          customStyle={{
-            fontFamily: MONT_BOLD,
-            fontSize: FONT_SIZE.medium,
-            paddingLeft: SPACING.xs,
-          }}>
-          {getFormatTime(openTime)} - {getFormatTime(closeTime)}
-        </Text>
-      </Text> */}
     </View>
   );
 };

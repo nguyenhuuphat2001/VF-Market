@@ -14,9 +14,6 @@ import styles from './styles';
 import {useDispatch, useSelector} from 'react-redux';
 import {getListProduct} from '@/store/product/action';
 
-import Header from '@/components/Header';
-
-import SCREEN from '@/constants/screen';
 import {PAGE_LIMIT} from '@/constants/index';
 
 import {SPACING, COLORS} from '@/theme/index';
@@ -26,15 +23,11 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import BottomSheet, {BottomSheetBackdrop} from '@gorhom/bottom-sheet';
 
 import Search from '@/components/Search';
+import Loading from '@/components/Loading';
 
 import {BANNER, HELLO} from '@/assets/images/index';
 import {navigate} from '@/navigation/navigationUtils';
 import screen from '@/constants/screen';
-
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
 
 import ItemCourse from './components/ItemCourse';
 import {logout} from '@/store/auth';
@@ -142,7 +135,7 @@ const UpdatePersonalInfoScreen = () => {
             </Text>
           </View>
         </View>
-        <Search />
+        <Search onPress={() => navigate(screen.SEARCH)} />
       </View>
       <ScrollView
         style={[styles.innerContainer]}
@@ -181,7 +174,7 @@ const UpdatePersonalInfoScreen = () => {
                   resizeMode="contain"
                   source={FILTER}
                 /> */}
-                <Text customStyle={{fontSize: 12, fontWeight: '400'}}>
+                <Text customStyle={{fontSize: 14, fontWeight: '400'}}>
                   Xem tất cả
                 </Text>
               </TouchableOpacity>
@@ -194,6 +187,7 @@ const UpdatePersonalInfoScreen = () => {
               showsVerticalScrollIndicator={false}
               keyExtractor={item => item._id}
             />
+            {/* <Loading isLoading={true} /> */}
           </View>
         </View>
       </ScrollView>
@@ -218,12 +212,10 @@ const UpdatePersonalInfoScreen = () => {
               alignItems: 'center',
             }}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <TouchableOpacity onPress={onClose}>
-                <Icon
-                  name="close"
-                  style={{fontSize: 35, color: COLORS.border_input}}
-                />
-              </TouchableOpacity>
+              <Icon
+                name="close"
+                style={{fontSize: 35, color: COLORS.border_input}}
+              />
               <Text
                 customStyle={{fontWeight: '600', fontSize: 16, marginLeft: 10}}>
                 Sắp xếp theo

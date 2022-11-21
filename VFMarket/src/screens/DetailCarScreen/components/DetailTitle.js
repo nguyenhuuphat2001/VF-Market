@@ -28,7 +28,7 @@ const StatusTag = ({isOpen}) => {
       customStyle={{
         fontSize: FONT_SIZE.small,
       }}>
-      {isOpen ? 'Đang mở cửa' : 'Đóng cửa'}
+      {isOpen ? 'Có sẵn' : 'Hết hàng'}
     </Text>
   );
 };
