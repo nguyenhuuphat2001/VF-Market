@@ -36,17 +36,17 @@ const DetailParameter = ({title, address, isOpen}) => {
       <View
         style={{
           flexDirection: 'row',
-          justifyContent: 'space-between',
-          paddingHorizontal: 10,
+          // justifyContent: 'space-between',
+          // paddingHorizontal: 10,
         }}>
-        <View>
+        <View style={{width: '50%'}}>
           <Text
             customStyle={{
               fontFamily: MONT_REGULAR,
               fontSize: FONT_SIZE.small,
               paddingVertical: 10,
             }}>
-            Động cơ: 1
+            Động cơ: Xăng
           </Text>
           <Text
             customStyle={{
@@ -54,7 +54,7 @@ const DetailParameter = ({title, address, isOpen}) => {
               fontSize: FONT_SIZE.small,
               paddingVertical: 10,
             }}>
-            Động cơ: 1
+            Số ghế: 7
           </Text>
           <Text
             customStyle={{
@@ -62,17 +62,17 @@ const DetailParameter = ({title, address, isOpen}) => {
               fontSize: FONT_SIZE.small,
               paddingVertical: 10,
             }}>
-            Động cơ: 1
+            Kích thước: 4750x1900x1660mm
           </Text>
         </View>
-        <View>
+        <View style={{width: '50%'}}>
           <Text
             customStyle={{
               fontFamily: MONT_REGULAR,
               fontSize: FONT_SIZE.small,
               paddingVertical: 10,
             }}>
-            Động cơ: 1
+            Công suất: 402 hp
           </Text>
           <Text
             customStyle={{
@@ -80,7 +80,7 @@ const DetailParameter = ({title, address, isOpen}) => {
               fontSize: FONT_SIZE.small,
               paddingVertical: 10,
             }}>
-            Động cơ: 1
+            Túi khí: 11
           </Text>
           <Text
             customStyle={{
@@ -88,7 +88,7 @@ const DetailParameter = ({title, address, isOpen}) => {
               fontSize: FONT_SIZE.small,
               paddingVertical: 10,
             }}>
-            Động cơ: 1
+            Dẫn động: AWD - 4 bánh
           </Text>
         </View>
       </View>

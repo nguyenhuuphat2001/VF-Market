@@ -2,7 +2,7 @@ import {View, Button, TouchableOpacity} from 'react-native';
 import React, {useState} from 'react';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Text from '@/components/Text';
-import {ARROW_DOWN} from '@assets/images';
+import {ARROW_DOWN} from '@/assets/images';
 import {
   COLORS,
   SPACING,

@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   input: {
+    width: '80%',
     // marginVertical: 5
     // top: -3
   },

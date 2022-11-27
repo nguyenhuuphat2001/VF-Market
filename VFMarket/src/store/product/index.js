@@ -35,18 +35,18 @@ const slice = createSlice({
       console.log(action.error);
     });
 
-    // builder.addCase(getListSearchProduct.pending, (state, action) => {
-    //   state.status = STATUS.FETCHING;
-    // });
-    // builder.addCase(getListSearchProduct.fulfilled, (state, action) => {
-    //   state.status = STATUS.SUCCESS;
-    //   state.listSearch = action.payload;
-    //   state.totalPageSearch = action.payload.totalPage;
-    // });
-    // builder.addCase(getListSearchProduct.rejected, (state, action) => {
-    //   state.status = STATUS.ERROR;
-    //   console.log(action.error);
-    // });
+    builder.addCase(getListSearchProduct.pending, (state, action) => {
+      state.status = STATUS.FETCHING;
+    });
+    builder.addCase(getListSearchProduct.fulfilled, (state, action) => {
+      state.status = STATUS.SUCCESS;
+      state.listSearch = action.payload;
+      state.totalPageSearch = action.payload.totalPage;
+    });
+    builder.addCase(getListSearchProduct.rejected, (state, action) => {
+      state.status = STATUS.ERROR;
+      console.log(action.error);
+    });
 
     // Detail product
     builder.addCase(getProductDetail.pending, (state, action) => {

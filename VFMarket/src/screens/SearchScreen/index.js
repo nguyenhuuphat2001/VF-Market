@@ -1,4 +1,4 @@
-import React, {useRef, useCallback, useMemo, useState} from 'react';
+import React, {useRef, useCallback, useMemo, useState, useEffect} from 'react';
 import {
   View,
   ScrollView,
@@ -88,6 +88,10 @@ const SearchScreen = () => {
   const [search, setSearch] = React.useState('');
   const [paginatior, setPaginator] = useState({page: 1, limit: PAGE_LIMIT});
 
+  useEffect(() => {
+    dispatch(getListSearchProduct({search: search, paginatior}));
+  }, [search]);
+
   const onPress = useCallback(() => {
     ref?.current?.collapse();
   }, []);
@@ -107,7 +111,7 @@ const SearchScreen = () => {
     [],
   );
 
-  const snapPoints = useMemo(() => ['80%', '80%'], []);
+  const snapPoints = useMemo(() => ['45%', '45%'], []);
 
   // callbacks
   const handleSheetChanges = useCallback(index => {
@@ -152,23 +156,10 @@ const SearchScreen = () => {
     setSearch(_search);
     if (!_search) {
       console.log('all');
-      dispatch(getListSearchProduct(paginatior));
+
       return;
     }
-
-    // setData([]);
-    // setIsLoading(true);
-    // getStarsMiddleware(
-    //   _search,
-    //   function (resData) {
-    //     setIsLoading(false);
-    //     setData([...resData]);
-    //   },
-    //   // (message) => {
-    //   //   setIsLoading(false);
-    //   // },
-    // );
-    dispatch(getListSearchProduct({search: _search, paginatior}));
+    // dispatch(getListSearchProduct({search: _search, paginatior}));
   };
 
   const handleChangeText = value => {
@@ -186,7 +177,8 @@ const SearchScreen = () => {
           style={{
             width: '100%',
             alignItems: 'flex-start',
-            marginBottom: SPACING.medium,
+
+            // marginBottom: SPACING.medium,
           }}>
           <Search onChangeText={handleChangeText} />
         </View>
@@ -196,12 +188,6 @@ const SearchScreen = () => {
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          {/* <View style={{width: '100%'}}>
-            <Text customStyle={{marginBottom: SPACING.small}}>Gần đây</Text>
-            {[1, 2, 3].map(item => (
-              <ItemSearch />
-            ))}
-          </View> */}
           <View
             style={{
               width: '100%',
@@ -221,7 +207,7 @@ const SearchScreen = () => {
                 backgroundColor: 'white',
                 zIndex: 100,
               }}>
-              <Text>37 Kết quả</Text>
+              <Text>{listProduct.length} Kết quả</Text>
             </View>
             <View
               style={{
@@ -231,7 +217,13 @@ const SearchScreen = () => {
               }}
             />
           </View>
-          <View style={{width: '100%', marginTop: 20}}>
+          <View
+            style={{
+              width: '100%',
+              marginTop: 22,
+              height: '80%',
+              // paddingBottom: 100,
+            }}>
             <FlatList
               data={listProduct}
               renderItem={renderItems}
@@ -265,7 +257,7 @@ const SearchScreen = () => {
             }}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               {/* <Icon name="close" style={{ fontSize: 35, color: COLORS.border_input }} /> */}
-              <Text customStyle={{fontWeight: '600', fontSize: 16}}>
+              <Text customStyle={{fontWeight: '600', fontSize: 18}}>
                 Bộ lọc
               </Text>
             </View>
@@ -283,13 +275,15 @@ const SearchScreen = () => {
               width: '100%',
               marginTop: 10,
             }}>
-            <Text
+            {/* <Text
               customStyle={{
                 fontSize: 12,
                 color: COLORS.border_input,
                 textAlign: 'left',
                 width: '100%',
-              }}>
+              }}> */}
+            <Text
+              customStyle={{fontSize: 14, textAlign: 'left', width: '100%'}}>
               Vị trí của bạn
             </Text>
             <View
@@ -305,7 +299,7 @@ const SearchScreen = () => {
                 marginVertical: 10,
               }}>
               <Text customStyle={{fontSize: 12, textAlign: 'left'}}>
-                Vị trí của bạn
+                Sắp xếp
               </Text>
               <Icon
                 name="arrow-drop-down"
@@ -321,15 +315,15 @@ const SearchScreen = () => {
               marginVertical: SPACING.small,
             }}
           />
-          <ScrollView
+          <View
             style={{width: '100%'}}
             contentContainerStyle={{paddingBottom: 60}}
             showsVerticalScrollIndicator={false}>
             <View style={{width: '100%'}}>
               <Text customStyle={{fontSize: 14, textAlign: 'left'}}>
-                Bộ môn
+                Động cơ
               </Text>
-              {/* <SelectMany /> */}
+              <SelectMany />
             </View>
             <View
               style={{
@@ -341,94 +335,11 @@ const SearchScreen = () => {
             />
             <View style={{width: '100%'}}>
               <Text customStyle={{fontSize: 14, textAlign: 'left'}}>
-                Đánh giá
+                Số ghế
               </Text>
-              <View
-                style={{
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  width: '100%',
-                }}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    width: '100%',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    marginTop: 10,
-                  }}>
-                  <Text
-                    customStyle={{
-                      fontSize: 14,
-                      color: 'black',
-                      fontWeight: '500',
-                    }}>
-                    Từ 5 sao
-                  </Text>
-                  <Icon
-                    name="radio-button-checked"
-                    style={{fontSize: 25, color: 'black'}}
-                  />
-                </View>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    width: '100%',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    marginTop: 10,
-                  }}>
-                  <Text>Từ 5 sao</Text>
-                  <Icon
-                    name="radio-button-unchecked"
-                    style={{fontSize: 25, color: COLORS.border_input}}
-                  />
-                </View>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    width: '100%',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    marginTop: 10,
-                  }}>
-                  <Text>Từ 5 sao</Text>
-                  <Icon
-                    name="radio-button-unchecked"
-                    style={{fontSize: 25, color: COLORS.border_input}}
-                  />
-                </View>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    width: '100%',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    marginTop: 10,
-                  }}>
-                  <Text>Từ 5 sao</Text>
-                  <Icon
-                    name="radio-button-unchecked"
-                    style={{fontSize: 25, color: COLORS.border_input}}
-                  />
-                </View>
-              </View>
+              <SelectMany />
             </View>
-            <View
-              style={{
-                width: '100%',
-                height: 1,
-                backgroundColor: COLORS.border_color,
-                marginVertical: SPACING.large,
-              }}
-            />
-            <View style={{width: '100%'}}>
-              <Text customStyle={{fontSize: 14, textAlign: 'left'}}>
-                Tiện ích
-              </Text>
-              {/* <SelectMany /> */}
-            </View>
-          </ScrollView>
+          </View>
         </View>
       </BottomSheet>
     </View>

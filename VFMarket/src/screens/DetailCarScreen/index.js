@@ -64,6 +64,7 @@ const DetailCarScreen = ({navigation, route}) => {
         style={{
           flex: 1,
           backgroundColor: COLORS.background,
+          marginBottom: SPACING.large,
         }}>
         <SharedElement id={`item.${data?._id}.photo`}>
           <DetailCarousel images={data?.images ?? []} />

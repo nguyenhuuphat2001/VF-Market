@@ -1,5 +1,5 @@
 import React, {useRef, useEffect, useState} from 'react';
-import {MINING, COIN, MINER} from '@assets/images';
+import {MINING, COIN, MINER} from '@/assets/images';
 import {View, Image, Animated, Text, TouchableOpacity} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 

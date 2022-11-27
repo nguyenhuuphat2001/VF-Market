@@ -1,12 +1,11 @@
 import React, {useRef, useEffect} from 'react';
-import {SPLASH_LOGO, MAIN_LOGO} from '@assets/images';
+import {SPLASH_LOGO, MAIN_LOGO} from '@/assets/images';
 import {View, Image, Animated, Text} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
 import {getData} from '@/utils/storage';
 import {useDispatch, useSelector} from 'react-redux';
 import {getProfile} from '@/store/auth/action';
-
 import styles from './styles';
 
 const SplashScreen = () => {

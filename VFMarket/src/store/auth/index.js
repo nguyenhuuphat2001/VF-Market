@@ -56,7 +56,7 @@ const slice = createSlice({
       console.log('action: ', action.error);
       Toast.show({
         type: 'error',
-        text1: action.error?.message || 'Vui lòng điền thông tin chính xác',
+        text1: action.error.message || 'Vui lòng điền thông tin chính xác',
         // text2: 'This is some something 👋'
       });
       state.isLoading = false;

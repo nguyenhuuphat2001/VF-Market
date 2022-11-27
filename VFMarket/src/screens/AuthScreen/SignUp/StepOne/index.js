@@ -1,5 +1,5 @@
 import React, {useRef, useEffect, useState} from 'react';
-import {MAIN_LOGO} from '@assets/images';
+import {MAIN_LOGO} from '@/assets/images';
 import {
   View,
   SafeAreaView,
@@ -42,7 +42,10 @@ const SignInScreen = () => {
     !input.firstName ||
     !input.lastName ||
     !input.mobileNumber ||
-    !input.passwordConfirm;
+    !input.passwordConfirm ||
+    input.mobileNumber.length < 10 ||
+    input.password < 8 ||
+    input.passwordConfirm < 8;
 
   const [error, setError] = useState({
     email: false,
@@ -151,6 +154,18 @@ const SignInScreen = () => {
                 placeholder="Số điện thoại"
               />
             </ContainerInput>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'flex-end',
+                marginTop: -7,
+                marginBottom: 10,
+              }}>
+              <Icon name="check" style={styles.icon} />
+              <Text customStyle={styles.note}>
+                Số điện thoại hợp lệ có 10 chữ số
+              </Text>
+            </View>
             {/* <ContainerInput customStyle={styles.input}>
               <TextInput
                 onChangeText={handleTextChanges('password')}
@@ -162,11 +177,20 @@ const SignInScreen = () => {
               placeholder="Mật khẩu"
               onChangeText={handleTextChanges('password')}
             />
-            <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'flex-end',
+              }}>
               <Icon name="check" style={styles.icon} />
               <Text customStyle={styles.note}>Tối thiểu 8 kí tự</Text>
             </View>
-            <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'flex-end',
+                marginBottom: 10,
+              }}>
               <Icon name="check" style={styles.icon} />
               <Text customStyle={styles.note}>
                 Bao gồm chữ in hoa, số, kí tự đặc biệt (#,@,...)
