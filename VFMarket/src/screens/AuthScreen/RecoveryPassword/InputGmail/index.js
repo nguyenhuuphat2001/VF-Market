@@ -5,6 +5,7 @@ import Text from '@/components/Text';
 import {useNavigation} from '@react-navigation/native';
 import ContainerInput from '@/components/ContainerInput';
 import styles from './styles';
+import {COLORS} from '@/theme/index';
 import Button from '@/components/Button';
 
 import Header from '@/components/Header';
@@ -44,14 +45,12 @@ const InputGmailScreen = () => {
 
           <View style={{flex: 1, width: '100%'}}>
             <ContainerInput customStyle={styles.input}>
-              <TextInput secureTextEntry={true} placeholder="Email" />
+              <TextInput
+                secureTextEntry={true}
+                placeholder="Email"
+                placeholderTextColor={COLORS.border_input}
+              />
             </ContainerInput>
-            {/* <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
-              <Icon name="check" style={[styles.icon, styles.isChecked]} />
-              <Text customStyle={[styles.note, styles.isChecked]}>
-                Tối thiểu 8 kí tự
-              </Text>
-            </View> */}
             <Button
               content="Gửi OTP"
               // disabled={!}
@@ -61,10 +60,6 @@ const InputGmailScreen = () => {
           </View>
         </KeyboardAwareScrollView>
       </View>
-
-      {/* <BottomSheet ref={ref}>
-        <View style={{ flex: 1, backgroundColor: 'orange' }} />
-      </BottomSheet> */}
     </View>
   );
 };

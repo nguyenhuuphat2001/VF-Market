@@ -66,8 +66,9 @@ const UpdatePersonalInfoScreen = () => {
       <View
         style={{
           alignItems: 'flex-start',
-          paddingHorizontal: SPACING.medium,
+          paddingHorizontal: SPACING.innerContainer,
           marginBottom: SPACING.medium,
+          // backgroundColor: 'black',
         }}>
         <SafeAreaView
           edges={['top']}
@@ -118,14 +119,15 @@ const UpdatePersonalInfoScreen = () => {
             width: '100%',
             alignItems: 'center',
             justifyContent: 'center',
+            // backgroundColor: 'red',
           }}>
           <Image
             style={{
-              // width: 298,
+              width: '100%',
               height: 180,
               // paddingHorizontal: SPACING.innerContainer,
             }}
-            resizeMode="contain"
+            resizeMode="stretch"
             source={BANNER}
           />
 

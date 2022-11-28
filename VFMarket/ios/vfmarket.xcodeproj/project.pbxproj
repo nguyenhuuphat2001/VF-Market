@@ -192,7 +192,6 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				8AE06758C5FA36C013D4FCC6 /* [CP] Embed Pods Frameworks */,
 				0FB36949B67104C6B7B1722E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -215,7 +214,6 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				1AC3861C07117DDA4B10F914 /* [CP] Embed Pods Frameworks */,
 				5A36CC3128730C982B65644A /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -325,23 +323,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-vfMarket-vfMarketTests/Pods-vfMarket-vfMarketTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1AC3861C07117DDA4B10F914 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-vfMarket/Pods-vfMarket-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-vfMarket/Pods-vfMarket-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-vfMarket/Pods-vfMarket-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		5A36CC3128730C982B65644A /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -379,23 +360,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8AE06758C5FA36C013D4FCC6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-vfMarket-vfMarketTests/Pods-vfMarket-vfMarketTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-vfMarket-vfMarketTests/Pods-vfMarket-vfMarketTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-vfMarket-vfMarketTests/Pods-vfMarket-vfMarketTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A7F7A356870BCF1451CBFA25 /* [CP] Check Pods Manifest.lock */ = {
@@ -528,6 +492,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6MPCZTU529;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = vfMarket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -555,6 +520,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6MPCZTU529;
 				INFOPLIST_FILE = vfMarket/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (

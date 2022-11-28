@@ -1,6 +1,7 @@
 import React, {useRef, useEffect, useState} from 'react';
 import {MAIN_LOGO} from '@/assets/images';
 import {
+  Appearance,
   View,
   Image,
   Animated,
@@ -9,6 +10,7 @@ import {
   TouchableOpacity,
   findNodeHandle,
 } from 'react-native';
+import {COLORS} from '@/theme/index';
 import Text from '@/components/Text';
 import {useNavigation} from '@react-navigation/native';
 import ContainerInput from '@/components/ContainerInput';
@@ -25,6 +27,7 @@ import {login} from '@/store/auth/action';
 import {useDispatch, useSelector} from 'react-redux';
 
 const SignInScreen = () => {
+  const isLoading = useSelector(state => state.authReducer.isLoading);
   let fadeAnim = useRef(new Animated.Value(0)).current;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -34,6 +37,7 @@ const SignInScreen = () => {
   const navigation = useNavigation();
 
   const inputRef = React.useRef(null);
+  console.log('dard mode: ', Appearance.getColorScheme());
 
   useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -74,7 +78,14 @@ const SignInScreen = () => {
 
   return (
     <View style={[styles.container]}>
-      <SafeAreaView style={{flex: 0, marginBottom: 20}} />
+      <SafeAreaView
+        style={{
+          flex: 0,
+          marginBottom: 20,
+          backgroundColor:
+            Appearance.getColorScheme() === 'dark' ? 'black' : 'white',
+        }}
+      />
       <KeyboardAwareScrollView
         ref={inputRef}
         onFocus={event => {
@@ -88,15 +99,12 @@ const SignInScreen = () => {
 
         <View style={{flex: 1, width: '100%'}}>
           <ContainerInput customStyle={styles.input}>
-            <TextInput placeholder="Email" onChangeText={handleEmail} />
-          </ContainerInput>
-          {/* <ContainerInput customStyle={styles.input}>
             <TextInput
-              secureTextEntry
-              placeholder="Mật khẩu"
-              onChangeText={handlePassword}
+              placeholder="Email"
+              onChangeText={handleEmail}
+              placeholderTextColor={COLORS.border_input}
             />
-          </ContainerInput> */}
+          </ContainerInput>
           <PasswordInput onChangeText={handlePassword} />
 
           <TouchableOpacity
@@ -107,6 +115,7 @@ const SignInScreen = () => {
 
           <Button
             onPress={handleLogin}
+            isLoading={isLoading}
             disabled={isDisable}
             content="Đăng nhập"
           />

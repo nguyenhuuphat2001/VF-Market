@@ -21,6 +21,7 @@ const PasswordInput = ({
           secureTextEntry={!showPassword}
           placeholder={placeholder}
           onChangeText={onChangeText}
+          placeholderTextColor={COLORS.border_input}
         />
         <Pressable onPress={handleTogglePassword}>
           {showPassword ? (

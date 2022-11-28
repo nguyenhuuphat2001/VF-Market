@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   findNodeHandle,
 } from 'react-native';
+import {COLORS} from '@/theme/index';
 import Text from '@/components/Text';
 import {useNavigation} from '@react-navigation/native';
 import ContainerInput from '@/components/ContainerInput';
@@ -125,6 +126,7 @@ const SignInScreen = () => {
               <TextInput
                 onChangeText={handleTextChanges('firstName')}
                 placeholder="First name"
+                placeholderTextColor={COLORS.border_input}
               />
             </ContainerInput>
             <ContainerInput
@@ -133,6 +135,7 @@ const SignInScreen = () => {
               <TextInput
                 onChangeText={handleTextChanges('lastName')}
                 placeholder="Last name"
+                placeholderTextColor={COLORS.border_input}
               />
             </ContainerInput>
             <ContainerInput
@@ -142,6 +145,7 @@ const SignInScreen = () => {
                 onChangeText={handleTextChanges('email')}
                 keyboardType="email-address"
                 placeholder="Email"
+                placeholderTextColor={COLORS.border_input}
               />
             </ContainerInput>
             <ContainerInput
@@ -152,6 +156,7 @@ const SignInScreen = () => {
                 onChangeText={handleTextChanges('mobileNumber')}
                 keyboardType="numeric"
                 placeholder="Số điện thoại"
+                placeholderTextColor={COLORS.border_input}
               />
             </ContainerInput>
             <View
