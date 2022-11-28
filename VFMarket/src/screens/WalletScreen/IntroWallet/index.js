@@ -13,7 +13,7 @@ import SCREEN from '@/constants/screen';
 
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
-const IntroWalletScreen = () => {
+const InputGmailScreen = () => {
   const navigation = useNavigation();
 
   const inputRef = useRef(null);
@@ -25,7 +25,7 @@ const IntroWalletScreen = () => {
 
   return (
     <View style={[styles.container]}>
-      <Header title="Wallet" />
+      <Header />
       <View style={[styles.innerContainer]}>
         <KeyboardAwareScrollView
           ref={inputRef}
@@ -61,4 +61,4 @@ const IntroWalletScreen = () => {
   );
 };
 
-export default IntroWalletScreen;
+export default InputGmailScreen;

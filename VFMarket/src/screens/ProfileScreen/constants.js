@@ -7,7 +7,7 @@ import {
   DOCUMENT,
 } from '@/assets/images/profile';
 
-import {KEY_PROFILE_SCREEN} from '@/navigation/ProfileStack';
+import {KEY_PROFILE_SCREEN} from '@/navigation/WalletStack';
 import CONST_SCREEN from '@/constants/screen';
 export const PROFILE_SCREENS = [
   {
