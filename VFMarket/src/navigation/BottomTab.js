@@ -1,6 +1,4 @@
 import HomeStack from './HomeStack';
-import ActivityScreen from '@/screens/ActivityScreen';
-import HomeScreen from '@/screens/HomeScreen';
 import MyCarScreen from '@/screens/MyCarScreen';
 import ProfileScreen from '@/screens/ProfileScreen';
 import MapScreen from '@/screens/MapScreen';

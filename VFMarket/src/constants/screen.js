@@ -10,6 +10,11 @@ const screen = {
   MAIN_SCREEN: 'MAIN',
   DETAIL_CAR: 'DETAIL_CAR',
   SEARCH: 'SEARCH',
+  WALLET_SCREEN: 'WalletScreen',
+  INTRO_WALLET_SCREEN: 'IntroWalletScreen',
+  CREATE_PASSWORD_WALLET_SCREEN: 'CreatePasswordWalletScreen',
+  CREATE_WALLET_SCREEN: 'CreateWalletScreen',
+  IMPORT_WALLET_SCREEN: 'ImportWalletScreen',
 };
 
 export default screen;

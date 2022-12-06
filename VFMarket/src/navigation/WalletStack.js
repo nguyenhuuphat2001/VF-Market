@@ -1,118 +1,72 @@
-import React, {createRef} from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
+// import React, {createRef} from 'react';
+// import {createStackNavigator} from '@react-navigation/stack';
 
-import ProfileScreen from '@/screens/ProfileScreen';
-import BMIScreen from '@/screens/BMIScreen';
-import BMIStatisticScreen from '@/screens/BMIStatisticScreen';
-import UpdateBMIScreen from '@/screens/UpdateBMI';
-import MyCalendarScreen from '@/screens/MyCalendarScreen';
-import HistoryPaymentScreen from '@/screens/HistoryPayment';
+// import WalletScreen from '@/screens/WalletScreen';
+// import IntroWalletScreen from '@/screens/IntroWalletScreen';
+// import CreatePasswordWalletScreen from '@/screens/CreatePasswordWalletScreen';
+// import CreateWalletScreen from '@/screens/CreatePasswordWalletScreen';
 
-import FavoriteScreen from '@/screens/FavoriteScreen';
+// const Stack = createStackNavigator();
 
-const Stack = createStackNavigator();
+// export const KEY_WALLET_SCREEN = {
+//   WALLET_SCREEN: 'WalletScreen',
+//   INTRO_WALLET_SCREEN: 'IntroWalletScreen',
+//   CREATE_PASSWORD_WALLET_SCREEN: 'CreatePasswordWalletScreen',
+//   CREATE_WALLET_SCREEN: 'CreateWalletScreen',
+// };
 
-export const KEY_PROFILE_SCREEN = {
-  PROFILE_SCREEN: 'ProfileScreen',
-  BMI_SCREEN: 'BMIScreen',
-  BMI_STATISTIC_SCREEN: 'BMIStatisticScreen',
-  UPDATE_BMI_SCREEN: 'UpdateBMIScreen',
-  MY_CALENDAR_SCREEN: 'MyCalendarScreen',
-  HISTORY_PAYMENT_SCREEN: 'HistoryPaymentScreen',
-  FAVORITE_SCREEN: 'FavoriteScreen',
-};
+// const WalletStack = () => {
+//   return (
+//     <Stack.Navigator>
+//       <Stack.Screen
+//         options={{
+//           headerShown: false,
+//           animationEnabled: true,
+//         }}
+//         name={KEY_WALLET_SCREEN.WALLET_SCREEN}
+//         component={WalletScreen}
+//       />
+//       {/* <Stack.Screen
+//         options={{
+//           headerShown: false,
+//           animationEnabled: true,
+//         }}
+//         name={KEY_WALLET_SCREEN.INTRO_WALLET_SCREEN}
+//         component={IntroWalletScreen}
+//       /> */}
 
-const ProfileStack = () => {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen
-        options={{
-          headerShown: false,
-          animationEnabled: true,
-        }}
-        name={KEY_PROFILE_SCREEN.PROFILE_SCREEN}
-        component={ProfileScreen}
-      />
+//       <Stack.Screen
+//         options={{
+//           headerShown: false,
+//           animationEnabled: true,
+//         }}
+//         name={KEY_WALLET_SCREEN.CREATE_PASSWORD_WALLET_SCREEN}
+//         component={CreatePasswordWalletScreen}
+//       />
 
-      <Stack.Screen
-        options={() => ({
-          tabBarStyle: {
-            display: 'none',
-          },
-          tabBarButton: () => null,
-          headerShown: false,
-          animationEnabled: true,
-        })}
-        name={KEY_PROFILE_SCREEN.BMI_SCREEN}
-        component={BMIScreen}
-      />
+//       <Stack.Screen
+//         options={{
+//           headerShown: false,
+//           animationEnabled: true,
+//         }}
+//         name={KEY_WALLET_SCREEN.CREATE_WALLET_SCREEN}
+//         component={CreateWalletScreen}
+//       />
 
-      <Stack.Screen
-        options={() => ({
-          tabBarStyle: {
-            display: 'none',
-          },
-          tabBarButton: () => null,
-          headerShown: false,
-          animationEnabled: true,
-        })}
-        name={KEY_PROFILE_SCREEN.BMI_STATISTIC_SCREEN}
-        component={BMIStatisticScreen}
-      />
+//       {/* <Stack.Screen
+//         options={() => ({
+//           tabBarStyle: {
+//             display: 'none',
+//           },
+//           tabBarButton: () => null,
+//           headerShown: false,
+//           animationEnabled: true,
+//         })}
+//         name={KEY_PROFILE_SCREEN.BMI_SCREEN}
+//         component={BMIScreen}
+//       /> */}
+//     </Stack.Navigator>
+//   );
+// };
 
-      <Stack.Screen
-        options={() => ({
-          tabBarStyle: {
-            display: 'none',
-          },
-          tabBarButton: () => null,
-          headerShown: false,
-          animationEnabled: true,
-        })}
-        name={KEY_PROFILE_SCREEN.UPDATE_BMI_SCREEN}
-        component={UpdateBMIScreen}
-      />
-
-      <Stack.Screen
-        options={() => ({
-          tabBarStyle: {
-            display: 'none',
-          },
-          tabBarButton: () => null,
-          headerShown: false,
-          animationEnabled: true,
-        })}
-        name={KEY_PROFILE_SCREEN.MY_CALENDAR_SCREEN}
-        component={MyCalendarScreen}
-      />
-
-      <Stack.Screen
-        options={() => ({
-          tabBarStyle: {
-            display: 'none',
-          },
-          tabBarButton: () => null,
-          headerShown: false,
-          animationEnabled: true,
-        })}
-        name={KEY_PROFILE_SCREEN.HISTORY_PAYMENT_SCREEN}
-        component={HistoryPaymentScreen}
-      />
-
-      <Stack.Screen
-        options={() => ({
-          tabBarStyle: {
-            display: 'none',
-          },
-          tabBarButton: () => null,
-          headerShown: false,
-          animationEnabled: true,
-        })}
-        name={KEY_PROFILE_SCREEN.FAVORITE_SCREEN}
-        component={FavoriteScreen}
-      />
-    </Stack.Navigator>
-  );
-};
-
-export default ProfileStack;
+// export default WalletStack;

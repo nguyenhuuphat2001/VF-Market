@@ -201,16 +201,6 @@ const SignInScreen = () => {
                 Bao gồm chữ in hoa, số, kí tự đặc biệt (#,@,...)
               </Text>
             </View>
-            {/* <ContainerInput
-              customStyle={[styles.input, styles.marginTopLarge]}
-              isError={!!error['passwordConfirm']}
-              errorText={'Mật khẩu không trùng khớp'}>
-              <TextInput
-                onChangeText={handleTextChanges('passwordConfirm')}
-                secureTextEntry
-                placeholder="Nhập lại mật khẩu"
-              />
-            </ContainerInput> */}
             <PasswordInput
               placeholder="Nhập lại mật khẩu"
               onChangeText={handleTextChanges('passwordConfirm')}

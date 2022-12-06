@@ -3,19 +3,15 @@ import CONST_SCREEN from '@/constants/screen';
 // import RecoveryPasswordScreen from '@/screens/AuthScreen/RecoveryPassword';
 
 // import UpdatePersonalInfoScreen from '@/screens/UpdateInfo';
-// import AvatarCameraScreen from '@/screens/AuthScreen/AvatarCamera';
 
 import DetailCarScreen from '@/screens/DetailCarScreen';
-// import OrderPackagesScreen from '@/screens/Order/OrderPackagesScreen';
-// import OrderPaymentScreen from '@/screens/Order/OrderPaymentScreen';
-// import OrderSuccessScreen from '@/screens/Order/OrderSuccessScreen';
 import SearchScreen from '@/screens/SearchScreen';
+import IntroWalletScreen from '@/screens/IntroWalletScreen';
+import CreatePasswordWalletScreen from '@/screens/CreatePasswordWalletScreen';
+import CreateWalletScreen from '@/screens/CreateWalletScreen';
+import ImportWalletScreen from '@/screens/ImportWalletScreen';
 
 export const route = [
-  //   {
-  //     name: CONST_SCREEN.AVATAR_CAMERA,
-  //     component: AvatarCameraScreen,
-  //   },
   //   {
   //     name: CONST_SCREEN.RECOVERY_PASSWORD,
   //     component: RecoveryPasswordScreen,
@@ -43,16 +39,20 @@ export const route = [
     name: CONST_SCREEN.SEARCH,
     component: SearchScreen,
   },
-  //   {
-  //     name: CONST_SCREEN.ORDER_PACKAGE,
-  //     component: OrderPackagesScreen,
-  //   },
-  //   {
-  //     name: CONST_SCREEN.ORDER_PAYMENT,
-  //     component: OrderPaymentScreen,
-  //   },
-  //   {
-  //     name: CONST_SCREEN.ORDER_SUCCESS,
-  //     component: OrderSuccessScreen,
-  //   },
+  {
+    name: CONST_SCREEN.INTRO_WALLET_SCREEN,
+    component: IntroWalletScreen,
+  },
+  {
+    name: CONST_SCREEN.CREATE_PASSWORD_WALLET_SCREEN,
+    component: CreatePasswordWalletScreen,
+  },
+  {
+    name: CONST_SCREEN.CREATE_WALLET_SCREEN,
+    component: CreateWalletScreen,
+  },
+  {
+    name: CONST_SCREEN.IMPORT_WALLET_SCREEN,
+    component: ImportWalletScreen,
+  },
 ];

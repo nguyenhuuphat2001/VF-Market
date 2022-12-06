@@ -2,6 +2,9 @@ import React from 'react';
 
 import {View, StyleSheet} from 'react-native';
 
+import {navigate} from '@/navigation/navigationUtils';
+import SCREEN from '@/constants/screen';
+
 import {MONT_REGULAR, MONT_BOLD, COLORS} from '@/theme/index';
 import Text from '@/components/Text';
 import Button from '@/components/Button';
@@ -23,17 +26,6 @@ export default () => {
       <View style={styles.circleBottom} />
       <View style={styles.circleBottom2} />
       <View style={styles.circleBottom3} />
-      {/* <Text
-        customStyle={{
-          fontFamily: MONT_BOLD,
-          fontSize: 20,
-          fontWeight: '500',
-          color: 'white',
-          marginTop: 10,
-          marginLeft: 10,
-        }}>
-        Wallet
-      </Text> */}
       <View
         style={{
           marginTop: 80,
@@ -48,7 +40,7 @@ export default () => {
             borderRadius: 10,
           }}
           content={'Kết nối ví'}
-          // onPress={() => navigate(screen.ORDER_PACKAGE, {gymId: data?._id})}
+          onPress={() => navigate(SCREEN.INTRO_WALLET_SCREEN)}
         />
       </View>
 
