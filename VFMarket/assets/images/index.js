@@ -1,5 +1,6 @@
 export const SPLASH_LOGO = require('./logo/splash-logo.png');
 export const MAIN_LOGO = require('./logo/Logo.png');
+export const BNB_LOGO = require('./logo/bnb-logo.png');
 
 export const OTP = require('./otp.png');
 

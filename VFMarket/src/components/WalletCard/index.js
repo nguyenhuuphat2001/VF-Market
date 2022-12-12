@@ -1,15 +1,56 @@
-import React from 'react';
-
-import {View, StyleSheet} from 'react-native';
+import React, {useEffect, useCallback, useState} from 'react';
+import {View, StyleSheet, Image, Modal, TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useDispatch, useSelector} from 'react-redux';
+import {getBalanceWallet, getTokenBalanceWallet} from '@/store/wallet/action';
 
 import {navigate} from '@/navigation/navigationUtils';
 import SCREEN from '@/constants/screen';
+import {BNB_LOGO} from '@/assets/images';
 
-import {MONT_REGULAR, MONT_BOLD, COLORS} from '@/theme/index';
+import {getShortAddress, formatPricing} from '@/utils/helper';
+
+import {MONT_REGULAR, MONT_BOLD, FONT_SIZE, COLORS} from '@/theme/index';
 import Text from '@/components/Text';
 import Button from '@/components/Button';
 
+import MyWalletModal from '@/components/Modal/MyWalletModal.js';
+
+export const WalletBalance = ({address}) => {
+  return (
+    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+      <Icon
+        name="account-balance-wallet"
+        style={{fontSize: 30, color: 'black'}}
+      />
+      <Text
+        customStyle={{
+          fontFamily: MONT_BOLD,
+          fontSize: FONT_SIZE.medium,
+          color: 'black',
+          // marginTop: 5,
+          marginLeft: 7,
+        }}>
+        {getShortAddress(address)}
+      </Text>
+    </View>
+  );
+};
+
 export default () => {
+  const dispatch = useDispatch();
+  const {currentAccount, balance, tokenBalance} = useSelector(
+    state => state.walletReducer,
+  );
+  const [modalVisible, setModalVisible] = useState(false);
+  useEffect(() => {
+    handleCreateWallet();
+  }, []);
+
+  const handleCreateWallet = async () => {
+    dispatch(getBalanceWallet(currentAccount));
+    dispatch(getTokenBalanceWallet(currentAccount));
+  };
   return (
     <View
       style={{
@@ -26,30 +67,112 @@ export default () => {
       <View style={styles.circleBottom} />
       <View style={styles.circleBottom2} />
       <View style={styles.circleBottom3} />
-      <View
-        style={{
-          marginTop: 80,
-          width: '100%',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Button
-          containerStyle={{
-            right: 10,
-            width: 200,
-            borderRadius: 10,
-          }}
-          content={'Kết nối ví'}
-          onPress={() => navigate(SCREEN.INTRO_WALLET_SCREEN)}
-        />
-      </View>
+      {currentAccount ? (
+        <View>
+          <View
+            style={{
+              alignSelf: 'center',
+              alignItems: 'center',
+              flexDirection: 'row',
+              marginTop: 10,
+              // marginLeft: 80,
+            }}>
+            <Image
+              style={{width: 25, height: 25}}
+              resizeMode="contain"
+              source={BNB_LOGO}
+            />
+            <Text
+              customStyle={{
+                fontFamily: MONT_BOLD,
+                fontSize: FONT_SIZE.large,
+                color: COLORS.white,
+                marginLeft: 7,
+              }}>
+              BSC Testnet
+            </Text>
+          </View>
 
-      {/* <View style={styles.conse} /> */}
-      {/* <View style={{position: 'absolute', top: -5}}>
-        <Text customStyle={{fontSize: 18, fontWeight: '200', color: 'ư'}}>
-          Wallet
-        </Text>
-      </View> */}
+          <View style={{marginLeft: 10, marginTop: 20}}>
+            <Text
+              customStyle={{
+                fontFamily: MONT_BOLD,
+                fontSize: FONT_SIZE.medium,
+                color: COLORS.white,
+              }}>
+              Your balance
+            </Text>
+            <Text
+              customStyle={{
+                fontFamily: MONT_REGULAR,
+                fontSize: FONT_SIZE.medium,
+                color: COLORS.gray_light,
+                marginTop: 2,
+              }}>
+              TBNB: {formatPricing(balance)}
+            </Text>
+            <Text
+              customStyle={{
+                fontFamily: MONT_REGULAR,
+                fontSize: FONT_SIZE.medium,
+                color: COLORS.gray_light,
+              }}>
+              C60: {formatPricing(tokenBalance)}
+            </Text>
+          </View>
+          <View
+            style={{
+              backgroundColor: '#f2f2f2',
+              width: '80%',
+              padding: 5,
+              marginLeft: 35,
+              marginTop: 15,
+              borderRadius: 10,
+              alignItems: 'center',
+            }}>
+            <TouchableOpacity
+              onPress={() => setModalVisible(true)}
+              delayLongPress={0}>
+              <WalletBalance address={currentAccount} />
+            </TouchableOpacity>
+          </View>
+          <MyWalletModal
+            modalVisible={modalVisible}
+            callbackChangeVisible={() => setModalVisible(false)}
+          />
+        </View>
+      ) : (
+        <View
+          style={{
+            marginTop: 80,
+            width: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}>
+          <TouchableOpacity
+            onPress={() => navigate(SCREEN.INTRO_WALLET_SCREEN)}
+            delayLongPress={0}>
+            <View
+              style={{
+                backgroundColor: '#fafafa',
+                padding: 10,
+                borderRadius: 10,
+                width: 200,
+              }}>
+              <Text
+                customStyle={{
+                  textAlign: 'center',
+                  fontFamily: MONT_BOLD,
+                  fontSize: FONT_SIZE.medium,
+                  color: 'black',
+                  paddingVertical: 5,
+                }}>
+                Kết nối ví
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 };

@@ -30,53 +30,12 @@ import {BANNER, FILTER} from '@/assets/images/index';
 
 import ItemCourse from '../HomeScreen/components/ItemCourse';
 
-import ItemSearch from './components/ItemSearch';
-
 import SelectMany from '@/components/SelectMany';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {getListSearchProduct} from '@/store/product/action';
 import {navigate} from '@/navigation/navigationUtils';
 import screen from '@/constants/screen';
-
-const LIST_DATA = [
-  {
-    key: '1',
-    type: 'title',
-    title: 'May',
-    data: '25',
-  },
-  {
-    key: '2',
-    type: 'data',
-    title: 'Meeting with UI/UX team',
-    data: '09:00am - 11:00am',
-  },
-  {
-    key: '3',
-    type: 'data',
-    title: 'Meeting with Patrick team',
-    data: '09:00am - 11:00am',
-  },
-  {
-    key: '4',
-    type: 'title',
-    title: 'May',
-    data: '26',
-  },
-  {
-    key: '5',
-    type: 'data',
-    title: 'Meeting with UI/UX team',
-    data: '09:00am - 11:00am',
-  },
-  {
-    key: '6',
-    type: 'data',
-    title: 'Meeting with Patrick team',
-    data: '09:00am - 11:00am',
-  },
-];
 
 const SearchScreen = () => {
   const navigation = useNavigation();

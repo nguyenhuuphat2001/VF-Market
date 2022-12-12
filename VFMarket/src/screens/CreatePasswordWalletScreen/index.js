@@ -18,7 +18,7 @@ const CreatePasswordWalletScreen = ({navigation, route}) => {
 
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const disabled = password.length < 8 || password !== confirmPassword;
+  const disabled = password.length < 6 || password !== confirmPassword;
 
   const handleSubmit = () => {
     if (to === SCREEN.CREATE_WALLET_SCREEN) {
@@ -48,7 +48,7 @@ const CreatePasswordWalletScreen = ({navigation, route}) => {
               // textAlign: 'center',
               marginTop: 5,
             }}>
-            Nhập ít nhất 8 kí tự
+            Nhập ít nhất 6 kí tự
           </Text>
         </View>
         <View style={{width: '80%', marginTop: 15}}>

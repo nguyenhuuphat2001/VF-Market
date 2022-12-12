@@ -11,6 +11,11 @@ export const STATUS = {
   SUCCESS: 'SUCCESS',
 };
 
+export const WALLET_STATUS = {
+  READY: 'READY',
+  PENDING: 'PENDING',
+};
+
 export const PAGE_LIMIT = 6;
 
 // export const

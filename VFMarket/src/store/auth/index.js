@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {login, signUp, getOTP, getProfile} from './action';
 
-import {storeData} from '@/utils/storage';
+import {storeData, keyStore} from '@/utils/storage';
 import {KEY_AUTHEN} from '@/constants/enviroments';
 
 import Toast from 'react-native-toast-message';
@@ -86,7 +86,7 @@ const {logoutSuccess} = slice.actions;
 
 export const logout = () => async dispatch => {
   try {
-    await storeData('KEY_AUTHEN', null);
+    await storeData(keyStore.KEY_AUTHEN, null);
     reset({
       index: 0,
       routes: [{name: 'AuthScreen'}],

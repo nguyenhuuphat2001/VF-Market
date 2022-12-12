@@ -1,5 +1,4 @@
 import React, {useRef, useEffect, useCallback} from 'react';
-import {MAIN_LOGO} from '@/assets/images';
 import {View, TextInput, TouchableOpacity, findNodeHandle} from 'react-native';
 import Text from '@/components/Text';
 import {useNavigation} from '@react-navigation/native';

@@ -11,7 +11,7 @@ import {
 } from '../../api/auth';
 import screen from '@/constants/screen';
 
-import {storeData, getData} from '@/utils/storage';
+import {storeData, getData, keyStore} from '@/utils/storage';
 
 import {navigate, reset} from '@/navigation/navigationUtils';
 
@@ -20,7 +20,7 @@ export const login = createAsyncThunk(
   async ({email, password, isGoToMain}, thunkAPI) => {
     const response = await loginAPI({email, password});
     setToken(response.data.data.accessToken);
-    await storeData('KEY_AUTHEN', response.data.data.accessToken);
+    await storeData(keyStore.KEY_AUTHEN, response.data.data.accessToken);
     const profile = await getProfileAPI();
     if (isGoToMain) {
       reset({
@@ -77,7 +77,7 @@ export const activeAccount = createAsyncThunk(
 );
 
 export const getProfile = createAsyncThunk('user/profile', async () => {
-  const token = await getData('KEY_AUTHEN');
+  const token = await getData(keyStore.KEY_AUTHEN);
   setToken(token);
   const response = await getProfileAPI();
   reset({

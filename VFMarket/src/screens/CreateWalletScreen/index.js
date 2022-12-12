@@ -3,6 +3,9 @@ import {View, TextInput, TouchableOpacity, findNodeHandle} from 'react-native';
 import Clipboard from '@react-native-clipboard/clipboard';
 import Toast from 'react-native-toast-message';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useDispatch, useSelector} from 'react-redux';
+import {importWallet} from '@/store/wallet/action';
+import {createAccount} from '../../blockchain/basic';
 
 import Text from '@/components/Text';
 import styles from './styles';
@@ -13,6 +16,7 @@ import {
   FONT_SIZE,
   MONT_REGULAR,
 } from '@/theme/index';
+
 import {navigate} from '@/navigation/navigationUtils';
 import Button from '@/components/Button';
 
@@ -21,10 +25,32 @@ import Header from '@/components/Header';
 import SCREEN from '@/constants/screen';
 
 const CreateWalletScreen = ({navigation, route}) => {
+  const dispatch = useDispatch();
   const {password} = route.params;
-  const [privateKey, setPrivateKey] = useState(
-    'e636c6af44faa82a6eb342a751325c20a88be339407015b34d94a9cf2b17212b',
-  );
+  const [privateKey, setPrivateKey] = useState('');
+
+  useEffect(() => {
+    handleCreateWallet();
+  }, []);
+
+  const handleCreateWallet = async () => {
+    const account = await createAccount();
+    console.log('account: ', account);
+    if (account) {
+      setPrivateKey(account.privateKey);
+    }
+  };
+
+  const submit = () => {
+    console.log('Connect');
+    dispatch(importWallet(privateKey));
+  };
+
+  const handleShowPrivateKey = ({newPrivateKey}) => {
+    console.log('newPrivateKey: ', newPrivateKey);
+    if (newPrivateKey) return newPrivateKey.slice(2);
+    return '';
+  };
 
   const handlePressCopy = () => {
     Clipboard.setString(privateKey);
@@ -97,7 +123,7 @@ const CreateWalletScreen = ({navigation, route}) => {
                 fontSize: FONT_SIZE.medium,
                 fontFamily: MONT_BOLD,
               }}>
-              {privateKey}
+              {handleShowPrivateKey({newPrivateKey: privateKey})}
             </Text>
             <Icon
               name="content-copy"
@@ -113,7 +139,7 @@ const CreateWalletScreen = ({navigation, route}) => {
           }}
           // disabled={disabled}
           content={'Kết nối ví'}
-          onPress={() => navigate(SCREEN.MAIN_SCREEN)}
+          onPress={submit}
         />
       </View>
     </View>

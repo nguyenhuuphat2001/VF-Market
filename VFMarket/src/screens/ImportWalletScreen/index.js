@@ -1,7 +1,6 @@
-import React, {useRef, useEffect, useCallback, useState} from 'react';
+import React, {useState} from 'react';
 import {View, TextInput, TouchableOpacity, findNodeHandle} from 'react-native';
 import Text from '@/components/Text';
-import {useNavigation} from '@react-navigation/native';
 import ContainerInput from '@/components/ContainerInput';
 import {navigate} from '@/navigation/navigationUtils';
 import styles from './styles';
@@ -13,16 +12,23 @@ import {
   MONT_REGULAR,
 } from '@/theme/index';
 
+import {useDispatch, useSelector} from 'react-redux';
+import {importWallet} from '@/store/wallet/action';
+
 import Header from '@/components/Header';
 import Button from '@/components/Button';
 
 import SCREEN from '@/constants/screen';
 
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-
 const ImportWalletScreen = ({navigation, route}) => {
+  const dispatch = useDispatch();
   const {password} = route.params;
   const [privateKey, setPrivateKey] = useState('');
+
+  const submit = () => {
+    console.log('Connect');
+    dispatch(importWallet(privateKey));
+  };
 
   return (
     <View>
@@ -54,11 +60,11 @@ const ImportWalletScreen = ({navigation, route}) => {
             borderWidth: 2,
           }}>
           <TextInput
-            // secureTextEntry={true}đasa
-            placeholder="Pivate key"
+            placeholder="Private key"
             placeholderTextColor={COLORS.border_input}
             multiline
             numberOfLines={4}
+            onChangeText={value => setPrivateKey(value)}
           />
         </ContainerInput>
         <Button
@@ -68,7 +74,7 @@ const ImportWalletScreen = ({navigation, route}) => {
             marginTop: 55,
           }}
           content={'Kết nối ví'}
-          onPress={() => navigate(SCREEN.MAIN_SCREEN)}
+          onPress={submit}
         />
       </View>
     </View>

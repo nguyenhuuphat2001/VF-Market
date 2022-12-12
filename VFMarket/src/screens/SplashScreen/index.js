@@ -3,9 +3,10 @@ import {SPLASH_LOGO, MAIN_LOGO} from '@/assets/images';
 import {View, Image, Animated, Text} from 'react-native';
 
 import {useNavigation} from '@react-navigation/native';
-import {getData} from '@/utils/storage';
+import {getData, keyStore} from '@/utils/storage';
 import {useDispatch, useSelector} from 'react-redux';
 import {getProfile} from '@/store/auth/action';
+import {importWallet} from '@/store/wallet/action';
 import styles from './styles';
 
 const SplashScreen = () => {
@@ -15,13 +16,16 @@ const SplashScreen = () => {
   const navigation = useNavigation();
 
   const handleNavigate = async () => {
-    const token = await getData('KEY_AUTHEN');
-    console.log('token: ', token);
+    const token = await getData(keyStore.KEY_AUTHEN);
+    const privateKey = await getData(keyStore.PRIVATE_KEY);
 
     if (token) {
-      await dispatch(getProfile());
+      dispatch(getProfile());
     } else {
       await navigation.replace('AuthScreen');
+    }
+    if (privateKey) {
+      dispatch(importWallet(privateKey));
     }
   };
 

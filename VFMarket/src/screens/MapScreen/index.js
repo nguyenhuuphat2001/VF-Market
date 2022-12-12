@@ -5,21 +5,18 @@ import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import Geolocation from '@react-native-community/geolocation';
 
 const MapScreen = () => {
-  const [position, setPosition] = useState({
-    latitude: 10,
-    longitude: 106,
-    latitudeDelta: 0.001,
-    longitudeDelta: 0.001,
-  });
+  const [position, setPosition] = useState({});
 
   useEffect(() => {
     Geolocation.getCurrentPosition(pos => {
-      const crd = pos.coords;
+      // const crd = pos.coords;
       setPosition({
-        latitude: crd.latitude,
-        longitude: crd.longitude,
-        latitudeDelta: 0.863731,
-        longitudeDelta: 0.779494,
+        // latitude: crd.latitude,
+        // longitude: crd.longitude,
+        latitude: 10,
+        longitude: 106,
+        latitudeDelta: 0.8567,
+        longitudeDelta: 0.7727,
       });
     });
   });

@@ -28,6 +28,7 @@ module.exports = {
           '@/store': './src/store',
           '@/utils': './src/utils',
           '@/assets': './assets',
+          '@/blockchain': './blockchain',
         },
       },
     ],
