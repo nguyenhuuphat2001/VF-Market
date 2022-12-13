@@ -9,7 +9,7 @@ import {
   MONT_REGULAR,
 } from '@/theme/index';
 
-const DetailParameter = ({title, address, isOpen}) => {
+const DetailParameter = () => {
   return (
     <View
       style={{
@@ -30,7 +30,7 @@ const DetailParameter = ({title, address, isOpen}) => {
             fontSize: FONT_SIZE.medium,
             lineHeight: SPACING.large,
           }}>
-          Thông số chi tiết
+          Detail
         </Text>
       </View>
       <View
@@ -46,7 +46,7 @@ const DetailParameter = ({title, address, isOpen}) => {
               fontSize: FONT_SIZE.small,
               paddingVertical: 10,
             }}>
-            Động cơ: Xăng
+            Engine: Diesel
           </Text>
           <Text
             customStyle={{
@@ -54,7 +54,7 @@ const DetailParameter = ({title, address, isOpen}) => {
               fontSize: FONT_SIZE.small,
               paddingVertical: 10,
             }}>
-            Số ghế: 7
+            Seat: 7
           </Text>
           <Text
             customStyle={{
@@ -62,7 +62,7 @@ const DetailParameter = ({title, address, isOpen}) => {
               fontSize: FONT_SIZE.small,
               paddingVertical: 10,
             }}>
-            Kích thước: 4750x1900x1660mm
+            Size: 4750x1900x1660mm
           </Text>
         </View>
         <View style={{width: '50%'}}>
@@ -72,7 +72,7 @@ const DetailParameter = ({title, address, isOpen}) => {
               fontSize: FONT_SIZE.small,
               paddingVertical: 10,
             }}>
-            Công suất: 402 hp
+            Wattage: 402 hp
           </Text>
           <Text
             customStyle={{
@@ -80,7 +80,7 @@ const DetailParameter = ({title, address, isOpen}) => {
               fontSize: FONT_SIZE.small,
               paddingVertical: 10,
             }}>
-            Túi khí: 11
+            Air bag: 11
           </Text>
           <Text
             customStyle={{
@@ -88,7 +88,7 @@ const DetailParameter = ({title, address, isOpen}) => {
               fontSize: FONT_SIZE.small,
               paddingVertical: 10,
             }}>
-            Dẫn động: AWD - 4 bánh
+            Drive: AWD - 4 wheel
           </Text>
         </View>
       </View>

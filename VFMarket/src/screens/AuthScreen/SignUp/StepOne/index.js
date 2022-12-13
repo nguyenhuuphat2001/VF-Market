@@ -39,14 +39,12 @@ const SignInScreen = () => {
   });
   const disabled =
     !input.email ||
-    !input.password ||
     !input.firstName ||
     !input.lastName ||
     !input.mobileNumber ||
-    !input.passwordConfirm ||
     input.mobileNumber.length < 10 ||
     input.password < 8 ||
-    input.passwordConfirm < 8;
+    input.passwordConfirm !== input.password;
 
   const [error, setError] = useState({
     email: false,
@@ -104,7 +102,7 @@ const SignInScreen = () => {
 
   return (
     <View style={[styles.container]}>
-      <Header />
+      <Header title="Sign up" />
       <View style={[styles.innerContainer]}>
         <KeyboardAwareScrollView
           ref={inputRef}
@@ -113,12 +111,6 @@ const SignInScreen = () => {
           }}
           showsVerticalScrollIndicator={false}
           style={{flex: 1, width: '100%', height: '100%'}}>
-          <View
-            style={{width: '100%', alignItems: 'flex-start', marginBottom: 30}}>
-            {/* <Image style={styles.image} resizeMode="contain" source={MAIN_LOGO} /> */}
-            <Text customStyle={styles.title}> Đăng kí</Text>
-          </View>
-
           <View style={{flex: 1, width: '100%'}}>
             <ContainerInput
               customStyle={styles.input}
@@ -151,11 +143,11 @@ const SignInScreen = () => {
             <ContainerInput
               customStyle={styles.input}
               isError={!!error['mobileNumber']}
-              errorText={'SDT không hợp lệ'}>
+              errorText={'Invalid phone number'}>
               <TextInput
                 onChangeText={handleTextChanges('mobileNumber')}
                 keyboardType="numeric"
-                placeholder="Số điện thoại"
+                placeholder="Phone"
                 placeholderTextColor={COLORS.border_input}
               />
             </ContainerInput>
@@ -168,7 +160,7 @@ const SignInScreen = () => {
               }}>
               <Icon name="check" style={styles.icon} />
               <Text customStyle={styles.note}>
-                Số điện thoại hợp lệ có 10 chữ số
+                Valid phone number with 10 digits
               </Text>
             </View>
             {/* <ContainerInput customStyle={styles.input}>
@@ -179,7 +171,7 @@ const SignInScreen = () => {
               />
             </ContainerInput> */}
             <PasswordInput
-              placeholder="Mật khẩu"
+              placeholder="Password"
               onChangeText={handleTextChanges('password')}
             />
             <View
@@ -188,7 +180,7 @@ const SignInScreen = () => {
                 alignItems: 'flex-end',
               }}>
               <Icon name="check" style={styles.icon} />
-              <Text customStyle={styles.note}>Tối thiểu 8 kí tự</Text>
+              <Text customStyle={styles.note}>Minimum 8 characters</Text>
             </View>
             <View
               style={{
@@ -198,15 +190,15 @@ const SignInScreen = () => {
               }}>
               <Icon name="check" style={styles.icon} />
               <Text customStyle={styles.note}>
-                Bao gồm chữ in hoa, số, kí tự đặc biệt (#,@,...)
+                Include capital letters, numbers, special characters(#,@,...)
               </Text>
             </View>
             <PasswordInput
-              placeholder="Nhập lại mật khẩu"
+              placeholder="Confirm password"
               onChangeText={handleTextChanges('passwordConfirm')}
             />
             <Button
-              content="Đăng ký"
+              content="Sign up"
               isLoading={isLoading}
               disabled={disabled}
               containerStyle={styles.marginTopLarge}

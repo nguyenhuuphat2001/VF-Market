@@ -18,19 +18,13 @@ import {PAGE_LIMIT} from '@/constants/index';
 
 import {SPACING, COLORS, FONT_SIZE} from '@/theme/index';
 
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
-import BottomSheet, {BottomSheetBackdrop} from '@gorhom/bottom-sheet';
-
 import Search from '@/components/Search';
-import Loading from '@/components/Loading';
 
 import {BANNER, HELLO} from '@/assets/images/index';
 import {navigate} from '@/navigation/navigationUtils';
 import screen from '@/constants/screen';
 
 import ItemCourse from './components/ItemCourse';
-import {logout} from '@/store/auth';
 
 const UpdatePersonalInfoScreen = () => {
   const navigation = useNavigation();
@@ -98,13 +92,11 @@ const UpdatePersonalInfoScreen = () => {
               height: 46,
             }}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Text customStyle={{fontSize: 14, fontWeight: '200'}}>
-                Xin chào
-              </Text>
+              <Text customStyle={{fontSize: 16, fontWeight: '400'}}>Hello</Text>
               <Image style={{width: 20}} resizeMode="contain" source={HELLO} />
             </View>
 
-            <Text customStyle={{fontSize: 16, fontWeight: '500'}}>
+            <Text customStyle={{fontSize: 18, fontWeight: '500'}}>
               {profile?.firstName} {profile?.lastName}
             </Text>
           </View>
@@ -141,12 +133,10 @@ const UpdatePersonalInfoScreen = () => {
                 marginBottom: 20,
               }}>
               <Text customStyle={{fontSize: 20, fontWeight: '500'}}>
-                Nổi bật
+                Special
               </Text>
               <TouchableOpacity onPress={() => navigate(screen.SEARCH)}>
-                <Text customStyle={{fontSize: FONT_SIZE.small}}>
-                  Xem tất cả
-                </Text>
+                <Text customStyle={{fontSize: FONT_SIZE.small}}>View all</Text>
               </TouchableOpacity>
             </View>
             <FlatList

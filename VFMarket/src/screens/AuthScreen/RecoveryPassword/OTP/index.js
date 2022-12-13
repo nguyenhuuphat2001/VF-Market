@@ -25,19 +25,15 @@ const OtpRecoveryScreen = () => {
 
   return (
     <View style={[styles.container]}>
-      <Header />
+      <Header title="Confirm email" />
       <View style={[styles.innerContainer]}>
         <KeyboardAwareScrollView
-          // ref={inputRef}
-          // onFocus={(event) => {
-          //     _scrollToInput(findNodeHandle(event.target))
-          // }}
           showsVerticalScrollIndicator={false}
           style={{flex: 1, width: '100%', height: '100%', marginBottom: 0}}>
-          <View
+          {/* <View
             style={{width: '100%', alignItems: 'flex-start', marginBottom: 10}}>
-            <Text customStyle={styles.title}> Xác nhận gmail</Text>
-          </View>
+            <Text customStyle={styles.title}>Confirm email</Text>
+          </View> */}
           <View style={{width: '100%', alignItems: 'center'}}>
             <Image style={styles.image} resizeMode="contain" source={OTP} />
           </View>
@@ -46,7 +42,7 @@ const OtpRecoveryScreen = () => {
               <Text customStyle={styles.title}> Xác thực OTP</Text>
               <View style={{flexDirection: 'row', marginVertical: 20}}>
                 <Text customStyle={styles.subText}>
-                  Vui lòng nhập mã OTP vừa được gửi đến gmail{' '}
+                  Please enter the OTP just sent to email{' '}
                   <Text customStyle={styles.phone}> abc@gmail.com </Text>
                 </Text>
               </View>
@@ -73,13 +69,13 @@ const OtpRecoveryScreen = () => {
           </View>
 
           <TouchableOpacity style={styles.registerContainer}>
-            <Text customStyle={styles.register}>Không nhận được mã?</Text>
-            <Text customStyle={styles.highLightText}> Gửi lại</Text>
+            <Text customStyle={styles.register}>Don't receive code?</Text>
+            <Text customStyle={styles.highLightText}> Resend</Text>
           </TouchableOpacity>
           <View style={{flex: 1, width: '100%'}}>
             <Button
               onPress={() => navigation.push(SCREEN.CHANGE_PASSWORD)}
-              content="Đăng ký"
+              content="Confirm"
               containerStyle={styles.marginTopLarge}
             />
           </View>

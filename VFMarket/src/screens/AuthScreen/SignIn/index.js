@@ -110,14 +110,14 @@ const SignInScreen = () => {
           <TouchableOpacity
             style={styles.btnForget}
             onPress={goToRecoveryPasswordScreen}>
-            <Text style={styles.subText}>Quên mật khẩu ?</Text>
+            <Text style={styles.subText}>Forgot the password ?</Text>
           </TouchableOpacity>
 
           <Button
             onPress={handleLogin}
             isLoading={isLoading}
             disabled={isDisable}
-            content="Đăng nhập"
+            content="Sign in"
           />
         </View>
       </KeyboardAwareScrollView>
@@ -125,8 +125,8 @@ const SignInScreen = () => {
       <TouchableOpacity
         style={styles.registerContainer}
         onPress={goToSignUpScreen}>
-        <Text customStyle={styles.register}>Bạn chưa có tài khoản?</Text>
-        <Text customStyle={styles.highLightText}> Đăng kí ngay</Text>
+        <Text customStyle={styles.register}>Don't have an account?</Text>
+        <Text customStyle={styles.highLightText}> Sign up</Text>
       </TouchableOpacity>
       <SafeAreaView style={{flex: 0, marginBottom: 20}} />
     </View>

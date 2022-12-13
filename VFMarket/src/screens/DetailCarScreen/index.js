@@ -1,8 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import {View, SafeAreaView, Image, ScrollView} from 'react-native';
+import React, {useRef, useCallback, useMemo, useState, useEffect} from 'react';
+import {
+  View,
+  SafeAreaView,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
+import StepIndicator from 'react-native-step-indicator';
 import Button, {BackButton, FavoriteButton} from '@/components/Button';
 import Text from '@/components/Text';
-import {COLORS, SPACING} from '@/theme/index';
+import BottomSheet, {BottomSheetBackdrop} from '@gorhom/bottom-sheet';
+import {COLORS, SPACING, MONT_MEDIUM} from '@/theme/index';
 import {
   DetailTitle,
   DetailCarousel,
@@ -10,21 +18,46 @@ import {
   DetailParameter,
 } from './components';
 import {SharedElement} from 'react-navigation-shared-element';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const DetailCarScreen = ({navigation, route}) => {
   const goBack = () => navigation.pop();
 
-  // const gymDetail = useSelector(state => state.gymReducer.detail);
-
+  const ref = useRef(null);
   const [data, setData] = useState({});
 
   useEffect(() => {
     const item = route.params;
-    console.log('detail car: ', item);
     if (item.name != data?.name) {
       setData(item);
     }
   }, [navigation]);
+
+  const onPress = useCallback(() => {
+    ref?.current?.collapse();
+  }, []);
+
+  const onClose = useCallback(() => {
+    ref?.current?.close();
+  }, []);
+
+  const renderBackdrop = useCallback(
+    props => (
+      <BottomSheetBackdrop
+        {...props}
+        disappearsOnIndex={0}
+        appearsOnIndex={1}
+      />
+    ),
+    [],
+  );
+
+  const snapPoints = useMemo(() => ['45%', '45%'], []);
+
+  // callbacks
+  const handleSheetChanges = useCallback(index => {
+    console.log('handleSheetChanges', index);
+  }, []);
 
   const showPrice = value => {
     const price = +value;
@@ -64,22 +97,18 @@ const DetailCarScreen = ({navigation, route}) => {
         style={{
           flex: 1,
           backgroundColor: COLORS.background,
-          marginBottom: 65,
+          marginBottom: 60,
         }}>
         <SharedElement id={`item.${data?._id}.photo`}>
           <DetailCarousel images={data?.images ?? []} />
         </SharedElement>
         <DetailTitle
           title={data?.name}
-          address={'146 Đường số 2, P.15, Quận Bình Thạnh, Tp Hồ Chí Minh'}
+          address={'Ho Chi Minh City'}
           isOpen={true}
         />
         {data?.description && <DetailDesc description={data?.description} />}
-        <DetailParameter
-          title={data?.name}
-          address={'146 Đường số 2, P.15, Quận Bình Thạnh, Tp Hồ Chí Minh'}
-          isOpen={true}
-        />
+        <DetailParameter />
       </ScrollView>
 
       <View
@@ -88,9 +117,8 @@ const DetailCarScreen = ({navigation, route}) => {
           position: 'absolute',
           bottom: 4,
           flexDirection: 'row',
-          padding: SPACING.medium,
+          padding: SPACING.large,
           justifyContent: 'space-between',
-          // alignItems: 'center',
           backgroundColor: COLORS.background,
           zIndex: 1,
         }}>
@@ -111,11 +139,97 @@ const DetailCarScreen = ({navigation, route}) => {
         <View>
           <Button
             containerStyle={{right: 10, width: 200, borderRadius: 100}}
-            content={'Mua ngay'}
-            // onPress={() => navigate(screen.ORDER_PACKAGE, {gymId: data?._id})}
+            content={'Buy'}
+            onPress={onPress}
           />
         </View>
       </View>
+      <BottomSheet
+        index={-1}
+        // opacity={1}
+        backdropComponent={renderBackdrop}
+        snapPoints={snapPoints}
+        onChange={handleSheetChanges}
+        ref={ref}>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: 'transparent',
+            paddingHorizontal: SPACING.medium,
+          }}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text customStyle={{fontWeight: '500', fontSize: 22}}>
+                Validation transfer
+              </Text>
+            </View>
+            <TouchableOpacity onPress={onClose}>
+              <Text
+                customStyle={{
+                  fontSize: 16,
+                  fontWeight: '500',
+                  // color: COLORS.border_input,
+                }}>
+                Close
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          <View
+            style={{width: '100%', paddingTop: 5}}
+            contentContainerStyle={{paddingBottom: 60}}
+            showsVerticalScrollIndicator={false}>
+            <View style={{width: '100%'}}>
+              <Text
+                customStyle={{
+                  fontSize: 14,
+                  textAlign: 'left',
+                  color: COLORS.primary_text,
+                }}>
+                Please follow below steps to validate your wallet and complete
+                the transaction
+              </Text>
+            </View>
+          </View>
+          <View style={{height: 200}}>
+            <StepIndicator
+              direction="vertical"
+              customStyles={{
+                labelAlign: 'flex-start',
+                separatorStrokeWidth: 1,
+                stepStrokeWidth: 0,
+                stepIndicatorSize: 25,
+                currentStepStrokeWidth: 0,
+                currentStepIndicatorSize: 25,
+                stepIndicatorCurrentColor: '#00BDFF',
+
+                separatorStrokeUnfinishedWidth: 2,
+                separatorStrokeFinishedWidth: 1,
+                stepStrokeUnFinishedColor: '#777E90',
+                separatorUnFinishedColor: '#777E90',
+                stepIndicatorUnFinishedColor: '#353945',
+
+                separatorStrokeFinishedWidth: 0,
+                separatorFinishedColor: '#0A688A',
+                stepIndicatorFinishedColor: '#0A688A',
+
+                labelSize: 14,
+                // labelFontFamily: 'MONT_MEDIUM',
+              }}
+              currentPosition={-1}
+              stepCount={3}
+              labels={['Connect wallet', 'Approve transfer', 'Buy NFT']}
+              // renderLabel={null}
+              // renderStepIndicator={CustomStep}
+            />
+          </View>
+        </View>
+      </BottomSheet>
     </SafeAreaView>
   );
 };

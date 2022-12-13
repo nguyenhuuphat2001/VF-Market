@@ -64,7 +64,7 @@ const DetailDesc = ({description, openTime, closeTime}) => {
               fontSize: FONT_SIZE.medium,
               lineHeight: SPACING.large,
             }}>
-            Mô tả
+            Description
           </Text>
           <ReadMoreButton readMore={readMore} onPress={pressReadMore} />
         </View>

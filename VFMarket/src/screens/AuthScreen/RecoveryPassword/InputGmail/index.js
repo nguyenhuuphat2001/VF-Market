@@ -25,7 +25,7 @@ const IntroWalletScreen = () => {
 
   return (
     <View style={[styles.container]}>
-      <Header title="Wallet" />
+      <Header title="Recovery Password" />
       <View style={[styles.innerContainer]}>
         <KeyboardAwareScrollView
           ref={inputRef}
@@ -35,9 +35,13 @@ const IntroWalletScreen = () => {
           showsVerticalScrollIndicator={false}
           style={{flex: 1, width: '100%', height: '100%'}}>
           <View
-            style={{width: '100%', alignItems: 'flex-start', marginBottom: 60}}>
-            {/* <Image style={styles.image} resizeMode="contain" source={MAIN_LOGO} /> */}
-            <Text customStyle={styles.title}>Lấy lại mật khẩu</Text>
+            style={{
+              width: '100%',
+              alignItems: 'flex-start',
+              marginTop: 20,
+              marginBottom: 20,
+            }}>
+            <Text customStyle={styles.title}>Input email to receive OTP</Text>
           </View>
 
           <View style={{flex: 1, width: '100%'}}>
@@ -49,9 +53,9 @@ const IntroWalletScreen = () => {
               />
             </ContainerInput>
             <Button
-              content="Gửi OTP"
+              content="Send OTP"
               // disabled={!}
-              containerStyle={styles.marginTopLarge}
+              containerStyle={styles.marginTopMedium}
               onPress={() => navigation.push(SCREEN.OTP_RECOVERY)}
             />
           </View>

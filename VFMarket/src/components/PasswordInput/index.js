@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const PasswordInput = ({
   label = 'label',
   value = 'value',
-  placeholder = 'Mật khẩu',
+  placeholder = 'Password',
   onChangeText,
 }) => {
   const [showPassword, setShowPassword] = React.useState(false);

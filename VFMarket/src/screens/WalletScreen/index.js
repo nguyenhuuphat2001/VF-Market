@@ -24,7 +24,7 @@ const WalletScreen = () => {
               fontWeight: '500',
               color: 'black',
             }}>
-            Lịch sử giao dịch
+            History transaction
           </Text>
         </View>
       </View>
@@ -42,9 +42,7 @@ const WalletScreen = () => {
             fontWeight: '400',
             color: 'black',
           }}>
-          {currentAccount
-            ? 'Không tồn tại lịch sử giao dịch'
-            : 'Vui lòng kết nối ví'}
+          {currentAccount ? 'Dont have transaction' : 'Please connect wallet'}
         </Text>
       </View>
     </SafeAreaView>

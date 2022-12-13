@@ -12,14 +12,14 @@ import CONST_SCREEN from '@/constants/screen';
 export const PROFILE_SCREENS = [
   {
     isTitle: true,
-    name: 'Tài khoản của tôi',
+    name: 'My account',
   },
   {
-    name: 'Thông tin tài khoản',
+    name: 'Information',
     icon: PROFILE,
   },
   {
-    name: 'Đổi mật khẩu',
+    name: 'Change password',
     icon: KEY,
     // route: CONST_SCREEN.RECOVERY_PASSWORD
   },
@@ -32,19 +32,19 @@ export const PROFILE_SCREENS = [
     isSecond: true,
   },
   {
-    name: 'Hiểu hơn về VF Market',
+    name: 'More info',
     icon: INFOMATION,
   },
   {
-    name: 'Trung tâm trợ giúp',
+    name: 'Help center',
     icon: HELP,
   },
   {
-    name: 'Chính sách / Điều khoản',
+    name: 'Policy',
     icon: DOCUMENT,
   },
   {
-    name: 'Đăng xuất',
+    name: 'Log out',
     icon: LOG_OUT,
     isLogOut: true,
   },

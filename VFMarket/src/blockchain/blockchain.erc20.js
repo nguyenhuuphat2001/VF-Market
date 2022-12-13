@@ -1,10 +1,12 @@
 import abi from './abi.json';
 import {web3TestBSC} from './basic';
+import {TOKEN_ADDRESS} from '@/constants/enviroments';
 
 export const useERC20Contract = () => {
+  console.log('TOKEN_ADDRESS: ', TOKEN_ADDRESS);
   const contract = new web3TestBSC.eth.Contract(
     abi.erc20_contract,
-    '0xA25C76d4b51821667352EEc35dFB00472311267A',
+    '0xc88D7F08CE8bC7Ba6555B1fF2A623e09bb8B787E',
   );
   return contract;
 };
@@ -17,6 +19,7 @@ export const getTokenBalance = async address => {
       console.log('getTokenBalance error', err);
     }
     tokenBalance = Number(data) / 1e18;
+    console.log('tokenBalance: ', tokenBalance);
   });
   return tokenBalance;
 };

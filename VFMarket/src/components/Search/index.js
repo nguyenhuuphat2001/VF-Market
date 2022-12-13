@@ -20,7 +20,7 @@ const Search = ({label = 'label', value = 'value', onPress, onChangeText}) => {
           editable={!!onChangeText || false}
           onChangeText={onChangeText}
           style={styles.input}
-          placeholder="Tìm kiếm "
+          placeholder="Search "
         />
         <Icon name="search" style={[styles.icon]} />
       </View>

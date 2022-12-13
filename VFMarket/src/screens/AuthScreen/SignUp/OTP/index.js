@@ -28,30 +28,6 @@ const StepTwoScreen = () => {
 
   const tempAccount = useSelector(state => state.authReducer.tempAccount);
   console.log('tempAccount: ', tempAccount);
-  // const activateCode = useSelector(state => state.authReducer.activateCode);
-
-  const _scrollToInput = reactNode => {
-    // Add a 'scroll' ref to your ScrollView
-    // inputRef?.current.scrollToFocusedInput(reactNode)
-  };
-
-  // useEffect(() => {
-  //   countdown();
-  // }, []);
-
-  // const countdown = () => {
-  //   id.current = setInterval(() => {
-  //     if (timer.current === 1) {
-  //       clearInterval(id.current);
-  //       timer.current = 40;
-  //     } else {
-  //       timer.current -= 1;
-
-  //       setNum(timer.current);
-  //     }
-  //   }, 1000);
-  // };
-
   const onSubmit = () => {
     dispatch(activeAccount({...tempAccount, otp: codeOTP}));
   };
@@ -60,28 +36,20 @@ const StepTwoScreen = () => {
 
   return (
     <View style={[styles.container]}>
-      <Header />
+      <Header title="Confirm password" />
       <View style={[styles.innerContainer]}>
         <KeyboardAwareScrollView
-          // ref={inputRef}
-          // onFocus={(event) => {
-          //     _scrollToInput(findNodeHandle(event.target))
-          // }}
           showsVerticalScrollIndicator={false}
           style={{flex: 1, width: '100%', height: '100%', marginBottom: 0}}>
-          <View
-            style={{width: '100%', alignItems: 'flex-start', marginBottom: 10}}>
-            <Text customStyle={styles.title}> Xác thực Email</Text>
-          </View>
           <View style={{width: '100%', alignItems: 'center'}}>
             <Image style={styles.image} resizeMode="contain" source={OTP} />
           </View>
           <View style={{width: '100%', alignItems: 'center'}}>
             <View style={styles.containerNote}>
-              <Text customStyle={styles.title}> Xác thực OTP</Text>
+              <Text customStyle={styles.title}>Confirm OTP</Text>
               <View style={{flexDirection: 'row', marginVertical: 20}}>
                 <Text customStyle={styles.subText}>
-                  Vui lòng nhập mã OTP vừa được gửi đến email{' '}
+                  Please enter the OTP that has just been sent to your email{' '}
                   <Text customStyle={styles.phone}> {tempAccount?.email} </Text>
                 </Text>
               </View>
@@ -122,7 +90,7 @@ const StepTwoScreen = () => {
           <View style={{flex: 1, width: '100%'}}>
             <Button
               onPress={onSubmit}
-              content="Đăng ký"
+              content="Sign up"
               containerStyle={styles.marginTopLarge}
             />
           </View>

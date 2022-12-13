@@ -42,7 +42,7 @@ const Button = ({
           ...styles.text,
           color: isOutline ? COLORS.primary : 'white',
         }}>
-        {isLoading ? 'Đang xử lý...' : content}
+        {isLoading ? 'Processing...' : content}
       </Text>
       {iconRight && (
         <Icon

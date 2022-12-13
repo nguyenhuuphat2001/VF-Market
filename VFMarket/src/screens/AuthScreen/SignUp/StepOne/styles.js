@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
   note: {
     color: COLORS.primary_text,
-    fontSize: 12,
+    fontSize: 11,
     textAlign: 'right',
     fontFamily: MONT_REGULAR,
     marginLeft: 3,

@@ -24,7 +24,6 @@ import {RECTANGLE_CAMERA, CAMERA} from '@/assets/images';
 
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-// import BottomSheet from '@/components/BottomSheet';
 import BottomSheet, {BottomSheetBackdrop} from '@gorhom/bottom-sheet';
 
 import {Picker} from 'react-native-wheel-pick';

@@ -12,11 +12,11 @@ import {COLORS} from '@/theme/index';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export const KEY_BOTTOM_SCREEN = {
-  HOME: 'Trang chủ',
-  MAP: 'Bản đồ',
-  MYCAR: 'Xe của tôi',
-  WALLET: 'Ví',
-  PROFILE: 'Tài khoản',
+  HOME: 'Home',
+  MAP: 'Map',
+  MYCAR: 'My car',
+  WALLET: 'Wallet',
+  PROFILE: 'Profile',
 };
 
 const BottomTabConstant = {

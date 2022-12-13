@@ -117,7 +117,7 @@ export default () => {
                 fontSize: FONT_SIZE.medium,
                 color: COLORS.gray_light,
               }}>
-              C60: {formatPricing(tokenBalance)}
+              vUSD: {formatPricing(tokenBalance)}
             </Text>
           </View>
           <View
@@ -167,7 +167,7 @@ export default () => {
                   color: 'black',
                   paddingVertical: 5,
                 }}>
-                Kết nối ví
+                Connect wallet
               </Text>
             </View>
           </TouchableOpacity>

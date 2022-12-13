@@ -12,7 +12,6 @@ import SCREEN from '@/constants/screen';
 
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import BottomSheet from '@/components/BottomSheet';
 
 const ChangePasswordScreen = () => {
   const navigation = useNavigation();
@@ -26,7 +25,7 @@ const ChangePasswordScreen = () => {
 
   return (
     <View style={[styles.container]}>
-      <Header />
+      <Header title="Change password" />
       <View style={[styles.innerContainer]}>
         <KeyboardAwareScrollView
           ref={inputRef}
@@ -35,36 +34,30 @@ const ChangePasswordScreen = () => {
           }}
           showsVerticalScrollIndicator={false}
           style={{flex: 1, width: '100%', height: '100%'}}>
-          <View
-            style={{width: '100%', alignItems: 'flex-start', marginBottom: 30}}>
-            {/* <Image style={styles.image} resizeMode="contain" source={MAIN_LOGO} /> */}
-            <Text customStyle={styles.title}>Cập nhật mật khẩu</Text>
-          </View>
-
           <View style={{flex: 1, width: '100%'}}>
             <ContainerInput customStyle={styles.input}>
-              <TextInput secureTextEntry={true} placeholder="Mật khẩu" />
+              <TextInput secureTextEntry={true} placeholder="Password" />
             </ContainerInput>
             <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
               <Icon name="check" style={[styles.icon, styles.isChecked]} />
               <Text customStyle={[styles.note, styles.isChecked]}>
-                Tối thiểu 8 kí tự
+                Minimum 8 characters
               </Text>
             </View>
             <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
               <Icon name="check" style={[styles.icon, styles.isChecked]} />
               <Text customStyle={[styles.note, styles.isChecked]}>
-                Bao gồm chữ in hoa, số, kí tự đặc biệt (#,@,...)
+                Include capital letters, numbers, special characters(#,@,...)
               </Text>
             </View>
             <ContainerInput customStyle={[styles.input, styles.marginTopLarge]}>
               <TextInput
                 secureTextEntry={true}
-                placeholder="Nhập lại mật khẩu"
+                placeholder="Confirm password"
               />
             </ContainerInput>
             <Button
-              content="Lưu mật khẩu"
+              content="Save password"
               containerStyle={styles.marginTopLarge}
               onPress={() => navigation.push(SCREEN.MAIN_SCREEN)}
             />

@@ -72,10 +72,10 @@ const SearchScreen = () => {
 
   const snapPoints = useMemo(() => ['45%', '45%'], []);
 
-  // callbacks
-  const handleSheetChanges = useCallback(index => {
-    console.log('handleSheetChanges', index);
-  }, []);
+  // // callbacks
+  // const handleSheetChanges = useCallback(index => {
+  //   console.log('handleSheetChanges', index);
+  // }, []);
 
   const renderItems = useCallback(
     ({item}) => (
@@ -128,7 +128,7 @@ const SearchScreen = () => {
 
   return (
     <View style={[styles.container]}>
-      <Header title="Tìm kiếm" renderIconRight={renderHeaderRight} />
+      <Header title="Search" renderIconRight={renderHeaderRight} />
       <View
         style={[styles.innerContainer]}
         showsVerticalScrollIndicator={false}>
@@ -166,7 +166,7 @@ const SearchScreen = () => {
                 backgroundColor: 'white',
                 zIndex: 100,
               }}>
-              <Text>{listProduct.length} Kết quả</Text>
+              <Text>{listProduct.length} items</Text>
             </View>
             <View
               style={{
@@ -200,7 +200,7 @@ const SearchScreen = () => {
         // opacity={1}
         backdropComponent={renderBackdrop}
         snapPoints={snapPoints}
-        onChange={handleSheetChanges}
+        // onChange={handleSheetChanges}
         ref={ref}>
         <View
           style={{
@@ -217,12 +217,12 @@ const SearchScreen = () => {
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               {/* <Icon name="close" style={{ fontSize: 35, color: COLORS.border_input }} /> */}
               <Text customStyle={{fontWeight: '600', fontSize: 18}}>
-                Bộ lọc
+                Filters
               </Text>
             </View>
             <TouchableOpacity onPress={onClose}>
               <Text customStyle={{fontSize: 16, color: COLORS.border_input}}>
-                Đặt lại
+                Reset
               </Text>
             </TouchableOpacity>
           </View>
@@ -243,7 +243,7 @@ const SearchScreen = () => {
               }}> */}
             <Text
               customStyle={{fontSize: 14, textAlign: 'left', width: '100%'}}>
-              Vị trí của bạn
+              Your location
             </Text>
             <View
               style={{
@@ -258,7 +258,7 @@ const SearchScreen = () => {
                 marginVertical: 10,
               }}>
               <Text customStyle={{fontSize: 12, textAlign: 'left'}}>
-                Sắp xếp
+                Arrange
               </Text>
               <Icon
                 name="arrow-drop-down"

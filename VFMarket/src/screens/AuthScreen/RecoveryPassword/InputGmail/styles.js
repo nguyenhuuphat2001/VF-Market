@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
     color: COLORS.orange,
   },
   title: {
-    fontSize: 20,
-    fontWeight: '600',
+    fontSize: 18,
+    fontWeight: '500',
     textAlign: 'left',
   },
   marginTopLarge: {
