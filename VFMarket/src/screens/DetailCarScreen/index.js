@@ -7,6 +7,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import StepIndicator from 'react-native-step-indicator';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import {SharedElement} from 'react-navigation-shared-element';
+import {useDispatch, useSelector} from 'react-redux';
 import Button, {BackButton, FavoriteButton} from '@/components/Button';
 import Text from '@/components/Text';
 import BottomSheet, {BottomSheetBackdrop} from '@gorhom/bottom-sheet';
@@ -17,14 +20,134 @@ import {
   DetailDesc,
   DetailParameter,
 } from './components';
-import {SharedElement} from 'react-navigation-shared-element';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+
+const CustomStep = ({position, stepStatus}) => {
+  const finished = stepStatus === 'finished';
+  const unfinished = stepStatus === 'unfinished';
+  return (
+    <View
+      style={[
+        {
+          width: 20,
+          height: 20,
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
+        unfinished
+          ? {
+              borderWidth: 1,
+              borderColor: 'gray',
+              borderRadius: 16,
+            }
+          : {},
+      ]}>
+      {finished ? (
+        <Icon name="check-circle" size={20} />
+      ) : (
+        <Text
+          customStyle={{
+            fontSize: 12,
+            fontWeight: '500',
+            color: 'white',
+          }}>
+          {position + 1}
+        </Text>
+      )}
+    </View>
+  );
+};
+
+// type TransactionValidationLabel = 'token' | 'starNFT' | 'keywordNFT' | 'submit';
+
+const ApproveLabel = ({
+  title,
+  hash,
+  status,
+  subTitle,
+  isActive,
+  paddingTop,
+}) => {
+  return (
+    // <View style={[styles.labelContainer, {paddingTop}]}>
+    <View style={{width: '100%'}}>
+      <Text
+        customStyle={{
+          fontWeight: '500',
+          fontSize: 14,
+          color: isActive ? 'black' : 'gray',
+        }}>
+        {title}
+      </Text>
+
+      {subTitle ? (
+        <Text customStyle={{fontWeight: '400', fontSize: 13}}>{subTitle}</Text>
+      ) : null}
+    </View>
+  );
+};
+
+const Label = ({position, stepStatus, label, currentPosition}) => {
+  const isActive = stepStatus === 'current';
+
+  switch (label) {
+    case 'connect':
+      return (
+        <ApproveLabel
+          title="Connect wallet"
+          subTitle="You should connect wallet to buy NFT"
+          isActive={isActive}
+          // status={erc20Token?.status}
+          // hash={erc20Token?.hash}
+          paddingTop={24}
+        />
+      );
+    case 'approve':
+      return (
+        <ApproveLabel
+          title="Approve NFT collection"
+          subTitle="To allow buy NFTs from your wallet. You only need to approve once."
+          isActive={isActive}
+          // status={keywordNFT?.status}
+          // hash={keywordNFT?.hash}
+        />
+      );
+    case 'submit':
+      return (
+        // // <View style={[styles.labelContainer, {paddingBottom: 24}]}>
+        // <View>
+        //   <Text
+        //     variant="body2Bold"
+        //     style={{
+        //       color: isActive ? '#fff' : COLORS.neutral5,
+        //     }}>
+        //     Submit transaction
+        //   </Text>
+
+        // </View>
+        <ApproveLabel
+          title=" Submit transaction"
+          // subTitle="To allow transfer NFTs from your wallet. You only need to approve once."
+          isActive={isActive}
+          // status={keywordNFT?.status}
+          // hash={keywordNFT?.hash}
+        />
+      );
+    default:
+      return null;
+  }
+};
 
 const DetailCarScreen = ({navigation, route}) => {
   const goBack = () => navigation.pop();
 
   const ref = useRef(null);
   const [data, setData] = useState({});
+  const [currentStep, setCurrentStep] = useState(-1);
+  const [buttonTitle, setButtonTitle] = useState('Connect');
+
+  const currentAccount = useSelector(
+    state => state.walletReducer.currentAccount,
+  );
 
   useEffect(() => {
     const item = route.params;
@@ -32,6 +155,13 @@ const DetailCarScreen = ({navigation, route}) => {
       setData(item);
     }
   }, [navigation]);
+
+  useEffect(() => {
+    if (currentAccount) {
+      setCurrentStep(1);
+      setButtonTitle('Approve');
+    }
+  }, []);
 
   const onPress = useCallback(() => {
     ref?.current?.collapse();
@@ -123,7 +253,12 @@ const DetailCarScreen = ({navigation, route}) => {
           zIndex: 1,
         }}>
         <View style={{left: 10}}>
-          <Text customStyle={{fontSize: 14, color: 'gray', fontWeight: '500'}}>
+          <Text
+            customStyle={{
+              fontSize: 16,
+              color: '#525252',
+              fontWeight: '500',
+            }}>
             Price
           </Text>
           <Text
@@ -139,7 +274,7 @@ const DetailCarScreen = ({navigation, route}) => {
         <View>
           <Button
             containerStyle={{right: 10, width: 200, borderRadius: 100}}
-            content={'Buy'}
+            content={buttonTitle}
             onPress={onPress}
           />
         </View>
@@ -165,7 +300,7 @@ const DetailCarScreen = ({navigation, route}) => {
             }}>
             <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Text customStyle={{fontWeight: '500', fontSize: 22}}>
-                Validation transfer
+                Validation
               </Text>
             </View>
             <TouchableOpacity onPress={onClose}>
@@ -173,7 +308,7 @@ const DetailCarScreen = ({navigation, route}) => {
                 customStyle={{
                   fontSize: 16,
                   fontWeight: '500',
-                  // color: COLORS.border_input,
+                  color: COLORS.primary_text,
                 }}>
                 Close
               </Text>
@@ -188,6 +323,7 @@ const DetailCarScreen = ({navigation, route}) => {
               <Text
                 customStyle={{
                   fontSize: 14,
+                  fontWeight: '400',
                   textAlign: 'left',
                   color: COLORS.primary_text,
                 }}>
@@ -201,14 +337,14 @@ const DetailCarScreen = ({navigation, route}) => {
               direction="vertical"
               customStyles={{
                 labelAlign: 'flex-start',
-                separatorStrokeWidth: 1,
+                separatorStrokeWidth: 3,
                 stepStrokeWidth: 0,
                 stepIndicatorSize: 25,
                 currentStepStrokeWidth: 0,
                 currentStepIndicatorSize: 25,
                 stepIndicatorCurrentColor: '#00BDFF',
 
-                separatorStrokeUnfinishedWidth: 2,
+                separatorStrokeUnfinishedWidth: 3,
                 separatorStrokeFinishedWidth: 1,
                 stepStrokeUnFinishedColor: '#777E90',
                 separatorUnFinishedColor: '#777E90',
@@ -217,15 +353,12 @@ const DetailCarScreen = ({navigation, route}) => {
                 separatorStrokeFinishedWidth: 0,
                 separatorFinishedColor: '#0A688A',
                 stepIndicatorFinishedColor: '#0A688A',
-
-                labelSize: 14,
-                // labelFontFamily: 'MONT_MEDIUM',
               }}
-              currentPosition={-1}
+              currentPosition={currentStep}
               stepCount={3}
-              labels={['Connect wallet', 'Approve transfer', 'Buy NFT']}
-              // renderLabel={null}
-              // renderStepIndicator={CustomStep}
+              labels={['connect', 'approve', 'submit']}
+              renderLabel={Label}
+              renderStepIndicator={CustomStep}
             />
           </View>
         </View>

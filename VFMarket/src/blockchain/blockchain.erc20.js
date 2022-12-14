@@ -23,3 +23,18 @@ export const getTokenBalance = async address => {
   });
   return tokenBalance;
 };
+
+export const getAllowance = async address => {
+  let tokenBalance = 0;
+  const erc20Contract = useERC20Contract();
+  await erc20Contract.methods
+    .allowance(address, '0x120cEa583890807135F9270159C9e0865e3072Fe')
+    .call((err, data) => {
+      if (err) {
+        console.log('getTokenBalance error', err);
+      }
+      tokenBalance = Number(data) / 1e18;
+      console.log('tokenBalance: ', tokenBalance);
+    });
+  return tokenBalance;
+};

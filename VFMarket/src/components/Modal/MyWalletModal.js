@@ -164,7 +164,7 @@ const MyWalletModal = ({modalVisible, callbackChangeVisible}) => {
             <TouchableOpacity onPress={handleDisconnect} delayLongPress={0}>
               <View
                 style={{
-                  backgroundColor: 'white',
+                  // backgroundColor: 'white',
                   padding: 10,
                   margin: 10,
                   borderRadius: 10,
@@ -173,10 +173,10 @@ const MyWalletModal = ({modalVisible, callbackChangeVisible}) => {
                   customStyle={{
                     textAlign: 'center',
                     fontFamily: MONT_BOLD,
-                    fontSize: FONT_SIZE.medium,
+                    fontSize: 22,
                     color: 'red',
                   }}>
-                  Ngắt kết nối
+                  Disconnect
                 </Text>
               </View>
             </TouchableOpacity>
@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     // alignItems: 'center',
     // marginTop: 22,
-    backgroundColor: '#00000050',
+    backgroundColor: '#00000070',
 
     // opacity: 0.9,
   },
@@ -203,7 +203,7 @@ const styles = StyleSheet.create({
     width: '80%',
     marginTop: 200,
     marginLeft: '10%',
-    backgroundColor: COLORS.primary_text,
+    backgroundColor: '#474747',
     alignItems: 'center',
     borderRadius: 10,
     padding: 10,
