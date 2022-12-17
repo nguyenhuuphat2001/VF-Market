@@ -1,6 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {importWalletFromPK, getWalletBalance} from '../../blockchain/basic';
-import {getTokenBalance} from '../../blockchain/blockchain.erc20';
+import {getTokenBalance, getAllowance} from '../../blockchain/blockchain.erc20';
 
 import {storeData, getData, keyStore} from '@/utils/storage';
 
@@ -30,5 +30,13 @@ export const getTokenBalanceWallet = createAsyncThunk(
   async address => {
     const balance = await getTokenBalance(address);
     return {balance};
+  },
+);
+
+export const getAllowanceWallet = createAsyncThunk(
+  'getTokenAllowance',
+  async address => {
+    const allowance = await getAllowance(address);
+    return {allowance};
   },
 );

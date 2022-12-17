@@ -139,14 +139,43 @@ const UpdatePersonalInfoScreen = () => {
                 <Text customStyle={{fontSize: FONT_SIZE.small}}>View all</Text>
               </TouchableOpacity>
             </View>
-            <FlatList
+            {/* <FlatList
               data={listProduct}
               renderItem={renderItems}
               numColumns={2}
               columnWrapperStyle={{justifyContent: 'space-between'}}
               showsVerticalScrollIndicator={false}
+              scrollEnabled={false
               keyExtractor={item => item._id}
-            />
+            /> */}
+            {/* {listProduct.map((product, index) => {
+              <View></View>
+              <renderItems item={product} />;
+            })} */}
+            <View
+              style={{
+                flex: 1,
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                alignItems: 'flex-start',
+                justifyContent: 'space-between',
+              }}>
+              {listProduct.map((product, index) => (
+                <TouchableOpacity
+                  key={product._id}
+                  onPress={() => navigate(screen.DETAIL_CAR, product)}
+                  style={{width: '48%'}}>
+                  <ItemCourse
+                    id={product._id}
+                    image={product.images[0]}
+                    name={product.name}
+                    price={product.price.value}
+                    currency={product.price.currency}
+                  />
+                </TouchableOpacity>
+              ))}
+            </View>
+
             {/* <Loading isLoading={true} /> */}
           </View>
         </View>

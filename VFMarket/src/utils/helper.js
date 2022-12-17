@@ -3,7 +3,6 @@ export const getShortAddress = (address, begin = 6, end = 4) =>
     ? `${address.slice(0, begin)}...${address.slice(-end)}`
     : address;
 export const formatPricing = text => {
-  console.log(text);
   let newText = text + '';
   const parts = newText.split('.');
   if (parts[1]) {

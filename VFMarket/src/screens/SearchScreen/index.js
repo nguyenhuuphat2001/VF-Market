@@ -192,6 +192,32 @@ const SearchScreen = () => {
               keyExtractor={item => item._id}
             />
           </View>
+          {/* <View
+            style={{
+              flex: 1,
+              marginTop: 22,
+              // height: '80%',
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              alignItems: 'flex-start',
+              justifyContent: 'space-between',
+              backgroundColor: 'red',
+            }}>
+            {listProduct.map((product, index) => (
+              <TouchableOpacity
+                key={product._id}
+                onPress={() => navigate(screen.DETAIL_CAR, product)}
+                style={{width: '48%'}}>
+                <ItemCourse
+                  id={product._id}
+                  image={product.images[0]}
+                  name={product.name}
+                  price={product.price.value}
+                  currency={product.price.currency}
+                />
+              </TouchableOpacity>
+            ))}
+          </View> */}
         </View>
       </View>
 

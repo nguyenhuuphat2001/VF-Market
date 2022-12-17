@@ -12,18 +12,22 @@ import Text from '../Text';
 
 const DATA = [
   {
+    id: '1',
     name: 'Động cơ điện',
-    value: 'elec',
+    value: 'electronic',
   },
   {
+    id: '2',
     name: 'Động cơ xăng',
-    value: 'nonelce',
+    value: 'diesel',
   },
 ];
 
 const SelectMany = ({label = 'label', value = 'value', onChange}) => {
-  const renderSelected = (name, isSelected, value) => (
-    <TouchableOpacity style={[styles.box, isSelected && styles.isActive]}>
+  const renderSelected = (id, name, isSelected, value) => (
+    <TouchableOpacity
+      style={[styles.box, isSelected && styles.isActive]}
+      key={id}>
       <Text
         customStyle={{
           color: isSelected ? COLORS.gray_light : COLORS.primary,
@@ -37,7 +41,7 @@ const SelectMany = ({label = 'label', value = 'value', onChange}) => {
   return (
     <View style={styles.container}>
       {DATA.map((item, index) =>
-        renderSelected(item.name, !!(index % 2), item.value),
+        renderSelected(item.id, item.name, !!(index % 2), item.value),
       )}
     </View>
   );

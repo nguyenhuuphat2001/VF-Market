@@ -1,5 +1,10 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {importWallet, getBalanceWallet, getTokenBalanceWallet} from './action';
+import {
+  importWallet,
+  getBalanceWallet,
+  getTokenBalanceWallet,
+  getAllowanceWallet,
+} from './action';
 import {WALLET_STATUS} from '@/constants/index';
 
 import {storeData, keyStore} from '@/utils/storage';
@@ -14,6 +19,7 @@ const INIT_STATE = {
   currentAccount: '',
   currentNetwork: '',
   currentPrivateKey: '',
+  allowance: '0',
 };
 
 // Slice
@@ -45,12 +51,13 @@ const slice = createSlice({
     });
 
     builder.addCase(getBalanceWallet.fulfilled, (state, action) => {
-      console.log('getBalanceWallet success: ', action.payload);
       state.balance = action.payload.balance;
     });
     builder.addCase(getTokenBalanceWallet.fulfilled, (state, action) => {
-      console.log('getTokenBalanceWallet success: ', action.payload);
       state.tokenBalance = action.payload.balance;
+    });
+    builder.addCase(getAllowanceWallet.fulfilled, (state, action) => {
+      state.allowance = action.payload.balance;
     });
     //   builder.addCase(getListSearchProduct.fulfilled, (state, action) => {
     //     state.status = STATUS.SUCCESS;
