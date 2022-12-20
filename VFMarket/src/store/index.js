@@ -1,4 +1,5 @@
 import {configureStore} from '@reduxjs/toolkit';
+import {useSelector} from 'react-redux';
 import {combineReducers} from 'redux';
 import authReducer from './auth';
 import productReducer from './product';
@@ -12,3 +13,5 @@ const reducer = combineReducers({
 export const store = configureStore({
   reducer,
 });
+
+export const useAppSelector = useSelector;

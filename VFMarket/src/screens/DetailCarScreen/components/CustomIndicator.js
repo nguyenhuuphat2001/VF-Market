@@ -110,6 +110,27 @@ const Label = ({position, stepStatus, label, currentPosition}) => {
           // hash={keywordNFT?.hash}
         />
       );
+    case 'finish':
+      return (
+        // // <View style={[styles.labelContainer, {paddingBottom: 24}]}>
+        // <View>
+        //   <Text
+        //     variant="body2Bold"
+        //     style={{
+        //       color: isActive ? '#fff' : COLORS.neutral5,
+        //     }}>
+        //     Submit transaction
+        //   </Text>
+
+        // </View>
+        <ApproveLabel
+          title=" Finish"
+          // subTitle="To allow transfer NFTs from your wallet. You only need to approve once."
+          isActive={isActive}
+          // status={keywordNFT?.status}
+          // hash={keywordNFT?.hash}
+        />
+      );
     default:
       return null;
   }
@@ -138,8 +159,8 @@ const CustomIndicator = ({curStep}) => (
         stepIndicatorFinishedColor: '#0A688A',
       }}
       currentPosition={curStep}
-      stepCount={3}
-      labels={['connect', 'approve', 'submit']}
+      stepCount={4}
+      labels={['connect', 'approve', 'submit', 'finish']}
       renderLabel={Label}
       renderStepIndicator={CustomStep}
     />

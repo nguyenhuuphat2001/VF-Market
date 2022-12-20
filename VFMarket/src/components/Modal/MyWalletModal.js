@@ -200,9 +200,9 @@ const styles = StyleSheet.create({
   },
   modalView: {
     position: 'absolute',
-    width: '80%',
+    width: '86%',
     marginTop: 200,
-    marginLeft: '10%',
+    marginLeft: '7%',
     backgroundColor: '#474747',
     alignItems: 'center',
     borderRadius: 10,

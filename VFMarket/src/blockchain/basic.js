@@ -1,4 +1,5 @@
 import Web3 from 'web3';
+import Toast from 'react-native-toast-message';
 
 export const web3TestBSC = new Web3(
   'https://bsc-testnet.nodereal.io/v1/d84c5781140b48468e16993b89a90a5f',
@@ -35,6 +36,72 @@ export const getWalletBalance = async currentAccount => {
       console.log('getBalance error', err);
     });
   return walletBalance;
+};
+
+export const useSignIncreaseAllowanceTransaction = async (
+  transactionConfig,
+  privateKey,
+) => {
+  var respone = '';
+  console.log('privateKey: ', privateKey);
+  const tx = await web3TestBSC.eth.accounts.signTransaction(
+    {...transactionConfig},
+    privateKey,
+    async function (err, signPromise) {
+      if (!err) {
+        if (signPromise.rawTransaction) {
+          await web3TestBSC.eth.sendSignedTransaction(
+            signPromise.rawTransaction,
+            function (error, hash) {
+              if (!error) {
+                console.log('The hash of your transaction is: ', hash);
+                Toast.show({
+                  type: 'info',
+                  text1: 'Transaction is submited',
+                });
+                respone = hash;
+                return hash;
+              } else {
+                console.log(
+                  'Something went wrong when sendSignedTransaction:',
+                  error,
+                );
+                Toast.show({
+                  type: 'error',
+                  text1: 'Something went wrong.',
+                });
+                // stateStore.dispatch(closeModal());
+              }
+            },
+          );
+        }
+      } else {
+        console.log('Something went wrong when signTransaction:', err);
+        // stateStore.dispatch(closeModal());
+        Toast.show({
+          type: 'error',
+          text1: 'Something went wrong.',
+        });
+      }
+    },
+  );
+  console.log('respone: ', respone);
+  console.log('A: ', tx.transactionHash);
+  return tx.transactionHash;
+};
+
+export const checkingTransactionReceipt = async txHash => {
+  const res = await web3TestBSC.eth
+    .getTransactionReceipt(txHash)
+    .then(receipt => {
+      console.log('checkingTransactionReceipt PendingTx', receipt);
+      if (receipt?.status) {
+        return true;
+      }
+      console.log('updateTransactionByIdMiddleware err ', err);
+      return false;
+    });
+  return res;
 };
 
 // export const sendToken = async (

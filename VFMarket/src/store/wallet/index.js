@@ -4,6 +4,10 @@ import {
   getBalanceWallet,
   getTokenBalanceWallet,
   getAllowanceWallet,
+  handleIncreaseAllowance,
+  handleSignIncreaseAllowanceTx,
+  handleBuyTransaction,
+  handleSignBuyTransaction,
 } from './action';
 import {WALLET_STATUS} from '@/constants/index';
 
@@ -12,14 +16,16 @@ import {storeData, keyStore} from '@/utils/storage';
 const INIT_STATE = {
   status: WALLET_STATUS.READY,
   balance: '0',
-  // value: '0',
-  // tokenValue: '0',
   tokenBalance: '0',
   // password: '',
   currentAccount: '',
   currentNetwork: '',
   currentPrivateKey: '',
   allowance: '0',
+  txIncreaseConfig: {},
+  txBuyConfig: {},
+  currentStep: 0,
+  buyHash: '',
 };
 
 // Slice
@@ -43,7 +49,7 @@ const slice = createSlice({
       console.log('success: ', action.payload);
       state.currentAccount = action.payload.address;
       state.currentPrivateKey = action.payload.privateKey;
-      // state.totalPage = action.payload.totalPage;
+      state.currentStep = 1;
     });
     builder.addCase(importWallet.rejected, (state, action) => {
       state.status = STATUS.READY;
@@ -54,11 +60,28 @@ const slice = createSlice({
       state.balance = action.payload.balance;
     });
     builder.addCase(getTokenBalanceWallet.fulfilled, (state, action) => {
-      state.tokenBalance = action.payload.balance;
+      state.tokenBalance = action.payload.tokenBalance;
     });
     builder.addCase(getAllowanceWallet.fulfilled, (state, action) => {
-      state.allowance = action.payload.balance;
+      state.allowance = action.payload.allowance;
+      if (action.payload.allowance) {
+        state.currentStep = 2;
+      }
     });
+    builder.addCase(handleIncreaseAllowance.fulfilled, (state, action) => {
+      state.txIncreaseConfig = action.payload.txIncreaseConfig;
+    });
+    builder.addCase(handleBuyTransaction.fulfilled, (state, action) => {
+      console.log('buy action');
+      state.txBuyConfig = action.payload.txBuyConfig;
+      state.buyHash = '';
+    });
+    builder.addCase(handleSignBuyTransaction.fulfilled, (state, action) => {
+      console.log('sign buy action');
+      state.txBuyConfig = {};
+      state.buyHash = action.payload.hash;
+    });
+
     //   builder.addCase(getListSearchProduct.fulfilled, (state, action) => {
     //     state.status = STATUS.SUCCESS;
     //     state.listSearch = action.payload;

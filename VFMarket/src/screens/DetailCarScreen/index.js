@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import {SharedElement} from 'react-navigation-shared-element';
 import {useDispatch, useSelector} from 'react-redux';
+import SCREEN from '@/constants/screen';
+import {navigate} from '@/navigation/navigationUtils';
 import Button, {BackButton, FavoriteButton} from '@/components/Button';
 import Text from '@/components/Text';
 import BottomSheet, {BottomSheetBackdrop} from '@gorhom/bottom-sheet';
@@ -19,7 +21,14 @@ import {
   DetailParameter,
   CustomIndicator,
 } from './components';
-import {getAllowanceWallet} from '@/store/wallet/action';
+import {
+  getAllowanceWallet,
+  handleIncreaseAllowance,
+  handleBuyTransaction,
+} from '@/store/wallet/action';
+import IncreaseAllowanceModal from '@/components/Modal/IncreaseAllowanceModal.js';
+import SignTransactionModal from '@/components/Modal/SignTransactionModal.js';
+import {checkingTransactionReceipt} from '../../blockchain/basic';
 
 const DetailCarScreen = ({navigation, route}) => {
   const dispatch = useDispatch();
@@ -29,8 +38,13 @@ const DetailCarScreen = ({navigation, route}) => {
   const [data, setData] = useState({});
   const [currentStep, setCurrentStep] = useState(0);
   const [buttonTitle, setButtonTitle] = useState('Connect');
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalSignVisible, setModalSignVisible] = useState(false);
+  // let onButtonPress = () => dispatch(handleIncreaseAllowance(currentAccount));
 
-  const {currentAccount, allowance} = useSelector(state => state.walletReducer);
+  const {currentAccount, allowance, buyHash} = useSelector(
+    state => state.walletReducer,
+  );
 
   useEffect(() => {
     const item = route.params;
@@ -40,16 +54,65 @@ const DetailCarScreen = ({navigation, route}) => {
   }, [navigation]);
 
   useEffect(() => {
+    console.log('buyHash: ', buyHash);
+    if (buyHash !== '') {
+      try {
+        let intervalId = setInterval(async () => {
+          const respone = await checkingTransactionReceipt(buyHash);
+          console.log('respone', respone);
+          if (respone) {
+            clearInterval(intervalId);
+            setButtonTitle('Finish');
+            setCurrentStep(3);
+            return true;
+          }
+        }, 2000);
+        console.log('intervalId', intervalId);
+      } catch (err) {
+        console.log('err: ', err);
+      }
+    }
+  }, [buyHash]);
+
+  useEffect(() => {
+    console.log('allowance: ', allowance);
     if (currentAccount) {
-      dispatch(getAllowanceWallet());
+      dispatch(getAllowanceWallet(currentAccount));
       setButtonTitle('Approve');
       setCurrentStep(1);
+      // onButtonPress = () => setModalVisible(true);
       if (allowance > 0) {
         setButtonTitle('Submit');
         setCurrentStep(2);
       }
     }
-  }, [navigation]);
+  }, [allowance]);
+
+  const onButtonPress = async () => {
+    switch (buttonTitle) {
+      case 'Connect': {
+        navigate(SCREEN.INTRO_WALLET_SCREEN);
+        break;
+      }
+      case 'Approve': {
+        await dispatch(handleIncreaseAllowance(currentAccount));
+        setModalVisible(true);
+        break;
+      }
+      case 'Submit': {
+        if (data?.launchId) {
+          await dispatch(
+            handleBuyTransaction({
+              launchId: data.launchId,
+              address: currentAccount,
+            }),
+          );
+          setModalSignVisible(true);
+        }
+        break;
+      }
+    }
+  };
 
   const onPress = useCallback(() => {
     ref?.current?.collapse();
@@ -167,6 +230,14 @@ const DetailCarScreen = ({navigation, route}) => {
           />
         </View>
       </View>
+      <IncreaseAllowanceModal
+        modalVisible={modalVisible}
+        callbackChangeVisible={() => setModalVisible(false)}
+      />
+      <SignTransactionModal
+        modalVisible={modalSignVisible}
+        callbackChangeVisible={() => setModalSignVisible(false)}
+      />
       <BottomSheet
         index={-1}
         backdropComponent={renderBackdrop}
@@ -227,7 +298,7 @@ const DetailCarScreen = ({navigation, route}) => {
               alignSelf: 'center',
             }}
             content={buttonTitle}
-            // onPress={onPress}
+            onPress={onButtonPress}
           />
         </View>
       </BottomSheet>
