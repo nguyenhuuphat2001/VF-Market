@@ -34,9 +34,11 @@ const slice = createSlice({
   initialState: INIT_STATE,
   reducers: {
     disconnectWallet: (state, action) => {
-      console.log('disconnect success');
       state.currentAccount = null;
       state.currentPrivateKey = null;
+    },
+    clearBuyHash: (state, action) => {
+      state.buyHash = '';
     },
   },
   extraReducers: builder => {
@@ -108,13 +110,21 @@ const slice = createSlice({
 });
 export default slice.reducer;
 
-const {disconnectWallet} = slice.actions;
+const {disconnectWallet, clearBuyHash} = slice.actions;
 
 export const disconnect = () => async dispatch => {
   try {
     console.log('disconnect .....');
     await storeData(keyStore.PRIVATE_KEY, null);
     return dispatch(disconnectWallet());
+  } catch (e) {
+    return console.error(e.message);
+  }
+};
+
+export const clearBuyTransaction = () => async dispatch => {
+  try {
+    return dispatch(clearBuyHash());
   } catch (e) {
     return console.error(e.message);
   }

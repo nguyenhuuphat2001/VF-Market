@@ -28,6 +28,8 @@ import {
 } from '@/store/wallet/action';
 import IncreaseAllowanceModal from '@/components/Modal/IncreaseAllowanceModal.js';
 import SignTransactionModal from '@/components/Modal/SignTransactionModal.js';
+import SuccessModal from '@/components/Modal/SuccessModal.js';
+import LoadingModal from '@/components/Modal/LoadingModal.js';
 import {checkingTransactionReceipt} from '../../blockchain/basic';
 
 const DetailCarScreen = ({navigation, route}) => {
@@ -40,6 +42,8 @@ const DetailCarScreen = ({navigation, route}) => {
   const [buttonTitle, setButtonTitle] = useState('Connect');
   const [modalVisible, setModalVisible] = useState(false);
   const [modalSignVisible, setModalSignVisible] = useState(false);
+  const [modalLoadingVisible, setModalLoadingVisible] = useState(false);
+  const [modalSuccessVisible, setModalSuccessVisible] = useState(false);
   // let onButtonPress = () => dispatch(handleIncreaseAllowance(currentAccount));
 
   const {currentAccount, allowance, buyHash} = useSelector(
@@ -54,14 +58,17 @@ const DetailCarScreen = ({navigation, route}) => {
   }, [navigation]);
 
   useEffect(() => {
-    console.log('buyHash: ', buyHash);
     if (buyHash !== '') {
+      if (modalLoadingVisible === false) {
+        setModalLoadingVisible(true);
+      }
       try {
         let intervalId = setInterval(async () => {
           const respone = await checkingTransactionReceipt(buyHash);
-          console.log('respone', respone);
           if (respone) {
             clearInterval(intervalId);
+            setModalLoadingVisible(false);
+            setModalSuccessVisible(true);
             setButtonTitle('Finish');
             setCurrentStep(3);
             return true;
@@ -75,7 +82,6 @@ const DetailCarScreen = ({navigation, route}) => {
   }, [buyHash]);
 
   useEffect(() => {
-    console.log('allowance: ', allowance);
     if (currentAccount) {
       dispatch(getAllowanceWallet(currentAccount));
       setButtonTitle('Approve');
@@ -89,17 +95,17 @@ const DetailCarScreen = ({navigation, route}) => {
   }, [allowance]);
 
   const onButtonPress = async () => {
-    switch (buttonTitle) {
-      case 'Connect': {
+    switch (currentStep) {
+      case 0: {
         navigate(SCREEN.INTRO_WALLET_SCREEN);
         break;
       }
-      case 'Approve': {
+      case 1: {
         await dispatch(handleIncreaseAllowance(currentAccount));
         setModalVisible(true);
         break;
       }
-      case 'Submit': {
+      case 2: {
         if (data?.launchId) {
           await dispatch(
             handleBuyTransaction({
@@ -109,6 +115,13 @@ const DetailCarScreen = ({navigation, route}) => {
           );
           setModalSignVisible(true);
         }
+        break;
+      }
+      case 3: {
+        onClose();
+        dispatch(getAllowanceWallet(currentAccount));
+        // setModalSignVisible(true);
+
         break;
       }
     }
@@ -170,7 +183,7 @@ const DetailCarScreen = ({navigation, route}) => {
           right: SPACING.innerContainer,
           zIndex: 1,
         }}>
-        <FavoriteButton isFavorite={true} />
+        {/* <FavoriteButton isFavorite={true} /> */}
       </View>
 
       <ScrollView
@@ -238,6 +251,15 @@ const DetailCarScreen = ({navigation, route}) => {
         modalVisible={modalSignVisible}
         callbackChangeVisible={() => setModalSignVisible(false)}
       />
+      <LoadingModal
+        modalVisible={modalLoadingVisible}
+        callbackChangeVisible={() => setModalLoadingVisible(false)}
+      />
+      <SuccessModal
+        modalVisible={modalSuccessVisible}
+        callbackChangeVisible={() => setModalSuccessVisible(false)}
+      />
+
       <BottomSheet
         index={-1}
         backdropComponent={renderBackdrop}

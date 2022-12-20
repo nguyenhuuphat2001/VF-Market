@@ -7,6 +7,7 @@ import {
   FlatList,
 } from 'react-native';
 import Text from '@/components/Text';
+import Lottie from 'lottie-react-native';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 
@@ -71,11 +72,6 @@ const SearchScreen = () => {
   );
 
   const snapPoints = useMemo(() => ['45%', '45%'], []);
-
-  // // callbacks
-  // const handleSheetChanges = useCallback(index => {
-  //   console.log('handleSheetChanges', index);
-  // }, []);
 
   const renderItems = useCallback(
     ({item}) => (
@@ -183,41 +179,24 @@ const SearchScreen = () => {
               height: '80%',
               // paddingBottom: 100,
             }}>
-            <FlatList
-              data={listProduct}
-              renderItem={renderItems}
-              numColumns={2}
-              columnWrapperStyle={{justifyContent: 'space-between'}}
-              showsVerticalScrollIndicator={false}
-              keyExtractor={item => item._id}
-            />
+            {listProduct.length > 0 ? (
+              <FlatList
+                data={listProduct}
+                renderItem={renderItems}
+                numColumns={2}
+                columnWrapperStyle={{justifyContent: 'space-between'}}
+                showsVerticalScrollIndicator={false}
+                keyExtractor={item => item._id}
+              />
+            ) : (
+              <Lottie
+                source={require('@/assets/lotties/loadingLotie.json')}
+                autoPlay
+                loop
+                style={{width: '100%'}}
+              />
+            )}
           </View>
-          {/* <View
-            style={{
-              flex: 1,
-              marginTop: 22,
-              // height: '80%',
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-              alignItems: 'flex-start',
-              justifyContent: 'space-between',
-              backgroundColor: 'red',
-            }}>
-            {listProduct.map((product, index) => (
-              <TouchableOpacity
-                key={product._id}
-                onPress={() => navigate(screen.DETAIL_CAR, product)}
-                style={{width: '48%'}}>
-                <ItemCourse
-                  id={product._id}
-                  image={product.images[0]}
-                  name={product.name}
-                  price={product.price.value}
-                  currency={product.price.currency}
-                />
-              </TouchableOpacity>
-            ))}
-          </View> */}
         </View>
       </View>
 

@@ -7,6 +7,7 @@ import {
   FlatList,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import Lottie from 'lottie-react-native';
 import Text from '@/components/Text';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
@@ -160,20 +161,29 @@ const UpdatePersonalInfoScreen = () => {
                 alignItems: 'flex-start',
                 justifyContent: 'space-between',
               }}>
-              {listProduct.map((product, index) => (
-                <TouchableOpacity
-                  key={product._id}
-                  onPress={() => navigate(screen.DETAIL_CAR, product)}
-                  style={{width: '48%'}}>
-                  <ItemCourse
-                    id={product._id}
-                    image={product.images[0]}
-                    name={product.name}
-                    price={product.price.value}
-                    currency={product.price.currency}
-                  />
-                </TouchableOpacity>
-              ))}
+              {listProduct.length > 0 ? (
+                listProduct.map((product, index) => (
+                  <TouchableOpacity
+                    key={product._id}
+                    onPress={() => navigate(screen.DETAIL_CAR, product)}
+                    style={{width: '48%'}}>
+                    <ItemCourse
+                      id={product._id}
+                      image={product.images[0]}
+                      name={product.name}
+                      price={product.price.value}
+                      currency={product.price.currency}
+                    />
+                  </TouchableOpacity>
+                ))
+              ) : (
+                <Lottie
+                  source={require('@/assets/lotties/loadingLotie.json')}
+                  autoPlay
+                  loop
+                  style={{width: '100%'}}
+                />
+              )}
             </View>
 
             {/* <Loading isLoading={true} /> */}
