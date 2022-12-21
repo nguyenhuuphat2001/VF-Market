@@ -3,6 +3,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {
   getListProduct as getListProductAPI,
   getProductDetail as getProductDetailAPI,
+  getListMyCar as getListMyCarAPI,
 } from '../../api/product';
 
 export const getListProduct = createAsyncThunk(
@@ -17,6 +18,14 @@ export const getListSearchProduct = createAsyncThunk(
   'product/list/search',
   async ({search, page = 1, limit = 10}) => {
     const response = await getListProductAPI({search, page, limit});
+    return response.data.data;
+  },
+);
+
+export const getListMyCar = createAsyncThunk(
+  'product/my-car',
+  async address => {
+    const response = await getListMyCarAPI(address);
     return response.data.data;
   },
 );

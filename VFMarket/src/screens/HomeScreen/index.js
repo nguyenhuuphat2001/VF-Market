@@ -25,9 +25,9 @@ import {BANNER, HELLO} from '@/assets/images/index';
 import {navigate} from '@/navigation/navigationUtils';
 import screen from '@/constants/screen';
 
-import ItemCourse from './components/ItemCourse';
+import ItemProduct from './components/ItemProduct';
 
-const UpdatePersonalInfoScreen = () => {
+const HomeScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const profile = useSelector(state => state.authReducer.profile);
@@ -137,37 +137,31 @@ const UpdatePersonalInfoScreen = () => {
                 Special
               </Text>
               <TouchableOpacity onPress={() => navigate(screen.SEARCH)}>
-                <Text customStyle={{fontSize: FONT_SIZE.small}}>View all</Text>
+                <Text
+                  customStyle={{
+                    fontSize: 14,
+                    fontWeight: '500',
+                    color: COLORS.text,
+                  }}>
+                  View all
+                </Text>
               </TouchableOpacity>
             </View>
-            {/* <FlatList
-              data={listProduct}
-              renderItem={renderItems}
-              numColumns={2}
-              columnWrapperStyle={{justifyContent: 'space-between'}}
-              showsVerticalScrollIndicator={false}
-              scrollEnabled={false
-              keyExtractor={item => item._id}
-            /> */}
-            {/* {listProduct.map((product, index) => {
-              <View></View>
-              <renderItems item={product} />;
-            })} */}
-            <View
-              style={{
-                flex: 1,
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-                alignItems: 'flex-start',
-                justifyContent: 'space-between',
-              }}>
-              {listProduct.length > 0 ? (
-                listProduct.map((product, index) => (
+            {listProduct.length > 0 ? (
+              <View
+                style={{
+                  flex: 1,
+                  flexDirection: 'row',
+                  flexWrap: 'wrap',
+                  alignItems: 'flex-start',
+                  justifyContent: 'space-between',
+                }}>
+                {listProduct.map((product, index) => (
                   <TouchableOpacity
                     key={product._id}
                     onPress={() => navigate(screen.DETAIL_CAR, product)}
                     style={{width: '48%'}}>
-                    <ItemCourse
+                    <ItemProduct
                       id={product._id}
                       image={product.images[0]}
                       name={product.name}
@@ -175,18 +169,18 @@ const UpdatePersonalInfoScreen = () => {
                       currency={product.price.currency}
                     />
                   </TouchableOpacity>
-                ))
-              ) : (
+                ))}
+              </View>
+            ) : (
+              <View style={{alignItems: 'center'}}>
                 <Lottie
                   source={require('@/assets/lotties/loadingLotie.json')}
                   autoPlay
                   loop
-                  style={{width: '100%'}}
+                  style={{width: '50%'}}
                 />
-              )}
-            </View>
-
-            {/* <Loading isLoading={true} /> */}
+              </View>
+            )}
           </View>
         </View>
       </ScrollView>
@@ -194,4 +188,4 @@ const UpdatePersonalInfoScreen = () => {
   );
 };
 
-export default UpdatePersonalInfoScreen;
+export default HomeScreen;

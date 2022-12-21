@@ -30,7 +30,7 @@ const LoadingModal = ({modalVisible, callbackChangeVisible}) => {
             source={require('@/assets/lotties/loadingLotie.json')}
             autoPlay
             loop
-            style={{width: '100%'}}
+            style={{width: '50%'}}
           />
         </View>
       </View>
@@ -42,22 +42,20 @@ export default LoadingModal;
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    // justifyContent: 'center',
+    justifyContent: 'center',
     // alignItems: 'center',
     // marginTop: 22,
     backgroundColor: '#00000070',
-
-    // opacity: 0.9,
   },
   modalView: {
     position: 'absolute',
-    width: '86%',
-    marginTop: 200,
-    marginLeft: '7%',
+    width: '100%',
+    // marginTop: 200,
+    // marginLeft: '7%',
     // backgroundColor: '#474747',
     alignItems: 'center',
     borderRadius: 10,
-    padding: 10,
+    // padding: 10,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

@@ -1,5 +1,10 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {getListProduct, getListSearchProduct, getProductDetail} from './action';
+import {
+  getListProduct,
+  getListSearchProduct,
+  getProductDetail,
+  getListMyCar,
+} from './action';
 import {STATUS} from '@/constants/index';
 
 const INIT_STATE = {
@@ -9,6 +14,7 @@ const INIT_STATE = {
   totalPage: 1,
   listSearch: [],
   totalPageSearch: 1,
+  listMyCar: [],
 };
 
 // Slice
@@ -57,6 +63,20 @@ const slice = createSlice({
       state.detail = action.payload.data;
     });
     builder.addCase(getProductDetail.rejected, (state, action) => {
+      state.status = STATUS.ERROR;
+      console.log(action.error);
+    });
+
+    // My car
+    builder.addCase(getListMyCar.pending, (state, action) => {
+      state.status = STATUS.FETCHING;
+    });
+    builder.addCase(getListMyCar.fulfilled, (state, action) => {
+      console.log('getListMyCar: ', action.payload.data.length);
+      state.status = STATUS.SUCCESS;
+      state.listMyCar = action.payload.data;
+    });
+    builder.addCase(getListMyCar.rejected, (state, action) => {
       state.status = STATUS.ERROR;
       console.log(action.error);
     });

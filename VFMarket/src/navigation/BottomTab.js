@@ -25,7 +25,7 @@ const BottomTabConstant = {
     component: HomeStack,
     icon: 'home',
     index: 0,
-    deactiveColor: COLORS.text_secondary,
+    deactiveColor: COLORS.break_line,
     activeColor: COLORS.primary,
   },
   [KEY_BOTTOM_SCREEN.MAP]: {
@@ -33,7 +33,7 @@ const BottomTabConstant = {
     component: MapScreen,
     icon: 'map',
     index: 1,
-    deactiveColor: COLORS.text_secondary,
+    deactiveColor: COLORS.break_line,
     activeColor: COLORS.primary,
   },
   [KEY_BOTTOM_SCREEN.MYCAR]: {
@@ -41,7 +41,7 @@ const BottomTabConstant = {
     component: MyCarScreen,
     icon: 'time-to-leave',
     index: 2,
-    deactiveColor: COLORS.text_secondary,
+    deactiveColor: COLORS.break_line,
     activeColor: COLORS.primary,
   },
   [KEY_BOTTOM_SCREEN.WALLET]: {
@@ -49,7 +49,7 @@ const BottomTabConstant = {
     component: WalletScreen,
     icon: 'account-balance-wallet',
     index: 3,
-    deactiveColor: COLORS.text_secondary,
+    deactiveColor: COLORS.break_line,
     activeColor: COLORS.primary,
   },
   [KEY_BOTTOM_SCREEN.PROFILE]: {
@@ -57,7 +57,7 @@ const BottomTabConstant = {
     component: ProfileScreen,
     icon: 'account-circle',
     index: 4,
-    deactiveColor: COLORS.text_secondary,
+    deactiveColor: COLORS.break_line,
     activeColor: COLORS.primary,
   },
 };
@@ -96,7 +96,7 @@ const BottomTab = () => (
         return <Icon name={iconName} size={size} color={newColor} />;
       },
       tabBarActiveTintColor: COLORS.primary,
-      tabBarInactiveTintColor: COLORS.text,
+      tabBarInactiveTintColor: COLORS.sub_text,
     })}>
     {renderBottomTab}
   </Tab.Navigator>

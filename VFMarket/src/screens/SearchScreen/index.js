@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Image,
   FlatList,
+  SafeAreaView,
 } from 'react-native';
 import Text from '@/components/Text';
 import Lottie from 'lottie-react-native';
@@ -29,7 +30,7 @@ import Search from '@/components/Search';
 
 import {BANNER, FILTER} from '@/assets/images/index';
 
-import ItemCourse from '../HomeScreen/components/ItemCourse';
+import ItemCourse from '../HomeScreen/components/ItemProduct';
 
 import SelectMany from '@/components/SelectMany';
 
@@ -189,12 +190,14 @@ const SearchScreen = () => {
                 keyExtractor={item => item._id}
               />
             ) : (
-              <Lottie
-                source={require('@/assets/lotties/loadingLotie.json')}
-                autoPlay
-                loop
-                style={{width: '100%'}}
-              />
+              <View style={{alignItems: 'center'}}>
+                <Lottie
+                  source={require('@/assets/lotties/loadingLotie.json')}
+                  autoPlay
+                  loop
+                  style={{width: '50%'}}
+                />
+              </View>
             )}
           </View>
         </View>

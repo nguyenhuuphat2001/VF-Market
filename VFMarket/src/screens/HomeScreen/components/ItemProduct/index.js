@@ -23,7 +23,7 @@ const showPrice = value => {
   return moneyFormatter.format(price);
 };
 
-const ItemCourse = ({id, name, image, price, currency}) => {
+const ItemProduct = ({id, name, image, price, currency}) => {
   return (
     <View style={styles.container}>
       <SharedElement id={`item.${id}.photo`}>
@@ -65,7 +65,7 @@ const ItemCourse = ({id, name, image, price, currency}) => {
   );
 };
 
-export default ItemCourse;
+export default ItemProduct;
 
 const styles = StyleSheet.create({
   container: {
