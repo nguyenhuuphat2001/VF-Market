@@ -30,8 +30,6 @@ const IncreaseAllowanceModal = ({modalVisible, callbackChangeVisible}) => {
       ? (+txIncreaseConfig?.gas * +txIncreaseConfig?.gasPrice) / 1e18
       : '';
   const handleDisconnect = () => {
-    console.log('txIncreaseConfig: ', txIncreaseConfig);
-    console.log('currentPrivateKey: ', currentPrivateKey);
     if (txIncreaseConfig && currentPrivateKey) {
       dispatch(
         handleSignIncreaseAllowanceTx({

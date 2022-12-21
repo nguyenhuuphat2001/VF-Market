@@ -26,7 +26,6 @@ import Text from '@/components/Text';
 import Button from '@/components/Button';
 
 const MyWalletModal = ({modalVisible, callbackChangeVisible}) => {
-  console.log('modalVisible: ', modalVisible);
   const dispatch = useDispatch();
   const currentAccount = useSelector(
     state => state.walletReducer.currentAccount,

@@ -19,7 +19,6 @@ import Text from '@/components/Text';
 import Button from '@/components/Button';
 
 const SuccessModal = ({modalVisible, callbackChangeVisible}) => {
-  console.log('modalVisible: ', modalVisible);
   const dispatch = useDispatch();
   const buyHash = useSelector(state => state.walletReducer.buyHash);
   const handleDisconnect = () => {
