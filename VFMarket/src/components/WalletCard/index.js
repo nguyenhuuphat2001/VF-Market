@@ -3,6 +3,7 @@ import {View, StyleSheet, Image, Modal, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useDispatch, useSelector} from 'react-redux';
 import {getBalanceWallet, getTokenBalanceWallet} from '@/store/wallet/action';
+import {useTopUp} from '@/store/transaction/action';
 
 import {navigate} from '@/navigation/navigationUtils';
 import SCREEN from '@/constants/screen';
@@ -15,6 +16,7 @@ import Text from '@/components/Text';
 import Button from '@/components/Button';
 
 import MyWalletModal from '@/components/Modal/MyWalletModal.js';
+import LoadingModal from '@/components/Modal/LoadingModal.js';
 
 export const WalletBalance = ({address}) => {
   return (
@@ -42,15 +44,22 @@ export default () => {
   const {currentAccount, balance, tokenBalance} = useSelector(
     state => state.walletReducer,
   );
+  const isLoading = useSelector(state => state.transactionReducer.isLoading);
   const [modalVisible, setModalVisible] = useState(false);
+  // const [modalLoadingVisible, setModalLoadingVisible] = useState(isLoading);
   useEffect(() => {
-    handleCreateWallet();
-  }, []);
+    handleGetBalanceWallet();
+  }, [isLoading]);
 
-  const handleCreateWallet = async () => {
+  const handleGetBalanceWallet = async () => {
     dispatch(getBalanceWallet(currentAccount));
     dispatch(getTokenBalanceWallet(currentAccount));
   };
+
+  const handleTopUp = async () => {
+    dispatch(useTopUp(currentAccount));
+  };
+
   return (
     <View
       style={{
@@ -136,10 +145,42 @@ export default () => {
               <WalletBalance address={currentAccount} />
             </TouchableOpacity>
           </View>
+
           <MyWalletModal
             modalVisible={modalVisible}
             callbackChangeVisible={() => setModalVisible(false)}
           />
+          <LoadingModal modalVisible={isLoading} />
+          <TouchableOpacity
+            onPress={handleTopUp}
+            delayLongPress={0}
+            style={{
+              backgroundColor: '#fff',
+              padding: 10,
+              borderRadius: 16,
+              alignItems: 'center',
+              position: 'absolute',
+              top: '40%',
+              right: '5%',
+              flexDirection: 'row',
+              zIndex: 2,
+            }}>
+            <Icon
+              name="save-alt"
+              style={{
+                fontSize: 18,
+                color: 'black',
+                marginRight: 5,
+              }}
+            />
+            <Text
+              customStyle={{
+                fontFamily: MONT_BOLD,
+                fontSize: FONT_SIZE.medium,
+              }}>
+              Top up
+            </Text>
+          </TouchableOpacity>
         </View>
       ) : (
         <View
@@ -182,22 +223,22 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 20,
     height: 70,
-    left: 310,
+    right: 20,
     top: 10,
     backgroundColor: COLORS.primary,
     borderRadius: 4,
-    zIndex: 1,
+    zIndex: 0,
     opacity: 0.9,
   },
   circleTop2: {
     position: 'absolute',
     width: 20,
     height: 75,
-    left: 300,
+    right: 30,
     top: 40,
     backgroundColor: COLORS.primary,
     borderRadius: 4,
-    zIndex: 1,
+    zIndex: 0,
     opacity: 0.8,
   },
   circleBottom: {

@@ -1,6 +1,9 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 
-import {getListTransactions as getListTransactionsAPI} from '../../api/transaction';
+import {
+  getListTransactions as getListTransactionsAPI,
+  useTopUp as useTopUpAPI,
+} from '../../api/transaction';
 
 export const getListTransactions = createAsyncThunk(
   'transaction/list',
@@ -9,3 +12,8 @@ export const getListTransactions = createAsyncThunk(
     return response.data.data;
   },
 );
+
+export const useTopUp = createAsyncThunk('transaction/topUp', async address => {
+  const response = await useTopUpAPI(address);
+  return response.data.data;
+});

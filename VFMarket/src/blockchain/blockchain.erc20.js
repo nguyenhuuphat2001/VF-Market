@@ -20,7 +20,6 @@ export const getTokenBalance = async address => {
       console.log('getTokenBalance error', err);
     }
     tokenBalance = Number(data) / 1e18;
-    console.log('tokenBalance: ', tokenBalance);
   });
   return tokenBalance;
 };
@@ -50,30 +49,15 @@ export const useIncreaseAllowance = async address => {
   const erc20Contract = useERC20Contract();
   const TOKEN_APPROVE_AMOUNT = web3TestBSC.utils.toWei('100000000'); // 100M token
 
-  // console.log(
-  //   'store.walletReducer.currentAccount: ',
-  //   store.walletReducer.currentAccount,
-  // );
-  // try {
-  //   const currentAccount = useSelector(state => state.wallet.currentAccount);
-  //   console.log('currentAccount: ', currentAccount);
-  // } catch (err) {
-  //   console.log('err: ', err);
-  // }
-  // const currentAccount = useSelector(state => state.wallet.currentAccount);
-  // console.log('currentAccount: ', currentAccount);
-  console.log('address: ', address);
   const methods = erc20Contract.methods.approve(
     '0x120cEa583890807135F9270159C9e0865e3072Fe',
     TOKEN_APPROVE_AMOUNT,
   );
   const nonce = await web3TestBSC.eth.getTransactionCount(address);
-  console.log('nonce: ', nonce);
 
   const gasEstimate = await methods.estimateGas({
     from: address,
   });
-  console.log('gasEstimate: ', gasEstimate);
 
   const gasPrice = await web3TestBSC.eth.getGasPrice();
 

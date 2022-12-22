@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   container: {
     alignContent: 'flex-start',
     maxHeight: 280,
-    marginBottom: SPACING.medium,
+    marginBottom: SPACING.large,
     shadowColor: '#000',
     shadowOffset: {
       width: 2,

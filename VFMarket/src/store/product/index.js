@@ -21,11 +21,11 @@ const INIT_STATE = {
 const slice = createSlice({
   name: 'product',
   initialState: INIT_STATE,
-  reducers: {
-    logoutSuccess: (state, action) => {
-      state.auth = null;
-    },
-  },
+  // reducers: {
+  //   logoutSuccess: (state, action) => {
+  //     state.auth = null;
+  //   },
+  // },
   extraReducers: builder => {
     // List product
     builder.addCase(getListProduct.pending, (state, action) => {

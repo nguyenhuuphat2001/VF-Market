@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import Lottie from 'lottie-react-native';
+import {clearListTansactions} from '@/store/transaction';
 import {getListTransactions} from '@/store/transaction/action';
 import {getShortAddress} from '@/utils/helper';
 
@@ -20,26 +21,25 @@ import styles from './styles';
 
 const WalletScreen = () => {
   const dispatch = useDispatch();
-  const currentAccount = useSelector(
-    state => state.walletReducer.currentAccount,
-  );
+  const {currentAccount, allowance} = useSelector(state => state.walletReducer);
 
-  const list = useSelector(state => state.transactionReducer.list);
+  const {list, status} = useSelector(state => state.transactionReducer);
 
   const [paginatior, setPaginator] = useState({page: 1, limit: 20});
 
   useEffect(() => {
     if (currentAccount) {
       dispatch(getListTransactions({search: currentAccount, paginatior}));
+    } else {
+      dispatch(clearListTansactions());
     }
-  }, []);
+  }, [allowance, currentAccount]);
 
   const renderItems = useCallback(
     ({item}) => (
       <TouchableOpacity
         // onPress={() => navigate(screen.DETAIL_CAR, item)}
         style={{
-          // width: '90%',
           backgroundColor: COLORS.light_grey,
           marginTop: 10,
           borderRadius: 10,
@@ -79,46 +79,70 @@ const WalletScreen = () => {
             History transaction
           </Text>
         </View>
-        <View style={{height: '100%'}}>
-          {list.length > 0 ? (
-            <FlatList
-              data={list}
-              renderItem={renderItems}
-              numColumns={1}
-              // columnWrapperStyle={{justifyContent: 'space-between'}}
-              showsVerticalScrollIndicator={false}
-              keyExtractor={item => item._id}
-            />
-          ) : (
-            <View style={{alignItems: 'center'}}>
-              <Lottie
-                source={require('@/assets/lotties/loadingLotie.json')}
-                autoPlay
-                loop
-                style={{width: '50%'}}
-              />
-            </View>
-          )}
-        </View>
+        {currentAccount ? (
+          <View style={{height: '100%'}}>
+            {status !== 'FETCHING' ? (
+              <View>
+                {list.length > 0 ? (
+                  <FlatList
+                    data={list}
+                    renderItem={renderItems}
+                    numColumns={1}
+                    // columnWrapperStyle={{justifyContent: 'space-between'}}
+                    showsVerticalScrollIndicator={false}
+                    keyExtractor={item => item._id}
+                  />
+                ) : (
+                  <View
+                    style={{
+                      marginTop: 70,
+                      width: '100%',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <Text
+                      customStyle={{
+                        fontFamily: MONT_REGULAR,
+                        fontSize: 16,
+                        fontWeight: '400',
+                        color: 'black',
+                      }}>
+                      Dont have transaction
+                    </Text>
+                  </View>
+                )}
+              </View>
+            ) : (
+              <View style={{alignItems: 'center'}}>
+                <Lottie
+                  source={require('@/assets/lotties/loadingLotie.json')}
+                  autoPlay
+                  loop
+                  style={{width: '50%'}}
+                />
+              </View>
+            )}
+          </View>
+        ) : (
+          <View
+            style={{
+              marginTop: 70,
+              width: '100%',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Text
+              customStyle={{
+                fontFamily: MONT_REGULAR,
+                fontSize: 16,
+                fontWeight: '400',
+                color: 'black',
+              }}>
+              Please connect wallet
+            </Text>
+          </View>
+        )}
       </View>
-      {/* <View
-        style={{
-          marginTop: 70,
-          width: '100%',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
-        <Text
-          customStyle={{
-            fontFamily: MONT_REGULAR,
-            fontSize: 16,
-            fontWeight: '400',
-            color: 'black',
-          }}>
-          {currentAccount ? 'Dont have transaction' : 'Please connect wallet'}
-        </Text>
-        
-      </View> */}
     </SafeAreaView>
   );
 };

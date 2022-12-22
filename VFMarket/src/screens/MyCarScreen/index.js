@@ -15,16 +15,14 @@ import styles from './styles';
 
 const MyCarScreen = () => {
   const dispatch = useDispatch();
-  const currentAccount = useSelector(
-    state => state.walletReducer.currentAccount,
-  );
-  const listMyCar = useSelector(state => state.productReducer.listMyCar);
+  const {currentAccount, allowance} = useSelector(state => state.walletReducer);
+  const {listMyCar, status} = useSelector(state => state.productReducer);
 
   useEffect(() => {
     if (currentAccount) {
       dispatch(getListMyCar(currentAccount));
     }
-  }, []);
+  }, [allowance, currentAccount]);
 
   const renderItems = useCallback(
     ({item}) => (
@@ -56,33 +54,75 @@ const MyCarScreen = () => {
             }}>
             All of my cars
           </Text>
-          <View
-            style={{
-              width: '100%',
-              marginTop: 22,
-              height: '80%',
-              paddingHorizontal: '5%',
-            }}>
-            {listMyCar ? (
-              <FlatList
-                data={listMyCar}
-                renderItem={renderItems}
-                numColumns={2}
-                columnWrapperStyle={{justifyContent: 'space-between'}}
-                showsVerticalScrollIndicator={false}
-                keyExtractor={item => item.tokenId}
-              />
-            ) : (
-              <View style={{alignItems: 'center'}}>
-                <Lottie
-                  source={require('@/assets/lotties/loadingLotie.json')}
-                  autoPlay
-                  loop
-                  style={{width: '50%'}}
-                />
-              </View>
-            )}
-          </View>
+          {currentAccount ? (
+            <View
+              style={{
+                width: '100%',
+                marginTop: 22,
+                height: '100%',
+                paddingHorizontal: '5%',
+              }}>
+              {status !== 'FETCHING' ? (
+                <View>
+                  {listMyCar.length > 0 ? (
+                    <FlatList
+                      data={listMyCar}
+                      renderItem={renderItems}
+                      numColumns={2}
+                      columnWrapperStyle={{justifyContent: 'space-between'}}
+                      showsVerticalScrollIndicator={false}
+                      keyExtractor={item => item.tokenId}
+                    />
+                  ) : (
+                    <View
+                      style={{
+                        marginTop: 70,
+                        width: '100%',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}>
+                      <Text
+                        customStyle={{
+                          fontFamily: MONT_REGULAR,
+                          fontSize: 16,
+                          fontWeight: '400',
+                          color: 'black',
+                        }}>
+                        Dont have nft
+                      </Text>
+                    </View>
+                  )}
+                </View>
+              ) : (
+                <View style={{alignItems: 'center'}}>
+                  <Lottie
+                    source={require('@/assets/lotties/loadingLotie.json')}
+                    autoPlay
+                    loop
+                    style={{width: '50%'}}
+                  />
+                </View>
+              )}
+            </View>
+          ) : (
+            <View
+              style={{
+                marginTop: 70,
+                width: '100%',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
+              <Text
+                customStyle={{
+                  fontFamily: MONT_REGULAR,
+                  fontSize: 16,
+                  fontWeight: '400',
+                  color: 'black',
+                }}>
+                Please connect wallet
+              </Text>
+            </View>
+          )}
         </View>
       </View>
     </SafeAreaView>
