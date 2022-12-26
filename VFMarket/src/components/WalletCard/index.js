@@ -41,7 +41,7 @@ export const WalletBalance = ({address}) => {
 
 export default () => {
   const dispatch = useDispatch();
-  const {currentAccount, balance, tokenBalance} = useSelector(
+  const {currentAccount, balance, tokenBalance, allowance} = useSelector(
     state => state.walletReducer,
   );
   const isLoading = useSelector(state => state.transactionReducer.isLoading);
@@ -49,7 +49,7 @@ export default () => {
   // const [modalLoadingVisible, setModalLoadingVisible] = useState(isLoading);
   useEffect(() => {
     handleGetBalanceWallet();
-  }, [isLoading]);
+  }, [isLoading, allowance]);
 
   const handleGetBalanceWallet = async () => {
     dispatch(getBalanceWallet(currentAccount));

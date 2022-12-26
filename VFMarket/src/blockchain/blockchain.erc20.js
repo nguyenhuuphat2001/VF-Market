@@ -1,6 +1,6 @@
 import abi from './abi.json';
 import {web3TestBSC} from './basic';
-import {TOKEN_ADDRESS} from '@/constants/enviroments';
+import {TOKEN_ADDRESS, LAUNCHPAD_ADDRESS} from '@/constants/enviroments';
 import {useDispatch, useSelector} from 'react-redux';
 import {useAppSelector} from '@/store';
 
@@ -34,7 +34,7 @@ export const getAllowance = async address => {
   let allowance = 0;
   const erc20Contract = useERC20Contract();
   await erc20Contract.methods
-    .allowance(address, '0x120cEa583890807135F9270159C9e0865e3072Fe')
+    .allowance(address, LAUNCHPAD_ADDRESS)
     .call((err, data) => {
       if (err) {
         console.log('getTokenBalance error', err);
@@ -50,7 +50,7 @@ export const useIncreaseAllowance = async address => {
   const TOKEN_APPROVE_AMOUNT = web3TestBSC.utils.toWei('100000000'); // 100M token
 
   const methods = erc20Contract.methods.approve(
-    '0x120cEa583890807135F9270159C9e0865e3072Fe',
+    LAUNCHPAD_ADDRESS,
     TOKEN_APPROVE_AMOUNT,
   );
   const nonce = await web3TestBSC.eth.getTransactionCount(address);

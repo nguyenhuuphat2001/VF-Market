@@ -38,12 +38,8 @@ export const getWalletBalance = async currentAccount => {
   return walletBalance;
 };
 
-export const useSignIncreaseAllowanceTransaction = async (
-  transactionConfig,
-  privateKey,
-) => {
+export const useSignTransaction = async (transactionConfig, privateKey) => {
   var respone = '';
-  console.log('privateKey: ', privateKey);
   const tx = await web3TestBSC.eth.accounts.signTransaction(
     {...transactionConfig},
     privateKey,

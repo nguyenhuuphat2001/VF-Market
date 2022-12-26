@@ -18,9 +18,8 @@ const SplashScreen = () => {
   const handleNavigate = async () => {
     const token = await getData(keyStore.KEY_AUTHEN);
     const privateKey = await getData(keyStore.PRIVATE_KEY);
-
     if (token) {
-      dispatch(getProfile());
+      dispatch(getProfile(token));
     } else {
       await navigation.replace('AuthScreen');
     }

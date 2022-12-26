@@ -36,16 +36,16 @@ const slice = createSlice({
       console.log(action.error);
     });
     builder.addCase(useTopUp.pending, (state, action) => {
-      state.status = STATUS.FETCHING;
+      // state.status = STATUS.FETCHING;
       state.isLoading = true;
     });
     builder.addCase(useTopUp.fulfilled, (state, action) => {
       console.log(action.payload);
-      state.status = STATUS.SUCCESS;
+      // state.status = STATUS.SUCCESS;
       state.isLoading = false;
     });
     builder.addCase(useTopUp.rejected, (state, action) => {
-      state.status = STATUS.ERROR;
+      // state.status = STATUS.ERROR;
       state.isLoading = false;
       console.log(action.error);
     });

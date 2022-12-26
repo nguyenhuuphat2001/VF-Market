@@ -5,10 +5,11 @@ import {
   getTokenBalanceWallet,
   getAllowanceWallet,
   handleIncreaseAllowance,
-  handleSignIncreaseAllowanceTx,
+  handleSignApproveTransaction,
   handleBuyTransaction,
   handleSignBuyTransaction,
 } from './action';
+import Toast from 'react-native-toast-message';
 import {WALLET_STATUS} from '@/constants/index';
 
 import {storeData, keyStore} from '@/utils/storage';
@@ -25,6 +26,7 @@ const INIT_STATE = {
   txIncreaseConfig: {},
   txBuyConfig: {},
   currentStep: 0,
+  increaseHash: '',
   buyHash: '',
 };
 
@@ -36,6 +38,9 @@ const slice = createSlice({
     disconnectWallet: (state, action) => {
       state.currentAccount = null;
       state.currentPrivateKey = null;
+    },
+    clearApproveHash: (state, action) => {
+      state.increaseHash = '';
     },
     clearBuyHash: (state, action) => {
       state.buyHash = '';
@@ -70,16 +75,36 @@ const slice = createSlice({
         state.currentStep = 2;
       }
     });
+    // Increase Allowance
     builder.addCase(handleIncreaseAllowance.fulfilled, (state, action) => {
       state.txIncreaseConfig = action.payload.txIncreaseConfig;
     });
+    builder.addCase(handleIncreaseAllowance.rejected, (state, action) => {
+      Toast.show({
+        type: 'error',
+        text1: 'Please check balance wallet',
+      });
+      state.txIncreaseConfig = {};
+    });
+
+    builder.addCase(handleSignApproveTransaction.fulfilled, (state, action) => {
+      state.txIncreaseConfig = {};
+      state.increaseHash = action.payload.hash;
+    });
+    // Buy
     builder.addCase(handleBuyTransaction.fulfilled, (state, action) => {
-      console.log('buy action');
       state.txBuyConfig = action.payload.txBuyConfig;
       state.buyHash = '';
     });
+    builder.addCase(handleBuyTransaction.rejected, (state, action) => {
+      Toast.show({
+        type: 'error',
+        text1: 'Please check balance wallet',
+      });
+      state.txBuyConfig = {};
+      state.buyHash = '';
+    });
     builder.addCase(handleSignBuyTransaction.fulfilled, (state, action) => {
-      console.log('sign buy action');
       state.txBuyConfig = {};
       state.buyHash = action.payload.hash;
     });
@@ -110,13 +135,21 @@ const slice = createSlice({
 });
 export default slice.reducer;
 
-const {disconnectWallet, clearBuyHash} = slice.actions;
+const {disconnectWallet, clearBuyHash, clearApproveHash} = slice.actions;
 
 export const disconnect = () => async dispatch => {
   try {
     console.log('disconnect .....');
     await storeData(keyStore.PRIVATE_KEY, null);
     return dispatch(disconnectWallet());
+  } catch (e) {
+    return console.error(e.message);
+  }
+};
+
+export const clearApproveTransaction = () => async dispatch => {
+  try {
+    return dispatch(clearApproveHash());
   } catch (e) {
     return console.error(e.message);
   }

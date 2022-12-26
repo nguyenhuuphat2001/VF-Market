@@ -2,8 +2,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {
   importWalletFromPK,
   getWalletBalance,
-  useSignIncreaseAllowanceTransaction,
-  checkingTransactionReceipt,
+  useSignTransaction,
 } from '../../blockchain/basic';
 import {
   getTokenBalance,
@@ -59,25 +58,11 @@ export const handleIncreaseAllowance = createAsyncThunk(
   },
 );
 
-export const handleSignIncreaseAllowanceTx = createAsyncThunk(
-  'handleSignIncreaseAllowanceTx',
+export const handleSignApproveTransaction = createAsyncThunk(
+  'handleSignApproveTransaction',
   async ({transactionConfig, privateKey}) => {
-    console.log('transactionConfig: ', transactionConfig);
-    console.log('privateKey: ', privateKey);
-    const hash = await useSignIncreaseAllowanceTransaction(
-      transactionConfig,
-      privateKey,
-    );
-    if (hash) {
-      try {
-        console.log('hash: ', hash);
-        const res = await checkingTransactionReceipt(hash);
-        console.log('res: ', res);
-      } catch (err) {
-        console.log('err: ', err);
-      }
-    }
-    return {res};
+    const hash = await useSignTransaction(transactionConfig, privateKey);
+    return {hash};
   },
 );
 
@@ -93,27 +78,7 @@ export const handleSignBuyTransaction = createAsyncThunk(
   'handleSignBuyTransaction',
   async ({transactionConfig, privateKey}, thunkApi) => {
     console.log('thunkApi: ', thunkApi);
-    const hash = await useSignIncreaseAllowanceTransaction(
-      transactionConfig,
-      privateKey,
-    );
-    // if (hash) {
-    //   try {
-    //     console.log('hash: ', hash);
-
-    //     let intervalId = setInterval(async () => {
-    //       const respone = await checkingTransactionReceipt(hash);
-    //       if (respone) {
-    //         console.log('respone', respone);
-    //         clearInterval(intervalId);
-    //         return true;
-    //       }
-    //     }, 2000);
-    //     console.log('intervalId', intervalId);
-    //   } catch (err) {
-    //     console.log('err: ', err);
-    //   }
-    // }
+    const hash = await useSignTransaction(transactionConfig, privateKey);
     return {hash};
   },
 );

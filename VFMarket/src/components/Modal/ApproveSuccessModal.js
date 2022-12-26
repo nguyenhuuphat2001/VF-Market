@@ -12,18 +12,18 @@ import {
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Lottie from 'lottie-react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {clearBuyTransaction} from '@/store/wallet';
+import {clearApproveTransaction} from '@/store/wallet';
 
 import {MONT_REGULAR, MONT_BOLD, FONT_SIZE, COLORS} from '@/theme/index';
 import Text from '@/components/Text';
 import Button from '@/components/Button';
 
-const SuccessModal = ({modalVisible, callbackChangeVisible}) => {
+const ApproveSuccessModal = ({modalVisible, callbackChangeVisible}) => {
   const dispatch = useDispatch();
-  const buyHash = useSelector(state => state.walletReducer.buyHash);
+  const increaseHash = useSelector(state => state.walletReducer.increaseHash);
   const handleDisconnect = () => {
     callbackChangeVisible();
-    dispatch(clearBuyTransaction());
+    dispatch(clearApproveTransaction());
   };
 
   return (
@@ -37,7 +37,7 @@ const SuccessModal = ({modalVisible, callbackChangeVisible}) => {
       }}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <Text customStyle={styles.modalText}>Transaction success</Text>
+          <Text customStyle={styles.modalText}>Approve success</Text>
           <TouchableOpacity
             onPress={handleDisconnect}
             style={[
@@ -52,14 +52,14 @@ const SuccessModal = ({modalVisible, callbackChangeVisible}) => {
 
           <View
             style={{
-              marginTop: 20,
-              marginBottom: 15,
+              marginTop: 30,
+              marginBottom: 10,
             }}>
             <Lottie
-              source={require('@/assets/lotties/successLotie.json')}
+              source={require('@/assets/lotties/approveSuccessLotie.json')}
               autoPlay
               loop
-              style={{width: '100%'}}
+              style={{width: '60%'}}
             />
           </View>
           <Text
@@ -71,14 +71,16 @@ const SuccessModal = ({modalVisible, callbackChangeVisible}) => {
             }}>
             Your transaction is success
           </Text>
-          {buyHash ? (
+          {increaseHash ? (
             <TouchableOpacity
               style={{
                 paddingVertical: 8,
                 marginBottom: 16,
               }}
               onPress={() =>
-                Linking.openURL(`https://testnet.bscscan.com/tx/${buyHash}`)
+                Linking.openURL(
+                  `https://testnet.bscscan.com/tx/${increaseHash}`,
+                )
               }>
               <Text
                 customStyle={{
@@ -94,17 +96,12 @@ const SuccessModal = ({modalVisible, callbackChangeVisible}) => {
     </Modal>
   );
 };
-export default SuccessModal;
+export default ApproveSuccessModal;
 
 const styles = StyleSheet.create({
   centeredView: {
     flex: 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
-    // marginTop: 22,
     backgroundColor: '#00000070',
-
-    // opacity: 0.9,
   },
   modalView: {
     position: 'absolute',

@@ -25,34 +25,19 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {login} from '@/store/auth/action';
 
 import {useDispatch, useSelector} from 'react-redux';
+import LoadingModal from '@/components/Modal/LoadingModal.js';
 
 const SignInScreen = () => {
   const isLoading = useSelector(state => state.authReducer.isLoading);
-  let fadeAnim = useRef(new Animated.Value(0)).current;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // const [modalLoadingVisible, setModalLoadingVisible] = useState(isLoading);
   const isDisable = !email || !password;
 
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const inputRef = React.useRef(null);
-  console.log('dard mode: ', Appearance.getColorScheme());
-
-  useEffect(() => {
-    Animated.timing(fadeAnim, {
-      toValue: 4,
-      duration: 3000,
-      useNativeDriver: true,
-    });
-    //.start(() => navigation.replace('AuthScreen'));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  // const opacityAnim = fadeAnim.interpolate({
-  //   inputRange: [0, 1, 2, 4],s
-  //   outputRange: [0.5, 1, 0.2, 0.9],
-  // });
 
   const _scrollToInput = reactNode => {
     // Add a 'scroll' ref to your ScrollView
@@ -78,14 +63,6 @@ const SignInScreen = () => {
 
   return (
     <View style={[styles.container]}>
-      <SafeAreaView
-        style={{
-          flex: 0,
-          marginBottom: 20,
-          backgroundColor:
-            Appearance.getColorScheme() === 'dark' ? 'black' : 'white',
-        }}
-      />
       <KeyboardAwareScrollView
         ref={inputRef}
         onFocus={event => {
@@ -93,7 +70,7 @@ const SignInScreen = () => {
         }}
         showsVerticalScrollIndicator={false}
         style={{flex: 1, width: '100%', height: '100%'}}>
-        <View style={{width: '100%', alignItems: 'center'}}>
+        <View style={{width: '100%', alignItems: 'center', marginTop: 20}}>
           <Image style={styles.image} resizeMode="contain" source={MAIN_LOGO} />
         </View>
 
@@ -128,7 +105,10 @@ const SignInScreen = () => {
         <Text customStyle={styles.register}>Don't have an account?</Text>
         <Text customStyle={styles.highLightText}> Sign up</Text>
       </TouchableOpacity>
-      <SafeAreaView style={{flex: 0, marginBottom: 20}} />
+      <LoadingModal
+        modalVisible={isLoading}
+        // callbackChangeVisible={() => setModalLoadingVisible(false)}
+      />
     </View>
   );
 };

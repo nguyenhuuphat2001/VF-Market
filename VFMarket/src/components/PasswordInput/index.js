@@ -15,7 +15,7 @@ const PasswordInput = ({
 
   const handleTogglePassword = () => setShowPassword(!showPassword);
   return (
-    <View style={[styles.container, styles.border]}>
+    <View style={[styles.container]}>
       <View style={styles.horizontal}>
         <TextInput
           secureTextEntry={!showPassword}
@@ -23,14 +23,15 @@ const PasswordInput = ({
           onChangeText={onChangeText}
           placeholderTextColor={COLORS.border_input}
         />
-        <Pressable onPress={handleTogglePassword}>
-          {showPassword ? (
-            <Icon name="eye" style={[styles.icon]} />
-          ) : (
-            <Icon name="eye-off" style={[styles.icon]} />
-          )}
-        </Pressable>
       </View>
+
+      <Pressable onPress={handleTogglePassword}>
+        {showPassword ? (
+          <Icon name="eye" style={[styles.icon]} />
+        ) : (
+          <Icon name="eye-off" style={[styles.icon]} />
+        )}
+      </Pressable>
     </View>
   );
 };
@@ -41,17 +42,15 @@ const styles = StyleSheet.create({
   container: {
     padding: 15,
     width: '100%',
-  },
-  border: {
     borderWidth: 0.5,
     borderColor: COLORS.border_input,
     borderRadius: 10,
-  },
-  horizontal: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    width: '100%',
     alignItems: 'center',
+  },
+  horizontal: {
+    width: '80%',
   },
   icon: {
     fontSize: 25,

@@ -21,12 +21,12 @@ import {useNavigation} from '@react-navigation/native';
 
 import {useDispatch, useSelector} from 'react-redux';
 import {logout} from '@/store/auth';
+import {disconnect} from '@/store/wallet';
 
 const ProfileScreen = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const profile = useSelector(state => state.authReducer.profile);
-  console.log('profile: ', profile);
   const renderItem = ({item}) =>
     item?.isTitle ? (
       <Text
@@ -41,6 +41,7 @@ const ProfileScreen = () => {
         style={styles.itemMenu}
         onPress={() => {
           if (item?.isLogOut) {
+            dispatch(disconnect());
             return dispatch(logout());
           }
 

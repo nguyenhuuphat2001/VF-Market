@@ -23,6 +23,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import Toast from 'react-native-toast-message';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import LoadingModal from '@/components/Modal/LoadingModal.js';
 
 const SignInScreen = () => {
   const navigation = useNavigation();
@@ -199,7 +200,7 @@ const SignInScreen = () => {
             />
             <Button
               content="Sign up"
-              isLoading={isLoading}
+              // isLoading={isLoading}
               disabled={disabled}
               containerStyle={styles.marginTopLarge}
               onPress={submit}
@@ -208,12 +209,12 @@ const SignInScreen = () => {
           </View>
         </KeyboardAwareScrollView>
 
-        {/* <TouchableOpacity style={styles.registerContainer}>
-          <Text customStyle={styles.register}>Bạn chưa có tài khoản?</Text>
-          <Text customStyle={styles.highLightText}> Đăng kí ngay</Text>
-        </TouchableOpacity> */}
         <SafeAreaView style={{flex: 0, marginBottom: 20}} />
       </View>
+      <LoadingModal
+        modalVisible={isLoading}
+        // callbackChangeVisible={() => setModalLoadingVisible(false)}
+      />
     </View>
   );
 };

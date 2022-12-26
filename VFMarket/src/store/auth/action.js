@@ -4,7 +4,7 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {setToken} from '../../api';
 import {
   signUp as signUpAPI,
-  getOTP as getOTPAPI,
+  // getOTP as getOTPAPI,
   activeAccount as activateAccountAPI,
   login as loginAPI,
   getProfile as getProfileAPI,
@@ -47,19 +47,19 @@ export const signUp = createAsyncThunk(
       email,
     });
     navigate(screen.OTP);
-    return {response};
+    return {firstName, lastName, password, mobileNumber, email};
   },
 );
 
-export const getOTP = createAsyncThunk(
-  'auth/getOTP',
-  async ({phone}, thunkAPI) => {
-    // const response = await loginAPI({ username, password });
-    // setToken("trueABC");
-    const data = await getOTPAPI({phone});
-    return data?.data?.data?.activateCode;
-  },
-);
+// export const getOTP = createAsyncThunk(
+//   'auth/getOTP',
+//   async ({phone}, thunkAPI) => {
+//     // const response = await loginAPI({ username, password });
+//     // setToken("trueABC");
+//     const data = await getOTPAPI({phone});
+//     return data?.data?.data?.activateCode;
+//   },
+// );
 
 export const activeAccount = createAsyncThunk(
   'auth/activeUser',
@@ -76,8 +76,8 @@ export const activeAccount = createAsyncThunk(
   },
 );
 
-export const getProfile = createAsyncThunk('user/profile', async () => {
-  const token = await getData(keyStore.KEY_AUTHEN);
+export const getProfile = createAsyncThunk('user/profile', async token => {
+  // const token = await getData(keyStore.KEY_AUTHEN);
   setToken(token);
   const response = await getProfileAPI();
   reset({

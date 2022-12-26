@@ -14,20 +14,14 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import {activeAccount} from '@/store/auth/action';
+import LoadingModal from '@/components/Modal/LoadingModal.js';
 
 const StepTwoScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [codeOTP, setCodeOTP] = useState('');
 
-  // const [num, setNum] = useState(40);
-  // let id = useRef(null);
-  // let timer = useRef(40);
-
-  const inputRef = React.useRef(null);
-
-  const tempAccount = useSelector(state => state.authReducer.tempAccount);
-  console.log('tempAccount: ', tempAccount);
+  const {tempAccount, isLoading} = useSelector(state => state.authReducer);
   const onSubmit = () => {
     dispatch(activeAccount({...tempAccount, otp: codeOTP}));
   };
@@ -53,11 +47,6 @@ const StepTwoScreen = () => {
                   <Text customStyle={styles.phone}> {tempAccount?.email} </Text>
                 </Text>
               </View>
-
-              {/* <Text customStyle={[styles.highLightText, styles.time]}>
-                {' '}
-                {`${num}s`}{' '}
-              </Text> */}
             </View>
 
             <View style={{width: '100%', alignItems: 'center'}}>
@@ -83,21 +72,21 @@ const StepTwoScreen = () => {
             </View>
           </View>
 
-          {/* <TouchableOpacity style={styles.registerContainer}>
-            <Text customStyle={styles.register}>Không nhận được mã?</Text>
-            <Text customStyle={styles.highLightText}> Gửi lại</Text>
-          </TouchableOpacity> */}
           <View style={{flex: 1, width: '100%'}}>
             <Button
               onPress={onSubmit}
-              content="Sign up"
+              content="Confirm"
               containerStyle={styles.marginTopLarge}
             />
           </View>
         </KeyboardAwareScrollView>
 
-        <SafeAreaView style={{flex: 0, marginBottom: 20}} />
+        {/* <SafeAreaView style={{flex: 0, marginBottom: 20}} /> */}
       </View>
+      <LoadingModal
+        modalVisible={isLoading}
+        // callbackChangeVisible={() => setModalLoadingVisible(false)}
+      />
     </View>
   );
 };

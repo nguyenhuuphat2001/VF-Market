@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {login, signUp, getOTP, getProfile} from './action';
+import {login, signUp, getProfile, activeAccount} from './action';
 
 import {storeData, keyStore} from '@/utils/storage';
 import {KEY_AUTHEN} from '@/constants/enviroments';
@@ -40,7 +40,7 @@ const slice = createSlice({
       state.isLoading = false;
       Toast.show({
         type: 'error',
-        text1: 'Email hoặc mật khẩu không đúng !!!',
+        text1: 'Email or password is invalid !!!',
       });
     });
     // Sign up
@@ -56,13 +56,28 @@ const slice = createSlice({
       console.log('action: ', action.error);
       Toast.show({
         type: 'error',
-        text1: action.error.message || 'Vui lòng điền thông tin chính xác',
+        text1: action.error.message || 'Please enter correct information',
         // text2: 'This is some something 👋'
       });
       state.isLoading = false;
     });
-    builder.addCase(getOTP.fulfilled, (state, action) => {
-      state.activateCode = action.payload;
+
+    builder.addCase(activeAccount.pending, (state, action) => {
+      state.tempAccount = action.meta.arg;
+      state.isLoading = true;
+    });
+    builder.addCase(activeAccount.fulfilled, (state, action) => {
+      state.tempAccount = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(activeAccount.rejected, (state, action) => {
+      console.log('action: ', action.error);
+      Toast.show({
+        type: 'error',
+        text1: 'Please enter correct OTP',
+        // text2: 'This is some something 👋'
+      });
+      state.isLoading = false;
     });
     // getProfile
     builder.addCase(getProfile.pending, (state, action) => {

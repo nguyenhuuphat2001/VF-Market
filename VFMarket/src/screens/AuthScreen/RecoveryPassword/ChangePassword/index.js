@@ -59,7 +59,7 @@ const ChangePasswordScreen = () => {
             <Button
               content="Save password"
               containerStyle={styles.marginTopLarge}
-              onPress={() => navigation.push(SCREEN.MAIN_SCREEN)}
+              // onPress={() => navigation.push(SCREEN.MAIN_SCREEN)}
             />
           </View>
         </KeyboardAwareScrollView>

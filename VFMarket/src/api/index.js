@@ -22,7 +22,6 @@ axios.interceptors.response.use(
     return res;
   },
   async err => {
-    console.log('err: ', err);
     return Promise.reject({
       message: err?.response.data.error || 'Server error',
     });

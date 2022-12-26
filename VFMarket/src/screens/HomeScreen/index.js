@@ -81,7 +81,9 @@ const HomeScreen = () => {
               style={{width: 48, height: 48, borderRadius: 100}}
               resizeMode="contain"
               source={{
-                uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRieAa2n6WfexuRussvPylufCjOBXpon47vJQ&usqp=CAU',
+                uri: profile?.photo
+                  ? profile.photo
+                  : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRieAa2n6WfexuRussvPylufCjOBXpon47vJQ&usqp=CAU',
               }}
             />
           </TouchableOpacity>

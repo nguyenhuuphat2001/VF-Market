@@ -1,11 +1,10 @@
 import React, {useRef, useCallback, useMemo, useState, useEffect} from 'react';
 import {
   View,
-  ScrollView,
   TouchableOpacity,
-  Image,
   FlatList,
   SafeAreaView,
+  Linking,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import Lottie from 'lottie-react-native';
@@ -38,7 +37,9 @@ const WalletScreen = () => {
   const renderItems = useCallback(
     ({item}) => (
       <TouchableOpacity
-        // onPress={() => navigate(screen.DETAIL_CAR, item)}
+        onPress={() =>
+          Linking.openURL(`https://testnet.bscscan.com/tx/${item.txHash}`)
+        }
         style={{
           backgroundColor: COLORS.light_grey,
           marginTop: 10,
@@ -113,7 +114,7 @@ const WalletScreen = () => {
                 )}
               </View>
             ) : (
-              <View style={{alignItems: 'center'}}>
+              <View style={{alignItems: 'center', marginTop: 20}}>
                 <Lottie
                   source={require('@/assets/lotties/loadingLotie.json')}
                   autoPlay

@@ -18,7 +18,7 @@ import {MONT_REGULAR, MONT_BOLD, FONT_SIZE, COLORS} from '@/theme/index';
 import Text from '@/components/Text';
 import Button from '@/components/Button';
 import {useIncreaseAllowance} from '../../blockchain/blockchain.erc20';
-import {handleSignIncreaseAllowanceTx} from '@/store/wallet/action';
+import {handleSignApproveTransaction} from '@/store/wallet/action';
 
 const IncreaseAllowanceModal = ({modalVisible, callbackChangeVisible}) => {
   const dispatch = useDispatch();
@@ -29,10 +29,10 @@ const IncreaseAllowanceModal = ({modalVisible, callbackChangeVisible}) => {
     txIncreaseConfig?.gas && txIncreaseConfig?.gasPrice
       ? (+txIncreaseConfig?.gas * +txIncreaseConfig?.gasPrice) / 1e18
       : '';
-  const handleDisconnect = () => {
+  const handleApprove = () => {
     if (txIncreaseConfig && currentPrivateKey) {
       dispatch(
-        handleSignIncreaseAllowanceTx({
+        handleSignApproveTransaction({
           transactionConfig: txIncreaseConfig,
           privateKey: currentPrivateKey,
         }),
@@ -191,7 +191,7 @@ const IncreaseAllowanceModal = ({modalVisible, callbackChangeVisible}) => {
                 {/* </View> */}
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={handleDisconnect}
+                onPress={handleApprove}
                 delayLongPress={0}
                 style={{
                   backgroundColor: 'white',

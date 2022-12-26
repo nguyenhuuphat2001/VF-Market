@@ -28,6 +28,7 @@ import {
 } from '@/store/wallet/action';
 import IncreaseAllowanceModal from '@/components/Modal/IncreaseAllowanceModal.js';
 import SignTransactionModal from '@/components/Modal/SignTransactionModal.js';
+import ApproveSuccessModal from '@/components/Modal/ApproveSuccessModal.js';
 import SuccessModal from '@/components/Modal/SuccessModal.js';
 import LoadingModal from '@/components/Modal/LoadingModal.js';
 import {checkingTransactionReceipt} from '../../blockchain/basic';
@@ -43,10 +44,12 @@ const DetailCarScreen = ({navigation, route}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalSignVisible, setModalSignVisible] = useState(false);
   const [modalLoadingVisible, setModalLoadingVisible] = useState(false);
+  const [modalApproveSuccessVisible, setModalApproveSuccessVisible] =
+    useState(false);
   const [modalSuccessVisible, setModalSuccessVisible] = useState(false);
   // let onButtonPress = () => dispatch(handleIncreaseAllowance(currentAccount));
 
-  const {currentAccount, allowance, buyHash} = useSelector(
+  const {currentAccount, allowance, buyHash, increaseHash} = useSelector(
     state => state.walletReducer,
   );
 
@@ -56,6 +59,29 @@ const DetailCarScreen = ({navigation, route}) => {
       setData(item);
     }
   }, [navigation]);
+
+  useEffect(() => {
+    if (increaseHash !== '') {
+      if (modalLoadingVisible === false) {
+        setModalLoadingVisible(true);
+      }
+      try {
+        let intervalId = setInterval(async () => {
+          const respone = await checkingTransactionReceipt(increaseHash);
+          if (respone) {
+            clearInterval(intervalId);
+            setModalLoadingVisible(false);
+            setModalApproveSuccessVisible(true);
+            setButtonTitle('Submit');
+            setCurrentStep(2);
+            return true;
+          }
+        }, 2000);
+      } catch (err) {
+        console.log('err: ', err);
+      }
+    }
+  }, [increaseHash]);
 
   useEffect(() => {
     if (buyHash !== '') {
@@ -69,12 +95,12 @@ const DetailCarScreen = ({navigation, route}) => {
             clearInterval(intervalId);
             setModalLoadingVisible(false);
             setModalSuccessVisible(true);
+
             setButtonTitle('Finish');
             setCurrentStep(3);
             return true;
           }
         }, 2000);
-        console.log('intervalId', intervalId);
       } catch (err) {
         console.log('err: ', err);
       }
@@ -254,6 +280,10 @@ const DetailCarScreen = ({navigation, route}) => {
       <LoadingModal
         modalVisible={modalLoadingVisible}
         callbackChangeVisible={() => setModalLoadingVisible(false)}
+      />
+      <ApproveSuccessModal
+        modalVisible={modalApproveSuccessVisible}
+        callbackChangeVisible={() => setModalApproveSuccessVisible(false)}
       />
       <SuccessModal
         modalVisible={modalSuccessVisible}
