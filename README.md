@@ -1,4 +1,4 @@
-![logo](assets/images/logo/Logo.png)
+<img width="150" height="150" alt="image1" src="assets/images/logo/Logo.png">
 
 # VF Market
 
@@ -9,18 +9,16 @@
 - [Technologies Used](#technologies-used)
 - [Features](#features)
 - [How to install and run the project](#how-to-install-and-run-the-project)
-- [Usage](#usage)
-- [Acknowledgements](#acknowledgements)
 - [Team](#team)
-- [License](#license)
-
-<!-- * [License](#license) -->
 
 ## Introduction
 
-VF Market
+VF Market is a mobile application allow user buy car.Every car has a nft used to prove ownership of user. User can use wallet in app to buy nft. This application is integrated with Backend [VF Market BE](https://github.com/LucasTran-tq/VF-market-be).
 
-![Dashboard](wwwroot/img/demoPage/dashboard.png)
+
+<img width="300" alt="image1" src="assets/images/preview/Splash Screen.png" hspace="20"><img width="300" alt="image2" src="assets/images/preview/Home.png">
+<img width="300" alt="image5" src="assets/images/preview/Search.png" hspace="20"><img width="300" alt="image6" src="assets/images/preview/Detail.png">
+<img width="300" alt="image7" src="assets/images/preview/Buy.png" hspace="20"><img width="300" alt="image8" src="assets/images/preview/Profile.png">
 
 ## Video Demo
 
@@ -30,103 +28,45 @@ You can have a look with VF Market through [the video](https://www.youtube.com/w
 
 VF Market should use the following technologies, frameworks and development techniques:
 
-- ASP.NET MVC
-- MS SQL Server as database back-end
-- Entity Framework to access database
-- Bootstrap SB Admin2
-- The standard ASP.NET Identity System for managing users and roles
-- AJAX communication in some parts of web application
-- Apply error handling and data validation to avoid crashes when invalid data is entered
+- [React Native](https://reactnative.dev)
+- [Redux thunk](https://redux.js.org)
+- [Web3Js](https://web3js.readthedocs.io)
 
 ## Features
 
 A few of the things you can do with VF Market:
 
-- Register
-- Login
-- Manage account
-- Manage employee
-- Manage employee skills
-- Manage employee positions
-- Manage salary
-- Manage customer
-- Manage product
-- Manage product type
-- Manage supplier
-- Manage billSetup
-
-> EmployeeManagement Page
-> ![EmployeeManagement](wwwroot/img/demoPage/employeeIndex.png)
-
-> Profile Page
-> ![Dashboard](wwwroot/img/demoPage/profile.png)
-
-> Bill Creation Page
-> ![Dashboard](wwwroot/img/demoPage/createBill.png)
+- Sign up
+- Sign in
+- View all products
+- Search
+- Create wallet
+- Import wallet
+- Read contract
+- Write contract
 
 ## How to install and run the project
 
-To clone and run this application, you'll need [.Net Framework](https://dotnet.microsoft.com/en-us/download/dotnet-framework), [Visual Studio](https://visualstudio.microsoft.com/) and [MS SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver15) installed on your computer.
-
-It requires .Net version 5.0.
-
-You might want to look into `appsettings.json` to make change connection string:
+To clone and run this application, you'll need [yarn](https://yarnpkg.com), [NodeJs](https://nodejs.org/en/) and [Visual Studio](https://visualstudio.microsoft.com/) installed on your computer.
 
 ```
-"AppMvcConnectionString" : "Data Source=[YourComputerName];Initial Catalog=[YourDatabaseName];User Id=[YourUserID];Password=[YourPassWord];"\
-"AppMvcConnectionString" : "Data Source=localhost,1433; Initial Catalog=appmvc; User ID=SA;Password=Password123”
-```
-
-Set up
-Go to https://localhost:5001/database-manage/Index → Seed data, to create admin account
-
-After that your command line will be in terminal:
-
-```
-- Install dotnet
-dotnet tool install --global dotnet-ef
-dotnet tool install --global dotnet-aspnet-codegenerator
-
-// run docker for Azure database
-docker-compose up -d
-
-// build table for database
-dotnet ef migrations add Init
-dotnet ef database update
+- Install package
+yarn
 ```
 
 ```
-dotnet restore
-dotnet watch run
+- Run android
+yarn android
 ```
 
-## Usage
-
-After you clone this repo to your desktop, go to its root directory and run `dotnet restore` to install its dependencies.\
-Once the dependencies are installed, you can run `dotnet watch run` to start the application. You will then be able to access it at localhost:5000
-
-To enter AIT Business management system and use as administrator, you should:
-
-- Register new account
-- After enter the system, go to Database Management, then click `Seed Data` to create administrator account
-- To check administrator account, log out current account
-- Log in again with administrator account.\
-   UserName: `admin`.\
-   Password: `admin123`.
-
-## Acknowledgements
-
-- Thanks to [Microsoft](https://www.microsoft.com/vi-vn/) for supporting us with Asp.net documentation
-- Thanks to [Stackoverflow](https://stackoverflow.com/) for supporting us
-- Thanks to [Github](https://github.com/) for supporting us control application's versions
-- Thanks to [SmarterASP.NET](https://www.smarterasp.net/) for supporting us hosing web application
+```
+- Run ios
+yarn pod
+yarn ios
+```
 
 ## Team
 
 - [Tran Quoc Thang](https://github.com/LucasTran-tq)
 - [Nguyen Huu Phat](https://github.com/nguyenhuuphat2001)
 
-## 📝 License
-
-Copyright © 2021. <br />
-This project is [MIT](https://github.com/LucasTran-tq/Business-Management-AspNet/blob/main/LICENSE) licensed.
