@@ -1,4 +1,4 @@
-![logo](wwwroot/assets/images/Logo.png)
+![logo](wwwroot/assets/images/logo/Logo.png)
 
 # VF Market
 
@@ -8,7 +8,6 @@
 - [Video Demo](#video-demo)
 - [Technologies Used](#technologies-used)
 - [Features](#features)
-- [Deployment](#deployment)
 - [How to install and run the project](#how-to-install-and-run-the-project)
 - [Usage](#usage)
 - [Acknowledgements](#acknowledgements)
@@ -19,7 +18,7 @@
 
 ## Introduction
 
-In each company, there is a separate way of doing business, but the operations are relatively similar (HR, product management, finance, engineering,...). These operations to do on paper are easy to lead to errors, data loss, which takes a lot of time as well as is not focused, easy to repeat many times. Understanding these requirements, AIT company wants to build a software to manage the company's business system to meet the basic tasks.
+VF Market
 
 ![Dashboard](wwwroot/img/demoPage/dashboard.png)
 
@@ -64,12 +63,6 @@ A few of the things you can do with VF Market:
 
 > Bill Creation Page
 > ![Dashboard](wwwroot/img/demoPage/createBill.png)
-
-## Deployment
-
-Web is deploying on [VF Market](http://lucasuit-001-site1.etempurl.com/) until Feb 13, 2022.\
-After that date, this link will be disable.\
-Please run it on localhost with below step!
 
 ## How to install and run the project
 
