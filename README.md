@@ -1,4 +1,4 @@
-![logo](wwwroot/assets/images/logo/Logo.png)
+![logo](assets/images/logo/Logo.png)
 
 # VF Market
 
