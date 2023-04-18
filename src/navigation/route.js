@@ -5,6 +5,7 @@ import CONST_SCREEN from '@/constants/screen';
 // import UpdatePersonalInfoScreen from '@/screens/UpdateInfo';
 
 import DetailCarScreen from '@/screens/DetailCarScreen';
+import DetailMyCarScreen from '@/screens/DetailMyCarScreen';
 import SearchScreen from '@/screens/SearchScreen';
 import IntroWalletScreen from '@/screens/IntroWalletScreen';
 import CreatePasswordWalletScreen from '@/screens/CreatePasswordWalletScreen';
@@ -23,6 +24,21 @@ export const route = [
   {
     name: CONST_SCREEN.DETAIL_CAR,
     component: DetailCarScreen,
+    configShareElement: (route, otherRoute, showing) => {
+      const item = route.params;
+      return [
+        {
+          id: `item.${item?._id}.photo`,
+          animation: 'fade-out',
+          resize: 'cover',
+          align: 'left-top',
+        },
+      ];
+    },
+  },
+  {
+    name: CONST_SCREEN.DETAIL_MY_CAR,
+    component: DetailMyCarScreen,
     configShareElement: (route, otherRoute, showing) => {
       const item = route.params;
       return [

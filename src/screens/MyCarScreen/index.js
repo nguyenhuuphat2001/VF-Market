@@ -10,6 +10,8 @@ import {MONT_REGULAR, MONT_BOLD, COLORS} from '@/theme/index';
 import Text from '@/components/Text';
 
 import ItemMyCar from './components/ItemMyCar';
+import {navigate} from '@/navigation/navigationUtils';
+import screen from '@/constants/screen';
 
 import styles from './styles';
 
@@ -28,6 +30,7 @@ const MyCarScreen = () => {
     ({item}) => (
       <TouchableOpacity
         // onPress={() => navigate(screen.DETAIL_CAR, item)}
+        onPress={() => navigate(screen.DETAIL_MY_CAR, item.tokenId)}
         style={{width: '42%'}}>
         <ItemMyCar
           tokenId={item.tokenId}

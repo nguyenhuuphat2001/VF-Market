@@ -10,6 +10,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import Lottie from 'lottie-react-native';
 import Text from '@/components/Text';
 import {useNavigation} from '@react-navigation/native';
+
 import styles from './styles';
 
 import {useDispatch, useSelector} from 'react-redux';

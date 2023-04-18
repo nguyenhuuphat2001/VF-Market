@@ -6,6 +6,7 @@ import {COLORS, SPACING, OPENSANS_SEMIBOLD} from '@/theme/index';
 import {SharedElement} from 'react-navigation-shared-element';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import LinearGradient from 'react-native-linear-gradient';
 // arrow-drop-down
 
 import Text from '@/components/Text';
@@ -15,11 +16,12 @@ import {MAIN_LOGO} from '@/assets/images';
 const ItemMyCar = ({tokenId, name, image, price, currency}) => {
   return (
     <View style={styles.container}>
-      <SharedElement id={`item.${tokenId}.photo`}>
-        <View style={styles.containerImage}>
-          <Image style={styles.image} resizeMode="cover" source={MAIN_LOGO} />
-        </View>
-      </SharedElement>
+      <LinearGradient
+        colors={['#000066', '#990033']}
+        style={styles.linearGradient}
+        start={{x: 0.5, y: 0.5}}>
+        <Image style={styles.image} resizeMode="cover" source={MAIN_LOGO} />
+      </LinearGradient>
       <View style={styles.content}>
         <Text
           customStyle={{
@@ -27,8 +29,9 @@ const ItemMyCar = ({tokenId, name, image, price, currency}) => {
             color: 'black',
             fontWeight: '500',
             padding: 5,
+            marginLeft: 5,
           }}>
-          VF Nft #{tokenId}
+          ID #{tokenId}
         </Text>
         {/* <Text
           customStyle={{
@@ -68,10 +71,11 @@ const styles = StyleSheet.create({
     // borderRadius: 10,
     // marginBottom: 5,
     borderColor: COLORS.border_input,
-    backgroundColor: 'silver',
+    // backgroundColor: linear - gradient(blue, red),
   },
   content: {
     // marginLeft: 2,
+    width: 120,
     backgroundColor: COLORS.break_line,
     borderWidth: 1,
     borderBottomLeftRadius: 10,
@@ -79,8 +83,20 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 100,
-    maxHeight: 100,
+    height: 110,
+    maxHeight: 110,
     borderRadius: 10,
+    marginLeft: 4,
+  },
+  linearGradient: {
+    // alignContent: 'flex-start',
+    borderWidth: 1,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+    // borderRadius: 10,
+    // marginBottom: 5,
+    borderColor: COLORS.border_input,
+    height: 120,
+    width: 120,
   },
 });

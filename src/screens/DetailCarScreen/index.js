@@ -55,6 +55,7 @@ const DetailCarScreen = ({navigation, route}) => {
 
   useEffect(() => {
     const item = route.params;
+    console.log('item: ', item);
     if (item.name != data?.name) {
       setData(item);
     }
@@ -132,7 +133,8 @@ const DetailCarScreen = ({navigation, route}) => {
         break;
       }
       case 2: {
-        if (data?.launchId) {
+        console.log('---start');
+        if (!data.launchId) {
           await dispatch(
             handleBuyTransaction({
               launchId: data.launchId,
@@ -140,6 +142,8 @@ const DetailCarScreen = ({navigation, route}) => {
             }),
           );
           setModalSignVisible(true);
+        } else {
+          console.log('---đâu có');
         }
         break;
       }
